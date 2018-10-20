@@ -1,0 +1,61 @@
+
+    .btn {
+        background-color: forestgreen;
+        color: #fff;
+        margin-left: 7px;
+    }
+
+    .tbtn {
+        width: auto;
+        padding: 6px;
+        border-radius: 4.5px;
+        border: 1.5px solid forestgreen;
+        background-color: transparent;
+        color: #fff;
+        margin-left: 7px;
+    }
+
+    .tbtn:focus {
+        background-color: forestgreen;
+        color: #fff;
+        border-color: transparent;
+    }
+
+    .tbtn:hover {
+        background-color: forestgreen;
+        color: #fff;
+        border-color: transparent;
+    }
+
+    .btn:focus {
+        border: 1.5px solid forestgreen;
+        background-color: transparent;
+        color: #fff;
+    }
+
+    .btn:hover {
+        border: 1.5px solid forestgreen;
+        background-color: transparent;
+        color: #fff;
+    }
+
+    .btn:active {
+        border: 1px solid forestgreen;
+        background-color: transparent;
+        color: #fff;
+    }
+
+    @media screen and (max-width: 600px) {
+        .banner h1,
+        h2,
+        .links>.btn {
+            position: absolute;
+            bottom: 100%;
+        }
+        .banner h1 {
+            font-size: 2.5em !important;
+        }
+        .banner h2 {
+            font-size: 1.5em !important;
+        }
+    }
