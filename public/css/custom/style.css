@@ -15,7 +15,7 @@ p {
 
 #form {
     background-color: rgb(245, 245, 245);
-    background-image: url("../img/iplayfootball/side\ of\ form\ art.gif");
+    background-image: url( "/img/iplayfootball/side_of_form_art.gif" );
     background-size: 45%;
     background-repeat: no-repeat;
     background-position: right center;
@@ -196,7 +196,7 @@ p {
     width: 100%;
     height: 750px;
     background: rgb(172, 15, 15);
-    background-image: url("../img/hm-bg-sm.png");
+    background-image: url("/img/hm_bg_sm.png");
     color: white;
 }
 

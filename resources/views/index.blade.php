@@ -73,7 +73,7 @@
                             <a href="https://twitter.com/techpadi"><img src=" {{ asset('img/if_square-twitter_317723.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                         </li>
                         <li style="display: inline;">
-                            <a href="https://www.instagram.com/techpadi"><img src="{{ url('img/if_new-google-favicon_682665.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                            <a href="https://www.instagram.com/techpadi"><img src="{{ asset('img/if_new-google-favicon_682665.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                         </li>
                     </ul>
                 </div>

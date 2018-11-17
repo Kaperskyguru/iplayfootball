@@ -1,7 +1,7 @@
 <style>
 #header {
     background-color: darkred;
-    background-image: url("../img/hm-bg-sm.png");
+    background-image: url( "/img/hm_bg_sm.png" );
     background-size: cover;
     background-repeat: no-repeat;
 }

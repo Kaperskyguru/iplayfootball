@@ -23,7 +23,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('profiles', function () {
+Route::get('players', function () {
     return view('profiles');
 });
 
@@ -49,3 +49,6 @@ Route::get('about', function () {
 
 
 Route::post("contact", "PagesController@sendContact");
+Route::get("/search", "SearchController@search");
+Route::get("/players", "PlayersController@players");
+Route::get("/profiles", "PlayersController@index");
