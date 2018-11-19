@@ -13,13 +13,13 @@ p {
     font: 16px;
 }
 
-#form {
+/* #form {
     background-color: rgb(245, 245, 245);
     background-image: url( "/img/iplayfootball/side_of_form_art.gif" );
     background-size: 45%;
     background-repeat: no-repeat;
     background-position: right center;
-}
+} */
 
 .form {
     margin: 2em 0;

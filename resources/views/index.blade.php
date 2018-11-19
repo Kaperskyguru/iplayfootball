@@ -43,6 +43,9 @@
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
                 </div>
                 <div class="col-12 form-group">
+                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Password" required>
+                </div>
+                <div class="col-12 form-group">
                     <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Phone Number">
                 </div>
                 <div class="col-12 form-group">
@@ -83,6 +86,12 @@
                 <div class="col-12 row pt-5">
                     <span class="ml-2">Already have an iPlayfootball account?,
                         <a href="{{ url('/login') }}" style="text-transform:uppercase; text-decoration:underline;">Login
+                            here
+                        </a>.</span>
+                </div>
+                <div class="col-12 row pt-5">
+                    <span class="ml-2">Are you a <strong>Scout</strong>, <strong>Team</strong> or <strong>Academy</strong>?
+                        <a href="{{ url('/register') }}" style="text-transform:uppercase; text-decoration:underline;">Register
                             here
                         </a>.</span>
                 </div>

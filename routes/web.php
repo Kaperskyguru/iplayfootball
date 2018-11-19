@@ -11,6 +11,119 @@
 |
 */
 
+
+// Admin route groups
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', function () {
+        return view('admin-dashboard.index');
+    });
+
+    Route::get('/addPlayer', function () {
+        return view('admin-dashboard.addPlayer');
+    });
+
+    Route::get('/players', function () {
+        return view('admin-dashboard.Players');
+    });
+
+    Route::get('/addscout', function () {
+        return view('admin-dashboard.addscout');
+    });
+
+    Route::get('/scouts', function () {
+        return view('admin-dashboard.scouts');
+    });
+
+    Route::get('/addteam', function () {
+        return view('admin-dashboard.addteam');
+    });
+
+    Route::get('/teams', function () {
+        return view('admin-dashboard.teams');
+    });
+
+    Route::get('/addacademic', function () {
+        return view('admin-dashboard.addacademic');
+    });
+
+    Route::get('/academics', function () {
+        return view('admin-dashboard.academics');
+    });
+
+    Route::get('/notices', function () {
+        return view('admin-dashboard.notice');
+    });
+
+    Route::get('/addverification', function () {
+        return view('admin-dashboard.addverification');
+    });
+
+    Route::get('/pending', function () {
+        return view('admin-dashboard.pendingverification');
+    });
+
+    Route::get('/verified', function () {
+        return view('admin-dashboard.verifiedverification');
+    });
+
+    Route::get('/declined', function () {
+        return view('admin-dashboard.declinedverification');
+    });
+
+    Route::get('/messages', function () {
+        return view('admin-dashboard.message');
+    });
+
+    Route::get('/sent', function () {
+        return view('admin-dashboard.sentmail');
+    });
+
+    Route::get('/details', function () {
+        return view('admin-dashboard.maildetails');
+    });
+
+    Route::get('/compose', function () {
+        return view('admin-dashboard.compose');
+    });
+
+    Route::get('/profile', function () {
+        return view('admin-dashboard.profile');
+    });
+});
+
+// players route groups
+Route::group(['prefix' => 'player'], function () {
+    Route::get('/', function () {
+        return view('players-dashboard.index');
+    });
+
+    Route::get('/messages', function () {
+        return view('players-dashboard.messages');
+    });
+
+    Route::get('/sent', function () {
+        return view('players-dashboard.sentmail');
+    });
+
+    Route::get('/details', function () {
+        return view('players-dashboard.maildetails');
+    });
+
+    Route::get('/compose', function () {
+        return view('players-dashboard.compose');
+    });
+
+    Route::get('/notices', function () {
+        return view('players-dashboard.notices');
+    });
+
+    Route::get('/users', function () {
+        return view('players-dashboard.users');
+    });
+});
+
+
+//  Other routes
 Route::get('/', function () {
     return view('index');
 });

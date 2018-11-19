@@ -63,6 +63,7 @@ style="height: 300px; position:relative"
                             <div class="col-md-4 col-sm-6 col-12  card-container">
                                 <div class="col-12 card" style="width:18rem">
                                     <div class="col-12 card-header">
+                                        <i class="far fa-check-circle fa-2x" style="z-index:1;color:forestgreen;position:relative;top:7px;left:105%;"></i>
                                         <div class="row">
                                             <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%">
                                         </div>
