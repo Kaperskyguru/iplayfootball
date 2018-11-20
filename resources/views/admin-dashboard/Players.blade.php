@@ -147,9 +147,10 @@
                                                                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                     </td>
                                                                                 </tr>
+                                                                                @foreach($Players as $player)
                                                                                 <tr>
                                                                                     <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>Mrs. Rabeya Begum</td>
+                                                                                    <td>{{$player->player_firstname}}</td>
                                                                                     <td>+2341234567890</td>
                                                                                     <td><a href="#" class="__cf_email__">johndoe@mail.com</a></td>
                                                                                     <td>Defender</td>
@@ -161,6 +162,8 @@
                                                                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                     </td>
                                                                                 </tr>
+                                                                                @endforeach
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
