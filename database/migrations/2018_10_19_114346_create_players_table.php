@@ -15,27 +15,23 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("player_firstname");
-            $table->string("player_lastname");
-            $table->string("player_username");
-            $table->string("player_password");
-            $table->string("player_email");
-            $table->integer("player_image_id");
+            $table->integer("user_id")->unsigned();
+            $table->integer("player_image_id")->unsigned();
             $table->integer("player_height");
             $table->integer("player_weight");
             $table->integer("player_facebook_id");
             $table->date("player_dob");
             $table->text('player_address');
-            $table->integer("player_package_id");
+            $table->integer("player_package_id")->unsigned();
             $table->string("player_gender");
-            $table->integer("player_status_id");
+            $table->integer("player_status_id")->unsigned();
             $table->string("player_position");
             $table->string("player_games_played");
             $table->integer("player_minutes_played");
             $table->integer("player_super_substitute");
-            $table->integer("player_associate_team");
-            $table->integer("player_associate_academic");
-            $table->integer("player_associate_scout");
+            $table->integer("player_associate_team")->unsigned();
+            $table->integer("player_associate_academic")->unsigned();
+            $table->integer("player_associate_scout")->unsigned();
             $table->text("player_biography");
             $table->integer("player_team_spirit");
             $table->integer("player_passing_accuracy");
@@ -54,7 +50,19 @@ class CreatePlayersTable extends Migration
             $table->integer("player_chances_creation");
             $table->integer("player_penalties_winnings");
             $table->integer("player_offsides");
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('player_associate_team')->references('id')->on('teams');
+            $table->foreign('player_associate_academic')->references('id')->on('academics');
+            $table->foreign('player_associate_scout')->references('id')->on('scouts');
+            $table->foreign('player_status_id')->references('id')->on('statuses');
+            $table->foreign('player_package_id')->references('id')->on('packages');
+            $table->foreign('player_image_id')->references('id')->on('images');
             $table->timestamps();
+        });
+
+        Schema::table('players', function($table)
+        {
+
         });
     }
 

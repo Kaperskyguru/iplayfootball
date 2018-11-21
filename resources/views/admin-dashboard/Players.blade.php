@@ -105,61 +105,20 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr>
-                                                                                    <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>MD. Alimul Alrazy</td>
-                                                                                    <td>+2341234567890</td>
-                                                                                    <td><a href="#" class="__cf_email__">johndoe@mail.com</a></td>
-                                                                                    <td>Left Wing Forward</td>
-                                                                                    <td>V.I.P</td>
-                                                                                    <td>27th April,2017</td>
-                                                                                    <td><span class="label-custom label label-default">Active</span></td>
-                                                                                    <td>
-                                                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>MD. Alrazy</td>
-                                                                                    <td>+2341234567890</td>
-                                                                                    <td><a href="#" class="__cf_email__">johndoe@mail.com</a></td>
-                                                                                    <td>Right Wing Forward</td>
-                                                                                    <td>V.I.P</td>
-                                                                                    <td>27th April,2017</td>
-                                                                                    <td><span class="label-danger label label-default">Inctive</span></td>
-                                                                                    <td>
-                                                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>Mrs. Jorina Begum</td>
-                                                                                    <td>+2341234567890</td>
-                                                                                    <td><a href="#" class="__cf_email__">johndoe@mail.com</a></td>
-                                                                                    <td>Goal Keeper</td>
-                                                                                    <td>V.I.P</td>
-                                                                                    <td>27th April,2017</td>
-                                                                                    <td><span class="label-danger label label-default">Inctive</span></td>
-                                                                                    <td>
-                                                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
-                                                                                    </td>
-                                                                                </tr>
+
                                                                                 @foreach($Players as $player)
                                                                                 <tr>
                                                                                     <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
                                                                                     <td>{{$player->player_firstname}}</td>
                                                                                     <td>+2341234567890</td>
-                                                                                    <td><a href="#" class="__cf_email__">johndoe@mail.com</a></td>
-                                                                                    <td>Defender</td>
+                                                                                    <td><a href="#" class="__cf_email__">{{$player->player_email}}</a></td>
+                                                                                    <td>{{$player->player_position}}</td>
                                                                                     <td>V.I.P</td>
                                                                                     <td>27th April,2017</td>
                                                                                     <td><span class="label-custom label label-default">Active</span></td>
                                                                                     <td>
-                                                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
+                                                                                        <button type="button" data-id="{{$player->player_id}}" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                                                                                        <button type="button" data-id="{{$player->player_id}}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @endforeach

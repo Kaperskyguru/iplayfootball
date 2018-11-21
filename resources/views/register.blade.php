@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-12 row pt-5">
                     <span class="ml-2">Already have an iPlayfootball account?,
-                        <a href="l{{ url('/login') }}" style="text-transform:uppercase; text-decoration:underline;">Login
+                        <a href="{{ url('/login') }}" style="text-transform:uppercase; text-decoration:underline;">Login
                             here</a>.</span>
                 </div>
             </div>

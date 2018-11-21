@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PlayersController as Players;
+use App\Http\Controllers\ScoutsController as Scouts;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,8 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::get('/scouts', function () {
-        return view('admin-dashboard.scouts');
+        $Scout = new Scouts;
+        return view('admin-dashboard.scouts')->with('Scouts', $Scout->scouts());
     });
 
     Route::get('/addteam', function () {
@@ -167,4 +169,3 @@ Route::post("contact", "PagesController@sendContact");
 Route::get("/search", "SearchController@search");
 Route::get("/players", "PlayersController@players");
 Route::get("/profiles", "PlayersController@index");
-Route::get("/store", "PlayersController@store");

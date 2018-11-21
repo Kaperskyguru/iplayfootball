@@ -18,11 +18,6 @@ class Player extends Model
     ];
 
     protected $fillable = [
-        "player_firstname",
-        "player_lastname",
-        "player_username",
-        "player_password",
-        "player_email",
         "player_image_id",
         "player_height",
         "player_weight",
