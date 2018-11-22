@@ -22,8 +22,8 @@ class CreateTeamsTable extends Migration
             $table->integer('status_id')->unsigned();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('image_id')->references('id')->on('images');
-            $table->foreign('status_id')->references('id')->on('statuses');
+            // $table->foreign('image_id')->references('id')->on('images');
+            // $table->foreign('status_id')->references('id')->on('statuses');
         });
     }
 

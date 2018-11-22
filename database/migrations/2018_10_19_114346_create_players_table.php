@@ -51,12 +51,12 @@ class CreatePlayersTable extends Migration
             $table->integer("player_penalties_winnings");
             $table->integer("player_offsides");
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('player_associate_team')->references('id')->on('teams');
-            $table->foreign('player_associate_academic')->references('id')->on('academics');
-            $table->foreign('player_associate_scout')->references('id')->on('scouts');
-            $table->foreign('player_status_id')->references('id')->on('statuses');
-            $table->foreign('player_package_id')->references('id')->on('packages');
-            $table->foreign('player_image_id')->references('id')->on('images');
+            // $table->foreign('player_associate_team')->references('id')->on('teams');
+            // $table->foreign('player_associate_academic')->references('id')->on('academics');
+            // $table->foreign('player_associate_scout')->references('id')->on('scouts');
+            // $table->foreign('player_status_id')->references('id')->on('statuses');
+            // $table->foreign('player_package_id')->references('id')->on('packages');
+            // $table->foreign('player_image_id')->references('id')->on('images');
             $table->timestamps();
         });
 

@@ -30,9 +30,9 @@ class CreateScoutsTable extends Migration
         Schema::table('scouts', function($table)
         {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('scout_team_id')->references('id')->on('teams');
-            $table->foreign('scout_image_id')->references('id')->on('images');
-            $table->foreign('scout_status_id')->references('id')->on('statuses');
+            // $table->foreign('scout_team_id')->references('id')->on('teams');
+            // $table->foreign('scout_image_id')->references('id')->on('images');
+            // $table->foreign('scout_status_id')->references('id')->on('statuses');
 
         });
     }
