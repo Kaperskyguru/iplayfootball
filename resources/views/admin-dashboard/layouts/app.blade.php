@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>iPlayFootball Admin Panel</title>
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="{{asset('admin_assets/dist/img/ico/iLOGO.png')}}" type="image/x-icon">
@@ -30,6 +31,7 @@
 
     <link href="{{asset('admin_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css" />
 
+    <link href="{{asset('admin_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
     @yield('styles')
 
 </head>
@@ -59,12 +61,12 @@
                     <span class="pe-7s-angle-left-circle"></span>
                 </a>
                 <!-- searchbar-->
-                <a href="#search"><span class="pe-7s-search"></span></a>
+                {{-- <a href="#search"><span class="pe-7s-search"></span></a> --}}
                 <div id="search">
                     <button type="button" class="close">×</button>
                     <form>
                         <input type="search" value="" placeholder="Search.." />
-                        <button type="submit" class="btn btn-add">Search...</button>
+                        {{-- <button type="submit" class="btn btn-add">Search...</button> --}}
                     </form>
                 </div>
                 <div class="navbar-custom-menu">
@@ -74,68 +76,25 @@
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-mail"></i>
-                                <span class="label label-success">4</span>
+                            <span class="label label-success">{{ count($messages)}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <ul class="menu">
+                                        @foreach ($messages as $message)
                                         <li>
                                             <!-- start message -->
-                                            <a href="#" class="border-gray">
+                                            <a href="{{url('/admin/details/'.$message->id)}}" class="border-gray">
                                                 <div class="pull-left">
                                                     <img src="{{asset('admin_assets/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
                                                 </div>
-                                                <h4>Ronaldo</h4>
-                                                <p>Please oreder 10 pices of kits..</p>
-                                                <span class="badge badge-success badge-massege"><small>15 hours ago</small>
+                                                <h4>{{ $message->sender->name}}</h4>
+                                                <p>{{ $message->message_subject}}</p>
+                                                <span class="badge badge-success badge-massege"><small>{{getHours($message->created_at)}} hours ago</small>
                                                 </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('admin_assets/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Leo messi</h4>
-                                                <p>Please oreder 10 pices of Sheos..</p>
-                                                <span class="badge badge-info badge-massege"><small>6 days ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('admin_assets/dist/img/avatar3.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Modric</h4>
-                                                <p>Please oreder 6 pices of bats..</p>
-                                                <span class="badge badge-info badge-massege"><small>1 hour ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('admin_assets/dist/img/avatar4.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Salman</h4>
-                                                <p>Hello i want 4 uefa footballs</p>
-                                                <span class="badge badge-danger badge-massege">
-                                                    <small>6 days ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('admin_assets/dist/img/avatar5.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Sergio Ramos</h4>
-                                                <p>Hello i want 9 uefa footballs</p>
-                                                <span class="badge badge-info badge-massege"><small>5 hours ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>
@@ -146,6 +105,8 @@
                                 <i class="pe-7s-bell"></i>
                                 <span class="label label-warning">7</span>
                             </a>
+                            {{-- @dd("hghj") --}}
+                            
                             <ul class="dropdown-menu">
                                 <li>
                                     <ul class="menu">
@@ -177,23 +138,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <!-- Help -->
-                                                <li class="dropdown dropdown-help hidden-xs">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="pe-7s-settings"></i></a>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <a href="{{ url('admin/profile')}}">
-                                                                    <i class="fa fa-line-chart"></i> Networking</a>
-                                                                </li>
-                                                                <li><a href="#"><i class="fa fa fa-bullhorn"></i> Lan settings</a></li>
-                                                                <li><a href="#"><i class="fa fa-bar-chart"></i> Settings</a></li>
-                                                                <li>
-                                                                    <a href="login.html">
-                                                                        <i class="fa fa-wifi"></i> wifi</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
+                                               
                                                             <!-- user -->
                                                             <li class="dropdown dropdown-user">
                                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -203,11 +148,15 @@
                                                                             <a href="{{ url('/admin/profile') }}">
                                                                                 <i class="fa fa-user"></i> User Profile</a>
                                                                             </li>
-                                                                            <li><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+                                                                            <li><a href="{{url('/admin/messages')}}"><i class="fa fa-inbox"></i> Inbox</a></li>
                                                                             <li>
-                                                                                <a href="login.html">
-                                                                                    <i class="fa fa-sign-out"></i> Signout</a>
-                                                                                </li>
+                                                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                                                    <i class="fa fa-sign-out"></i> Signout
+                                                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                                        {{ csrf_field() }}
+                                                                                    </form>
+                                                                                </a>
+                                                                            </li>
                                                                             </ul>
                                                                         </li>
                                                                     </ul>
@@ -303,13 +252,13 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-                                                                    <li>
+                                                                    {{-- <li>
                                                                         <a href="user.html">
                                                                             <i class="fa fa-lock"></i> <span>Insurance</span>
                                                                             <span class="pull-right-container">
                                                                             </span>
                                                                         </a>
-                                                                    </li>
+                                                                    </li> --}}
                                                                 </ul>
                                                             </div>
                                                             <!-- /.sidebar -->
@@ -346,6 +295,7 @@
                                                     <script src="{{asset('admin_assets/plugins/fastclick/fastclick.min.js')}}" type="text/javascript"></script>
                                                     <!-- CRMadmin frame -->
                                                     <script src="{{asset('admin_assets/dist/js/custom.js')}}" type="text/javascript"></script>
+                                                    <script src="{{asset('js/custom/main.js')}}" type="text/javascript"></script>
                                                     <!-- End Core Plugins
                                                     =====================================================================-->
                                                     <!-- Start Page Lavel Plugins
@@ -357,11 +307,15 @@
                                                     <script src="{{asset('admin_assets/plugins/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
                                                     <!-- Monthly js -->
                                                     <script src="{{asset('admin_assets/plugins/monthly/monthly.js')}}" type="text/javascript"></script>
-
+                                                    <!-- Datatables -->
+                                                    <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
                                                     <!-- Dashboard js -->
                                                     <script src="{{asset('admin_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
                                                     <!-- End Theme label Script
                                                     =====================================================================-->
+                                                    <script>
+                                                    $('#dataTableExample1').dataTable();
+                                                    </script>
                                                     @yield('scripts')
                                                 </body>
 

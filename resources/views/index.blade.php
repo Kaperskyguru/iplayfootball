@@ -34,27 +34,47 @@
 <div class="row">
     <div class="col-md-7 col-sm-6 col-12 pt-5 pb-5 banner-form" style="background-color: white">
         <h5 class="text-center" style="color: rgba(0, 0, 0, 0.555)">REGISTER</h5>
-        <form role="form" class="form" style="padding: 20px;">
+        <form role="form" class="form" method="POST" action="{{ route('register') }}" style="padding: 20px;">
+            @csrf
             <div class="row">
                 <div class="col-12 form-group">
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Full Name">
+                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name" id="name"placeholder="Full Name">
+                    @if ($errors->has('name'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                @endif
                 </div>
                 <div class="col-12 form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" id="email" aria-describedby="emailHelp" placeholder="Email Address">
+                    @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
                 </div>
                 <div class="col-12 form-group">
-                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Password" required>
+                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" aria-describedby="emailHelp" placeholder="Password" required>
+                                       
+                    @if ($errors->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+                </div>
+                <div class="col-12 form-group">
+                    <input type="password" class="form-control" name="password_confirmation" id="password-confirm" placeholder="Confirm password" required>
                 </div>
                 <div class="col-12 form-group">
                     <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Phone Number">
                 </div>
-                <div class="col-12 form-group">
+                {{-- <div class="col-12 form-group">
                     <input type="date" class="form-control" id="formGroupExampleInput2" placeholder="Date of Birth">
-                </div>
+                </div> --}}
                 <div class="col-12 form-group">
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="National">
+                    <input type="text" class="form-control" name="country" id="country" placeholder="State">
                 </div>
-                <div class="col-12 form-group">
+                {{-- <div class="col-12 form-group">
                     <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Height(ft)">
                 </div>
                 <div class="col-12 form-group">
@@ -62,8 +82,9 @@
                 </div>
                 <div class="col-12 form-group">
                     <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Position">
-                </div>
+                </div> --}}
                 <div class="col-md-7 col-12 row">
+                    <input type="hidden" name="role" id="role" value="8">
                     <button type="submit" class="btn mt-2 ml-3">Sign Up</button>
                 </div>
                 <div class="col-md-4 col-12 row" style="display:block; margin-left: 25px; padding:0px;">
@@ -81,11 +102,11 @@
                     </ul>
                 </div>
                 <div class="col-md-12 col-12 form-group m-2 mt-3">
-                    <a href="{{ url('/resetpassword') }}">Forgot Password?</a>
+                    <a href="{{ route('password.request') }}">Forgot Password?</a>
                 </div>
                 <div class="col-12 row pt-5">
                     <span class="ml-2">Already have an iPlayfootball account?,
-                        <a href="{{ url('/login') }}" style="text-transform:uppercase; text-decoration:underline;">Login
+                        <a href="{{ route('login') }}" style="text-transform:uppercase; text-decoration:underline;">Login
                             here
                         </a>.</span>
                 </div>

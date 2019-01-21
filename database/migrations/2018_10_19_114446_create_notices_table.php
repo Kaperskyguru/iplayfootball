@@ -19,6 +19,7 @@ class CreateNoticesTable extends Migration
             $table->text("notice_desc");
             $table->dateTime("notice_enddate");
             $table->dateTime("notice_publishdate");
+            $table->dateTime("notice_startdate");
             $table->integer("notice_visibility_id");
             $table->integer("notice_status_id");
             $table->timestamps();

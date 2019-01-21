@@ -32,6 +32,20 @@
                             <a href="#" class="btn btn-add" data-toggle="modal" data-target="#addnot">
                                 <i class="fa fa-plus"></i> Add Notice</a>
                             </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bars"></i> Export Table Data</button>
                                 <ul class="dropdown-menu exp-drop" role="menu">
@@ -105,64 +119,27 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
+                                                                                    @foreach($Notices as $notice)
                                                                                         <tr>
-                                                                                            <td>Salary</td>
-                                                                                            <td>08-08-2017</td>
-                                                                                            <td>08-08-2017</td>
-                                                                                            <td>08-09-2017</td>
-                                                                                            <td>Monthly salary to be delay for uncircummostance</td>
-                                                                                            <td>Admin</td>
+                                                                                            <td><a href="#readNoticeModal" data-id="{{$notice->id}}" data-toggle="modal" id="readNotice" style="color:black;" data-token="<?php echo csrf_token() ?>">{{$notice->notice_title}}</a></td>
+                                                                                            <td>{{dateFormat($notice->notice_publishdate)}}</td>
+                                                                                            <td>{{dateFormat($notice->notice_publishdate)}}</td>
+                                                                                            <td>{{dateFormat($notice->notice_enddate)}}</td>
+                                                                                            <td>{{$notice->notice_desc}}</td>
+                                                                                            <td>{{$notice->visibleTo->status_text}}</td>
                                                                                             <td>
-                                                                                                <span class="label-custom label label-default">Published</span>
+                                                                                                <span class="label-custom label label-default">{{$notice->status->status_text}}</span>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <button type="button" class="btn btn-add btn-xs" data-toggle="modal" data-target="#update">
+                                                                                                <button type="button" data-token="{{csrf_token() }}" id="updateNotice" data-id="{{$notice->id}}" class="btn btn-add btn-xs" data-toggle="modal" data-target="#update">
                                                                                                     <i class="fa fa-pencil"></i>
                                                                                                 </button>
-                                                                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delt">
+                                                                                                <button type="button" id="deleteNotice" data-token="{{csrf_token() }}" data-id="{{$notice->id}}" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delt">
                                                                                                     <i class="fa fa-trash-o"></i>
                                                                                                 </button>
                                                                                             </td>
                                                                                         </tr>
-                                                                                        <tr>
-                                                                                            <td>Salary</td>
-                                                                                            <td>08-08-2017</td>
-                                                                                            <td>08-08-2017</td>
-                                                                                            <td>08-09-2017</td>
-                                                                                            <td>Monthly salary to be delay for uncircummostance</td>
-                                                                                            <td>Players</td>
-                                                                                            <td>
-                                                                                                <span class="label-warning label label-default">pending</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button type="button" class="btn btn-add btn-xs" data-toggle="modal" data-target="#update">
-                                                                                                    <i class="fa fa-pencil"></i>
-                                                                                                </button>
-                                                                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delt">
-                                                                                                    <i class="fa fa-trash-o"></i>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>Off day</td>
-                                                                                            <td>08-08-2017</td>
-                                                                                            <td>08-08-2017</td>
-                                                                                            <td>08-09-2017</td>
-                                                                                            <td>tommorow is a holyday</td>
-                                                                                            <td>Admin</td>
-                                                                                            <td>
-                                                                                                <span class="label-danger label label-default">dely</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button type="button" class="btn btn-add btn-xs" data-toggle="modal" data-target="#update">
-                                                                                                    <i class="fa fa-pencil"></i>
-                                                                                                </button>
-                                                                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delt">
-                                                                                                    <i class="fa fa-trash-o"></i>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
+                                                                                    @endforeach
                                                                                 </table>
                                                                             </div>
                                                                         </div>
@@ -181,55 +158,56 @@
                                                                             <div class="modal-body">
                                                                                 <div class="row">
                                                                                     <div class="col-md-12">
-                                                                                        <form class="form-horizontal">
+                                                                                        <form class="form-horizontal" method="POST" action="{{ url('admin/notices') }}">
+                                                                                        @method('POST')
+                                                                                        @csrf
                                                                                             <fieldset>
+                                                                                            <!-- <input type="hidden" name="_token" value="{{ @csrf_token() }}"> -->
                                                                                                 <!-- Text input-->
                                                                                                 <div class="col-md-6 form-group">
-                                                                                                    <label class="control-label">Notice title</label>
-                                                                                                    <input type="text" placeholder="Notice title" class="form-control">
+                                                                                                    <label class="control-label" for="title">Notice title</label>
+                                                                                                    <input type="text" name="title" id="title" placeholder="Notice title" class="form-control">
                                                                                                 </div>
                                                                                                 <div class="col-md-6 form-group">
-                                                                                                    <label class="control-label">Publish date</label>
-                                                                                                    <input type="number" placeholder="Notice title" class="form-control">
+                                                                                                    <label class="control-label" for="notice_publishdate">Publish date</label>
+                                                                                                    <input type="date" name="notice_publishdate" id="notice_publishdate" placeholder="Notice published date" class="form-control">
                                                                                                 </div>
                                                                                                 <div class="col-md-6 form-group">
-                                                                                                    <label class="control-label">Start date</label>
-                                                                                                    <input type="number" placeholder="Notice title" class="form-control">
+                                                                                                    <label class="control-label" for="notice_startdate">Start date</label>
+                                                                                                    <input type="date" placeholder="Notice start date" name="notice_startdate" id="notice_startdate" class="form-control">
                                                                                                 </div>
                                                                                                 <div class="col-md-6 form-group">
-                                                                                                    <label class="control-label">End date</label>
-                                                                                                    <input type="number" placeholder="Notice title" class="form-control">
+                                                                                                    <label class="control-label" for="notice_enddate">End date</label>
+                                                                                                    <input type="date" placeholder="Notice end date" name="notice_enddate" id="notice_enddate" class="form-control">
                                                                                                 </div>
                                                                                                 <div class="col-md-6 form-group">
-                                                                                                    <label class="control-label">description</label>
-                                                                                                    <input type="text" placeholder="description" class="form-control">
+                                                                                                    <label class="control-label" for="desc">description</label>
+                                                                                                    <textarea type="text" name="desc" id="desc" placeholder="description" class="form-control"> </textarea>  
                                                                                                 </div>
                                                                                                 <!-- Text input-->
                                                                                                 <div class="col-md-6 form-group">
-                                                                                                    <label class="control-label">status</label>
-                                                                                                    <select class="form-control">
-                                                                                                        <option></option>
-                                                                                                        <option>Pending</option>
-                                                                                                        <option>Publish</option>
-                                                                                                        <option>Delay</option>
+                                                                                                    <label class="control-label" for="notice_status">status</label>
+                                                                                                    <select class="form-control" name="notice_status" id="notice_status">
+                                                                                                        <option value="2">Pending</option>
+                                                                                                        <option value="1">Publish</option>
+                                                                                                        <option value="3">Delay</option>
                                                                                                     </select>
                                                                                                 </div>
                                                                                                 <div class="col-md-12 form-group">
-                                                                                                    <label>Notice Visible To:</label>
-                                                                                                    <select class="form-control">
-                                                                                                        <option></option>
-                                                                                                        <option>Everyone</option>
-                                                                                                        <option>Academies</option>
-                                                                                                        <option>Team</option>
-                                                                                                        <option>Scout</option>
-                                                                                                        <option>Player</option>
-                                                                                                        <option>Admin</option>
+                                                                                                    <label class="control-label" for="visibility_id">Notice Visible To:</label>
+                                                                                                    <select name="visibility_id" name="visibility_id" class="form-control">
+                                                                                                        <option value="4">Everyone</option>
+                                                                                                        <option value="5">Academies</option>
+                                                                                                        <option value="6">Team</option>
+                                                                                                        <option value="7">Scout</option>
+                                                                                                        <option value="8">Player</option>
+                                                                                                        <option value="9">Admin</option>
                                                                                                     </select>
                                                                                                 </div>
                                                                                                 <div class="col-md-12 form-group user-form-group">
                                                                                                     <div class="pull-right">
                                                                                                         <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                                                                        <button type="submit" class="btn btn-add btn-sm">Update</button>
+                                                                                                        <button type="submit" class="btn btn-add btn-sm">Send</button>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </fieldset>
@@ -257,60 +235,8 @@
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <div class="row">
-                                                                                        <div class="col-md-12">
-                                                                                            <form class="form-horizontal">
-                                                                                                <fieldset>
-                                                                                                    <!-- Text input-->
-                                                                                                    <div class="col-md-6 form-group">
-                                                                                                        <label class="control-label">Notice title</label>
-                                                                                                        <input type="text" placeholder="Notice title" class="form-control">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-6 form-group">
-                                                                                                        <label class="control-label">Publish date</label>
-                                                                                                        <input type="number" placeholder="Notice title" class="form-control">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-6 form-group">
-                                                                                                        <label class="control-label">Start date</label>
-                                                                                                        <input type="number" placeholder="Notice title" class="form-control">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-6 form-group">
-                                                                                                        <label class="control-label">End date</label>
-                                                                                                        <input type="number" placeholder="Notice title" class="form-control">
-                                                                                                    </div>
-                                                                                                    <div class="col-md-6 form-group">
-                                                                                                        <label class="control-label">description</label>
-                                                                                                        <input type="text" placeholder="description" class="form-control">
-                                                                                                    </div>
-                                                                                                    <!-- Text input-->
-                                                                                                    <div class="col-md-6 form-group">
-                                                                                                        <label class="control-label">status</label>
-                                                                                                        <select class="form-control">
-                                                                                                            <option></option>
-                                                                                                            <option>Pending</option>
-                                                                                                            <option>Publish</option>
-                                                                                                            <option>Delay</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                    <div class="col-md-12 form-group">
-                                                                                                        <label>Notice Visible To:</label>
-                                                                                                        <select class="form-control">
-                                                                                                            <option></option>
-                                                                                                            <option>Everyone</option>
-                                                                                                            <option>Academies</option>
-                                                                                                            <option>Team</option>
-                                                                                                            <option>Scout</option>
-                                                                                                            <option>Player</option>
-                                                                                                            <option>Admin</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                                        <div class="pull-right">
-                                                                                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                                                                            <button type="submit" class="btn btn-add btn-sm">Update</button>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </fieldset>
-                                                                                            </form>
+                                                                                        <div class="col-md-12" id="notice_update_info">
+                                                                                
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -337,12 +263,8 @@
                                                                                             <div class="col-md-12">
                                                                                                 <form class="form-horizontal">
                                                                                                     <fieldset>
-                                                                                                        <div class="col-md-12 form-group user-form-group">
-                                                                                                            <label class="control-label">Delete Notice</label>
-                                                                                                            <div class="pull-right">
-                                                                                                                <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                                                                                                <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                                                                                            </div>
+                                                                                                        <div id="notice_info" class="col-md-12 form-group user-form-group">
+                                                                                                            
                                                                                                         </div>
                                                                                                     </fieldset>
                                                                                                 </form>
@@ -358,7 +280,34 @@
                                                                             <!-- /.modal-dialog -->
                                                                         </div>
                                                                         <!-- /.modal -->
-                                                                    </section>
+
+                                                                        <!-- Modal1 -->
+                                                                    <div class="modal fade" id="readNoticeModal" tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header modal-header-primary">
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                        <h3>
+                                                                                            <i class="fa fa-file-text m-r-5"></i> Read notice</h3>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12" id="noticeReadForm">
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- /.modal-content -->
+                                                                            </div>
+                                                                            <!-- /.modal-dialog -->
+                                                                        </div>
+                                                                        <!-- /.modal -->
+                                                                        <!-- Modal1 -->
+                                                                        </section>
                                                                     @endsection
                                                                     @section('scripts')
                                                                     <!-- table-export js -->
@@ -368,6 +317,74 @@
                                                                     <script src="{{asset('admin_assets/plugins/table-export/sprintf.js')}}" type="text/javascript"></script>
                                                                     <script src="{{asset('admin_assets/plugins/table-export/jspdf.js')}}" type="text/javascript"></script>
                                                                     <script src="{{asset('admin_assets/plugins/table-export/base64.js')}}" type="text/javascript"></script>
-                                                                    <!-- dataTables js -->
-                                                                    <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
-                                                                    @endsection
+                                                                    <script>
+                                                                        $(document).ready(function(){
+
+                                                                            $('body').delegate('#deleteNotice', 'click', function(){
+                                                                                let id = $(this).data('id');
+                                                                                var token = $(this).data("token");
+                                                                                $.ajax({
+                                                                                    url:'/admin/notices/delete',
+                                                                                    type:'get',
+                                                                                    data:{'id':id, '_token': token},
+                                                                                    success: function(data) {
+                                                                                        $('#notice_info').html(data);
+                                                                                    }
+                                                                                });
+                                                                            });
+
+                                                                            $('body').delegate('#del_YES', 'click', function(){
+                                                                                var id = $(this).data('id');
+                                                                                var token = $(this).data("token");
+                                                                                $.ajax({
+                                                                                    url:'/admin/notices/delete',
+                                                                                    type:'DELETE',
+                                                                                    data:{'id':id, '_token': token, '_method': 'DELETE'},
+                                                                                    success: function(data) {
+
+                                                                                    }
+                                                                                });
+                                                                            });
+
+                                                                            $('body').delegate('#updateNotice', 'click', function(){
+                                                                                var id = $(this).data('id');
+                                                                                var token = $(this).data("token");
+                                                                                $.ajax({
+                                                                                    url:'/admin/notices/update',
+                                                                                    type:'get',
+                                                                                    data:{'id':id, '_token': token, '_method': 'get'},
+                                                                                    success: function(data) {
+                                                                                        $('#notice_update_info').html(data);
+                                                                                    }
+                                                                                });
+                                                                            });
+
+                                                                            // $('body').delegate('#update', 'click', function(){
+                                                                            //     var id = $(this).data('id');
+                                                                            //     var token = $(this).data("token");
+                                                                            //     $.ajax({
+                                                                            //         url:'/admin/notices/update',
+                                                                            //         type:'PUT',
+                                                                            //         data:{'id':id, '_token': token, '_method': 'PUT'},
+                                                                            //         success: function(data) {
+
+                                                                            //         }
+                                                                            //     });
+                                                                            // });
+
+                                                                            $('body').delegate('#readNotice', 'click', function(){
+                                                                                let id = $(this).data('id');
+                                                                                var token = $(this).data("token");
+                                                                                $.ajax({
+                                                                                    url:'/admin/notices/read',
+                                                                                    type:'get',
+                                                                                    data:{'id':id, '_token': token},
+                                                                                    success: function(data) {
+                                                                                        // alert(data);
+                                                                                        $('#noticeReadForm').html(data);
+                                                                                    }
+                                                                                });
+                                                                            });
+                                                                        });
+                                                                    </script>
+                                                                     @endsection

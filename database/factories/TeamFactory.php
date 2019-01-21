@@ -3,9 +3,12 @@ use Faker\Generator as Faker;
 use App\User;
 
 $factory->define(App\Team::class, function (Faker $faker) {
-    $user = $faker->randomElement(User::where('type', 'team')->get());
+    $gender = $faker->randomElement($array = array('male', 'female'));
     return [
-        'user_id' => $user->id,
+        'name' => $faker->name($gender),
+        'phone' => $faker->e164PhoneNumber,
+        'state' => $faker->state,
+        'email' => $faker->unique()->safeEmail,
         'type' => $faker->numberBetween(1,3),
         'image_id' => $faker->numberBetween(1,20),
         'address' => $faker->address,

@@ -1,11 +1,7 @@
 @extends('players-dashboard.layouts.app')
-
 @section('styles')
-
-<!--Summernote css-->
-<link href="{{asset('players_assets/plugins/summernote/summernote.css')}}" rel="stylesheet" type="text/css" />
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 @endsection
-
 @section('content')
 <!-- Main content -->
 <section class="content">
@@ -28,7 +24,7 @@
                         <div class="col-xs-8">
                             <div class="inbox-toolbar btn-toolbar">
                                 <div class="btn-group">
-                                    <a href="{{ url('/player/messages') }}" class="btn btn-default">
+                                    <a href="{{url('/player/messages')}}" class="btn btn-default">
                                         <span class="fa fa-long-arrow-left"></span>
                                     </a>
 
@@ -45,13 +41,13 @@
                                     <h6>Mailbox</h6>
                                     <ul class="nav">
                                         <li class="active">
-                                            <a href="{{ url('/player/messages') }}">
+                                            <a href="{{url('/player/messages')}}">
                                                 <i class="fa fa-inbox"></i>Inbox
-                                                <small class="label pull-right bg-green">61</small>
+                                                <small class="label pull-right bg-green">{{$totalUreadMessages}}</small>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ url('/player/sent') }}">
+                                            <a href="{{url('/player/sent')}}">
                                                 <i class="fa fa-envelope-o"></i>Send Mail</a>
                                             </li>
 
@@ -62,33 +58,37 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-9 p-0 inbox-mail p-20">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-form-label text-right">To :</label>
-                                    <div class="col-sm-9 col-md-10">
-                                        <input class="form-control" type="text" id="to">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                                <form action="{{ url('player/messages') }}" method="POST">
+                                    
+                                    <input class="form-control" name="to" type="hidden" value="Supports" id="to">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-md-2 col-form-label text-right">Subject :</label>
+                                        <div class="col-sm-9 col-md-10">
+                                            <input class="form-control" type="text" name="subject" id="subjejct">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-form-label text-right">Cc :</label>
-                                    <div class="col-sm-9 col-md-10">
-                                        <input class="form-control" type="text" id="cc">
+                                    <!-- summernote -->
+                                    <textarea id="summernote" name="body" class="summernote"></textarea>
+                                    <div class="hidden-xs hidden-sm btn-group">
+                                        <button type="button" class="text-center btn btn-default">DISCARD</button>
+                                        <button type="button" class="btn btn-default">SAVE</button>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-form-label text-right">Subject :</label>
-                                    <div class="col-sm-9 col-md-10">
-                                        <input class="form-control" type="text" id="subjejct">
+                                    <div class="btn-group pull-right">
+                                    <input type="hidden" name="_token" value="{{ @csrf_token() }}">
+                                    <input type="hidden" name="message_type" id="message_type" value="16">
+                                        <button type="submit" class="btn btn-add">SEND</button>
                                     </div>
-                                </div>
-                                <!-- summernote -->
-                                <div id="summernote"></div>
-                                <div class="hidden-xs hidden-sm btn-group">
-                                    <button type="button" class="text-center btn btn-default">DISCARD</button>
-                                    <button type="button" class="btn btn-default">SAVE</button>
-                                </div>
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn btn-add">SEND</button>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -99,9 +99,10 @@
     <!-- /.content -->
     @endsection
     @section('scripts')
-    <!-- summernote js -->
-    <script src="{{asset('players_assets/plugins/summernote/summernote.js')}}" type="text/javascript"></script>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>    
+ 
+    <!-- <script src="{{asset('players_assets/plugins/summernote/summernote.js')}}" type="text/javascript"></script> -->
     <script>
     //Summernote
     function sumnote() {

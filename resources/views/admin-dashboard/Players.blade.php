@@ -25,6 +25,20 @@
                         </a>
                     </div>
                 </div>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="panel-body">
                     <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                     <div class="btn-group">
@@ -109,16 +123,16 @@
                                                                                 @foreach($Players as $player)
                                                                                 <tr>
                                                                                     <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>{{$player->player_firstname}}</td>
-                                                                                    <td>+2341234567890</td>
+                                                                                    <td>{{$player->player_name}}</td>
+                                                                                    <td>{{$player->player_phone}}</td>
                                                                                     <td><a href="#" class="__cf_email__">{{$player->player_email}}</a></td>
                                                                                     <td>{{$player->player_position}}</td>
                                                                                     <td>V.I.P</td>
-                                                                                    <td>27th April,2017</td>
-                                                                                    <td><span class="label-custom label label-default">Active</span></td>
+                                                                                    <td>{{dateFormat($player->created_at)}}</td>
+                                                                                    <td><span class="label-custom label label-default">{{$player->status->status_text}}</span></td>
                                                                                     <td>
-                                                                                        <button type="button" data-id="{{$player->player_id}}" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" data-id="{{$player->player_id}}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
+                                                                                        <button type="button" data-id="{{$player->id}}" class="btn btn-add btn-sm" data-token="<?php echo csrf_token() ?>" data-toggle="modal" id="updatePlayer" data-target="#updateModal"><i class="fa fa-pencil"></i></button>
+                                                                                        <button type="button" data-id="{{$player->id}}" id="deletePlayer" data-token="<?php echo csrf_token() ?>" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @endforeach
@@ -131,7 +145,7 @@
                                                         </div>
                                                     </div>
                                                     <!-- customer Modal1 -->
-                                                    <div class="modal fade" id="customer1" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
@@ -140,274 +154,8 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <form class="form-horizontal">
-                                                                                <fieldset>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Player Name:</label>
-                                                                                        <input type="text" placeholder="Player Name" class="form-control">
-                                                                                    </div>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Email:</label>
-                                                                                        <input type="email" placeholder="Email" class="form-control">
-                                                                                    </div>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Mobile:</label>
-                                                                                        <input type="number" placeholder="Mobile" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Address:</label><br>
-                                                                                        <textarea name="address" rows="3" class="form-control"></textarea>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Player Package:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Premium ₦50,000</option>
-                                                                                            <option>Gold ₦20,000</option>
-                                                                                            <option>Silver ₦2,000</option>
-                                                                                            <option>Free</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Player Position:</label>
-                                                                                        <input type="text" placeholder="Player Position" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Games Played:</label>
-                                                                                        <input type="text" placeholder="Games Played" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Minutes Played:</label>
-                                                                                        <input type="text" placeholder="Minutes Played" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Super-Substitute:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Yes</option>
-                                                                                            <option>No</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Associate Team:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Arsenal Fc</option>
-                                                                                            <option>Manchester United</option>
-                                                                                            <option>Manchester United</option>
-                                                                                            <option>Manchester United</option>
-                                                                                            <option>Manchester United</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Associate Academy:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Arsenal Academy</option>
-                                                                                            <option>Manchester Academy</option>
-                                                                                            <option>Manchester Academy</option>
-                                                                                            <option>Manchester Academy</option>
-                                                                                            <option>Manchester Academy</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Associate Scout:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Arsenal Fc</option>
-                                                                                            <option>Manchester United</option>
-                                                                                            <option>Manchester United</option>
-                                                                                            <option>Manchester United</option>
-                                                                                            <option>Manchester United</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-12 form-group">
-                                                                                        <label class="control-label">Biography:</label><br>
-                                                                                        <textarea name="biography" rows="3" class="form-control"></textarea>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">TEAM SPIRIT:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">PASSING ACCURACY:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">GROUND DUEL WINNING:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">ARIEL DUEL WINNING:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">RECOVERY:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">TACKLES WINNING:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">CLEARANCE:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">BLOCKING:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">INTERCEPTIONS:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">PENALTIES CONCEDED:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">FOUL WINNINGS:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">GOAL SCORING:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">PENALTY GOALS:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">SHOOTING ACCURACY:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">SUCCESSFUL CROSSES:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">ASSIST ABILITY:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">CHANCES CREATION:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">PENALTIES WINNING:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">OFFSIDES:</label>
-                                                                                        <select class="form-control">
-                                                                                            <option></option>
-                                                                                            <option>Okay</option>
-                                                                                            <option>Impressive</option>
-                                                                                            <option>Outstanding</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                        <div class="pull-right">
-                                                                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                                                            <button type="submit" class="btn btn-add btn-sm">Save</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </fieldset>
-                                                                            </form>
+                                                                        <div class="col-md-12" id="update_box">
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -427,19 +175,15 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    <h3><i class="fa fa-user m-r-5"></i> Delete Playerer</h3>
+                                                                    <h3><i class="fa fa-user m-r-5"></i> Delete Player</h3>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <form class="form-horizontal">
                                                                                 <fieldset>
-                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                        <label class="control-label">Delete Playerer</label>
-                                                                                        <div class="pull-right">
-                                                                                            <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                                                                            <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                                                                        </div>
+                                                                                    <div id="player_info" class="col-md-12 form-group user-form-group">
+                                                                                        
                                                                                     </div>
                                                                                 </fieldset>
                                                                             </form>
@@ -467,6 +211,51 @@
                                                 <script src="{{asset('admin_assets/plugins/table-export/sprintf.js')}}" type="text/javascript"></script>
                                                 <script src="{{asset('admin_assets/plugins/table-export/jspdf.js')}}" type="text/javascript"></script>
                                                 <script src="{{asset('admin_assets/plugins/table-export/base64.js')}}" type="text/javascript"></script>
-                                                <!-- dataTables js -->
-                                                <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
+                                                <script>
+                                                
+                                                    $(document).ready(function(){
+
+                                                        $('body').delegate('#deletePlayer', 'click', function(){
+                                                            let id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/players/delete',
+                                                                type:'get',
+                                                                data:{'id':id, '_token': token},
+                                                                success: function(data) {
+                                                                    $('#player_info').html(data);
+                                                                }
+                                                            });
+                                                        });
+
+                                                        $('body').delegate('#del_YES', 'click', function(){
+                                                            var id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/players/delete',
+                                                                type:'DELETE',
+                                                                data:{'id':id, '_token': token, '_method': 'DELETE'},
+                                                                success: function(data) {
+
+                                                                }
+                                                            });
+                                                        });
+
+
+                                                        $('body').delegate('#updatePlayer', 'click', function(){
+                                                            let id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/players/update',
+                                                                type:'get',
+                                                                data:{'id':id, '_token': token},
+                                                                success: function(data) {
+                                                                    // alert(data);
+                                                                    $('#update_box').html(data);
+                                                                }
+                                                            });
+                                                        });
+
+                                                    });
+                                                </script>
                                                 @endsection

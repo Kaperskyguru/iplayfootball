@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-    //
+    protected $guard = 'player';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -53,4 +53,24 @@ class Player extends Model
         "player_penalties_winnings",
         "player_offsides"
     ];
+
+    public function status()
+    {
+        return $this->belongsTo('App\Status', 'player_status_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo('App\Status', 'player_package_id', 'id');
+    }
+
+    public function verify()
+    {
+        return $this->belongsTo('App\Verification', 'id', 'verification_user_id');
+    }
 }

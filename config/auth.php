@@ -41,6 +41,31 @@ return [
             'provider' => 'users',
         ],
 
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'player' => [
+            'driver' => 'session',
+            'provider' => 'players',
+        ],
+
+        'scout' => [
+            'driver' => 'session',
+            'provider' => 'scouts',
+        ],
+
+        'team' => [
+            'driver' => 'session',
+            'provider' => 'teams',
+        ],
+
+        'academic' => [
+            'driver' => 'session',
+            'provider' => 'academics',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -68,6 +93,31 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Dashboard::class,
+        ],
+
+        'players' => [
+            'driver' => 'eloquent',
+            'model' => App\Player::class,
+        ],
+
+        'teams' => [
+            'driver' => 'eloquent',
+            'model' => App\Team::class,
+        ],
+
+        'scouts' => [
+            'driver' => 'eloquent',
+            'model' => App\Scouts::class,
+        ],
+
+        'academics' => [
+            'driver' => 'eloquent',
+            'model' => App\Academic::class,
         ],
 
         // 'users' => [

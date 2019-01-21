@@ -1,8 +1,6 @@
 @extends('admin-dashboard.layouts.app')
 
 @section('styles')
-<!-- dataTables css -->
-<link href="{{asset('admin_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
 .assopla {
@@ -72,6 +70,20 @@
                         </a>
                     </div>
                 </div>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="panel-body">
                     <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                     <div class="btn-group">
@@ -152,21 +164,22 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-
+                                                                                @foreach($Teams as $team)
                                                                                 <tr>
                                                                                     <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>Mrs. Rabeya Begum</td>
-                                                                                    <td>+2341234567890</td>
-                                                                                    <td><a href="#" class="__cf_email__">johndoe@mail.com</a></td>
-                                                                                    <td>98 Green Rd, Dhaka 1215, Bangladesh</td>
+                                                                                    <td>{{$team->name}}</td>
+                                                                                    <td>{{$team->phone}}</td>
+                                                                                    <td><a href="#" class="__cf_email__">{{$team->email}}</a></td>
+                                                                                    <td>{{$team->address}}</td>
                                                                                     <td>V.I.P</td>
-                                                                                    <td>27th April,2017</td>
-                                                                                    <td><span class="label-custom label label-default">Active</span></td>
+                                                                                    <td>{{getFromDateAttribute($team->created_at)}}</td>
+                                                                                    <td><span class="label-custom label label-default">{{$team->status->status_text}}</span></td>
                                                                                     <td>
-                                                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
+                                                                                        <button type="button" id="updateTeam" data-id="{{$team->id}}" data-token="{{ csrf_token() }}"  class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                                                                                        <button type="button" id="deleteTeam" data-id="{{$team->id}}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                     </td>
                                                                                 </tr>
+                                                                                @endforeach
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -184,53 +197,8 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <form class="form-horizontal">
-                                                                                <fieldset>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Team Name:</label>
-                                                                                        <input type="text" placeholder="Team Name" class="form-control">
-                                                                                    </div>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Email:</label>
-                                                                                        <input type="email" placeholder="Email" class="form-control">
-                                                                                    </div>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Mobile</label>
-                                                                                        <input type="number" placeholder="Mobile" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Address</label><br>
-                                                                                        <textarea name="address" rows="3"></textarea>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Profile Package</label>
-                                                                                        <input type="text" placeholder="type" class="form-control">
-                                                                                    </div>
-                                                                                    <div id="myDIV" class="col-md-12 form-group">
-                                                                                        <label class="control-label">add player</label>
-                                                                                        <input type="text" id="myInput" placeholder="add player" class="form-control">
-                                                                                        <span onclick="newElement()" class="addBtn btn-add btn btn-sm">Add</span>
-                                                                                    </div>
-                                                                                    <ul id="myUL" class="assopla col-md-12 form-group" style="padding-left:20px;">
-                                                                                        <li class="assopla-list">Victor Ighalo</li>
-                                                                                        <li class="assopla-list">Angel Dimaria</li>
-                                                                                        <li class="assopla-list">C. Ronaldo</li>
-                                                                                        <li class="assopla-list">Ronaldinho</li>
-                                                                                        <li class="assopla-list">Cesc Fabrigas</li>
-                                                                                        <li class="assopla-list">Eden Hazard</li>
-                                                                                    </ul>
-                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                        <div class="pull-right">
-                                                                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                                                            <button type="submit" class="btn btn-add btn-sm">Save</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </fieldset>
-                                                                            </form>
+                                                                        <div class="col-md-12" id="update_box">
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -250,19 +218,15 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    <h3><i class="fa fa-user m-r-5"></i> Delete Playerer</h3>
+                                                                    <h3><i class="fa fa-user m-r-5"></i> Delete Team</h3>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <form class="form-horizontal">
                                                                                 <fieldset>
-                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                        <label class="control-label">Delete Playerer</label>
-                                                                                        <div class="pull-right">
-                                                                                            <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                                                                            <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                                                                        </div>
+                                                                                    <div id="team_info" class="col-md-12 form-group user-form-group">
+                                                                                        
                                                                                     </div>
                                                                                 </fieldset>
                                                                             </form>
@@ -290,10 +254,51 @@
                                                 <script src="{{asset('admin_assets/plugins/table-export/sprintf.js')}}" type="text/javascript"></script>
                                                 <script src="{{asset('admin_assets/plugins/table-export/jspdf.js')}}" type="text/javascript"></script>
                                                 <script src="{{asset('admin_assets/plugins/table-export/base64.js')}}" type="text/javascript"></script>
-                                                <!-- dataTables js -->
-                                                <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
                                                 <!-- SlimScroll -->
                                                 <script>
+
+                                                    $(document).ready(function(){
+
+                                                        $('body').delegate('#deleteTeam', 'click', function(){
+                                                            let id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/teams/delete',
+                                                                type:'get',
+                                                                data:{'id':id, '_token': token},
+                                                                success: function(data) {
+                                                                    $('#team_info').html(data);
+                                                                }
+                                                            });
+                                                        });
+
+                                                        $('body').delegate('#del_YES', 'click', function(){
+                                                            var id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/teams/delete',
+                                                                type:'DELETE',
+                                                                data:{'id':id, '_token': token, '_method': 'DELETE'},
+                                                                success: function(data) {
+
+                                                                }
+                                                            });
+                                                        });
+
+                                                        $('body').delegate('#updateTeam', 'click', function(){
+                                                            let id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/teams/update',
+                                                                type:'get',
+                                                                data:{'id':id, '_token': token},
+                                                                success: function(data) {
+                                                                    $('#update_box').html(data);
+                                                                }
+                                                            });
+                                                        });
+
+                                                     });
                                                 // Create a "close" button and append it to each list item
                                                 var myNodelist = document.getElementsByClassName("assopla-list");
                                                 var i;

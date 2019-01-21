@@ -25,64 +25,79 @@
                             <i class="fa fa-list"></i> Scout List </a>
                         </div>
                     </div>
+                    @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                     <div class="panel-body">
-                        <form class="col-sm-6">
+                        <form class="col-sm-6" method="POST" action="{{ url('admin/scouts') }}" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" required>
+                                <label class="label-control" for="firstname">First Name</label>
+                                <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter First Name" required>
                             </div>
                             <div class="form-group">
-                                <label>Last Name</label>
-                                <input type="text" class="form-control" placeholder="Enter last Name" required>
+                                <label class="label-control" for="lastname">Last Name</label>
+                                <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter last Name" required>
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" placeholder="Enter Email" required>
+                                <label class="label-control" for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
                             </div>
                             <div class="form-group">
-                                <label>Mobile</label>
-                                <input type="number" class="form-control" placeholder="Enter Mobile" required>
+                                <label class="label-control" for="number">Mobile</label>
+                                <input type="number" name="number" id="number" class="form-control" placeholder="Enter Mobile" required>
                             </div>
                             <div class="form-group">
-                                <label>Sex</label><br>
-                                <label class="radio-inline"><input name="sex" value="1" checked="checked" type="radio">Male</label>
-                                <label class="radio-inline"><input name="sex" value="0" type="radio">Female</label>
+                                <label class="label-control" for="sex">Sex</label><br>
+                                <label class="radio-inline" for="sex"><input name="sex" id="sex" value="Male" checked="checked" type="radio">Male</label>
+                                <label class="radio-inline" for="sex"><input name="sex" id="sex" value="Female" type="radio">Female</label>
                             </div>
                             <div class="form-group">
-                                <label>Date of Birth</label>
-                                <input id='minMaxExample' type="date" class="form-control" placeholder="Enter Date...">
+                                <label class="label-control" for="dob">Date of Birth</label>
+                                <input id='minMaxExample' type="date" name="dob" id="dob" class="form-control" placeholder="Enter Date...">
                             </div>
                             <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" rows="3" required></textarea>
+                                <label class="label-control" for="address">Address</label>
+                                <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Picture upload</label>
-                                <input type="file" name="picture">
+                                <label class="label-control" for="picture">Picture upload</label>
+                                <input type="file" name="picture" id="picture">
                                 <input type="hidden" name="old_picture">
                             </div>
                             <div class="form-group">
-                                <label>Qualificaions/Licence</label>
-                                <input type="text" class="form-control" placeholder="Enter qualifications" required>
+                                <label class="label-control" for="licence">Qualificaions/Licence</label>
+                                <input type="text" name="licence" id="licence" class="form-control" placeholder="Enter qualifications" required>
                             </div>
                             <div class="form-group">
-                                <label>Clubs/Teams</label>
-                                <input type="text" class="form-control" placeholder="Enter Team" required>
+                                <label class="label-control" for="team">Clubs/Teams</label>
+                                <input type="text" name="team" id="team" class="form-control" placeholder="Enter Team" required>
                             </div>
 
                             <div class="form-group">
-                                <label>Other Notes</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="type a message here..." required></textarea>
+                                <label class="label-control" for="notes">Other Notes</label>
+                                <textarea class="form-control" name="notes" id="notes" rows="3" placeholder="type a message here..." required></textarea>
                             </div>
                             <div class="form-check">
-                                <label>Status</label><br>
-                                <label class="radio-inline">
-                                    <input type="radio" name="status" value="1" checked="checked">Active</label>
-                                    <label class="radio-inline"><input type="radio" name="status" value="0" >Inactive</label>
+                                <label class="label-control" class="label-control" for="dob">Status</label><br>
+                                <label class="radio-inline" for="scout_status">
+                                    <input type="radio" name="scout_status" id="scout_status" value="1" checked="checked">Active</label>
+                                    <label class="radio-inline" for="scout_status"><input type="radio" id="scout_status" name="scout_status" value="3" >Inactive</label>
                                 </div>
                                 <div class="reset-button">
-                                    <a href="#" class="btn btn-warning">Reset</a>
-                                    <a href="#" class="btn btn-success">Save</a>
+                                <input type="hidden" name="_token" value="{{ @csrf_token() }}">
+                                    <button type="reset" class="btn btn-warning">Reset</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                 </div>
                             </form>
                         </div>

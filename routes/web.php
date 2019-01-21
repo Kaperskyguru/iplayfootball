@@ -1,6 +1,12 @@
 <?php
 use App\Http\Controllers\PlayersController as Players;
 use App\Http\Controllers\ScoutsController as Scouts;
+use App\Http\Controllers\NoticesController as Notices;
+use App\Http\Controllers\AcademicsController as Academics;
+use App\Http\Controllers\VerificationsController as Verifications;
+use App\Http\Controllers\TeamsController as Teams;
+use App\Http\Controllers\MessagesController as Messages;
+use App\Http\Middleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,81 +20,82 @@ use App\Http\Controllers\ScoutsController as Scouts;
 
 
 // Admin route groups
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin'], function()
+{
 
-    Route::get('/', function () {
-        return view('admin-dashboard.index');
-    });
+    Route::get('/', 'DashboardController@index')->name('admin');
+
 
     Route::get('/addPlayer', function () {
         return view('admin-dashboard.addPlayer');
     });
 
-    Route::get('/players', function () {
-        $Players = new Players;
-        return view('admin-dashboard.Players')->with('Players', $Players->players());
-    });
+    Route::get('/players/delete', 'PlayersController@view_delete_confirmation');
+    Route::delete('/players/delete', 'PlayersController@delete');
+    Route::get('/players/update', 'PlayersController@view_update_box');
+    // Route::patch('/players', 'PlayersController@update');
 
-    Route::get('/addscout', function () {
+    Route::resource('/players', 'PlayersController');
+
+    Route::get('/players', 'PlayersController@players');
+    // Route::post('/players', 'PlayersController@store');
+
+    Route::get('/addscout', function () { // change create instead of addscout
         return view('admin-dashboard.addscout');
     });
 
-    Route::get('/scouts', function () {
-        $Scout = new Scouts;
-        return view('admin-dashboard.scouts')->with('Scouts', $Scout->scouts());
-    });
+    // Route::post('/scouts', 'ScoutsController@store');
+    Route::get('/scouts/delete', 'ScoutsController@view_delete_confirmation');
+    Route::get('/scouts/update', 'ScoutsController@view_update_box');
+    Route::resource('/scouts', 'ScoutsController');
+    // Route::delete('/scouts', 'ScoutsController@delete');
+    Route::get('/scouts', 'ScoutsController@scouts');
+
 
     Route::get('/addteam', function () {
         return view('admin-dashboard.addteam');
     });
+    
+    
+    
+    Route::get('/teams/delete', 'TeamsController@view_delete_confirmation');
+    Route::get('/teams/update', 'TeamsController@view_update_box');
+    Route::resource('/teams', 'TeamsController');
 
-    Route::get('/teams', function () {
-        return view('admin-dashboard.teams');
-    });
+
 
     Route::get('/addacademic', function () {
         return view('admin-dashboard.addacademic');
     });
+    Route::get('/academics/delete', 'AcademicsController@view_delete_confirmation');
+    Route::get('/academics/update', 'AcademicsController@view_update_box');
+    Route::resource('/academics', 'AcademicsController');
 
-    Route::get('/academics', function () {
-        return view('admin-dashboard.academics');
-    });
-
-    Route::get('/notices', function () {
-        return view('admin-dashboard.notice');
-    });
+    Route::get('/notices', 'NoticesController@noticeView');
+    // Route::post('/notices/add', 'NoticesController@store');
+    Route::get('/notices/delete', 'NoticesController@view_delete_confirmation');
+    Route::get('/notices/update', 'NoticesController@view_update_box');
+    Route::get('/notices/read', 'NoticesController@adminReadNotice');
+    Route::resource('/notices', 'NoticesController');
 
     Route::get('/addverification', function () {
         return view('admin-dashboard.addverification');
     });
 
-    Route::get('/pending', function () {
-        return view('admin-dashboard.pendingverification');
-    });
+    Route::get('/pending', 'VerificationsController@pendingView');
 
-    Route::get('/verified', function () {
-        return view('admin-dashboard.verifiedverification');
-    });
+    Route::get('/verified', 'VerificationsController@verifiedView');
 
-    Route::get('/declined', function () {
-        return view('admin-dashboard.declinedverification');
-    });
+    Route::get('/declined', 'VerificationsController@declinedView');
 
-    Route::get('/messages', function () {
-        return view('admin-dashboard.message');
-    });
+    Route::get('/messages', 'MessagesController@inbox');
+    Route::post('/messages', 'MessagesController@store');
 
-    Route::get('/sent', function () {
-        return view('admin-dashboard.sentmail');
-    });
+    Route::get('/messages/sent', 'MessagesController@sent');
 
-    Route::get('/details', function () {
-        return view('admin-dashboard.maildetails');
-    });
+    Route::get('/details/{id}', 'MessagesController@details');
 
-    Route::get('/compose', function () {
-        return view('admin-dashboard.compose');
-    });
+    Route::get('/compose', 'MessagesController@compose');
 
     Route::get('/profile', function () {
         return view('admin-dashboard.profile');
@@ -96,30 +103,27 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 // players route groups
-Route::group(['prefix' => 'player'], function () {
-    Route::get('/', function () {
-        return view('players-dashboard.index');
-    });
+Route::prefix('/player')->group(function()
+{
+    Route::get('/', 'PlayersController@player_view')->name('player');
 
-    Route::get('/messages', function () {
-        return view('players-dashboard.messages');
-    });
+    Route::PATCH('/update/{id}', 'PlayersController@playerUpdate')->name('playerUpdate');
 
-    Route::get('/sent', function () {
-        return view('players-dashboard.sentmail');
-    });
+    Route::get('/update', 'PlayersController@playerUpdateForm');
 
-    Route::get('/details', function () {
-        return view('players-dashboard.maildetails');
-    });
+    Route::post('/verify', 'VerificationsController@playerVerification');
 
-    Route::get('/compose', function () {
-        return view('players-dashboard.compose');
-    });
+    Route::get('/messages', 'MessagesController@playersInboxView');
+    Route::post('/messages', 'MessagesController@playerSendMessage');
 
-    Route::get('/notices', function () {
-        return view('players-dashboard.notices');
-    });
+    Route::get('/sent', 'MessagesController@playersSentView');
+
+    Route::get('/details', 'MessagesController@playersDetailsView');
+
+    Route::get('/compose', 'MessagesController@playersComposeView');
+
+    Route::get('/notices', 'NoticesController@playerNotices');
+    Route::get('/notices/read', 'NoticesController@playerReadNotice');
 
     Route::get('/users', function () {
         return view('players-dashboard.users');
@@ -148,13 +152,6 @@ Route::get('profile', function () {
     return view('profile');
 });
 
-Route::get('login', function () {
-    return view('login');
-});
-
-Route::get('register', function () {
-    return view('register');
-});
 
 Route::get('resetpassword', function () {
     return view('resetpassword');
@@ -169,3 +166,7 @@ Route::post("contact", "PagesController@sendContact");
 Route::get("/search", "SearchController@search");
 Route::get("/players", "PlayersController@players");
 Route::get("/profiles", "PlayersController@index");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

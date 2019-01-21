@@ -1,4 +1,7 @@
 @extends('admin-dashboard.layouts.app')
+@section('styles')
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+@endsection
 @section('content')
 <!-- Main content -->
 <section class="content">
@@ -40,7 +43,7 @@
                                         <li class="active">
                                             <a href="{{url('/admin/messages')}}">
                                                 <i class="fa fa-inbox"></i>Inbox
-                                                <small class="label pull-right bg-green">61</small>
+                                                <small class="label pull-right bg-green">{{$totalUreadMessages}}</small>
                                             </a>
                                         </li>
                                         <li>
@@ -55,33 +58,42 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-9 p-0 inbox-mail p-20">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-form-label text-right">To :</label>
-                                    <div class="col-sm-9 col-md-10">
-                                        <input class="form-control" type="text" id="to">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                                <form action="{{ url('admin/messages') }}" method="POST">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-md-2 col-form-label text-right">To :</label>
+                                        <div class="col-sm-9 col-md-10">
+                                            <input class="form-control" name="to" type="text" id="to">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-form-label text-right">Cc :</label>
-                                    <div class="col-sm-9 col-md-10">
-                                        <input class="form-control" type="text" id="cc">
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-md-2 col-form-label text-right">Subject :</label>
+                                        <div class="col-sm-9 col-md-10">
+                                            <input class="form-control" type="text" name="subject" id="subjejct">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-md-2 col-form-label text-right">Subject :</label>
-                                    <div class="col-sm-9 col-md-10">
-                                        <input class="form-control" type="text" id="subjejct">
+                                    <!-- summernote -->
+                                    <textarea id="summernote" name="body" class="summernote"></textarea>
+                                    <div class="hidden-xs hidden-sm btn-group">
+                                        <button type="button" class="text-center btn btn-default">DISCARD</button>
+                                        <button type="button" class="btn btn-default">SAVE</button>
                                     </div>
-                                </div>
-                                <!-- summernote -->
-                                <div id="summernote"></div>
-                                <div class="hidden-xs hidden-sm btn-group">
-                                    <button type="button" class="text-center btn btn-default">DISCARD</button>
-                                    <button type="button" class="btn btn-default">SAVE</button>
-                                </div>
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn btn-add">SEND</button>
-                                </div>
+                                    <div class="btn-group pull-right">
+                                    <input type="hidden" name="_token" value="{{ @csrf_token() }}">
+                                    <input type="hidden" name="message_type" id="message_type" value="16">
+                                        <button type="submit" class="btn btn-add">SEND</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -92,8 +104,10 @@
     <!-- /.content -->
     @endsection
     @section('scripts')
-    <script src="{{asset('admin_assets/plugins/summernote/summernote.js ')}}'" type="text/javascript"></script>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>    
+ 
+    <!-- <script src="{{asset('admin_assets/plugins/summernote/summernote.js')}}" type="text/javascript"></script> -->
     <script>
     //Summernote
     function sumnote() {

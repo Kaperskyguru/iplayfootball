@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             TeamTableSeeder::class,
             ScoutTableSeeder::class,
             AcademicTableSeeder::class,
+            MessageTableSeeder::class,
+            VerificationTableSeeder::class,
+            NoticeTableSeeder::class
         ]);
     }
 }

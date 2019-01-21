@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +38,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // dd();
+        // $this->middleware('auth');
     }
 
     /**
@@ -52,6 +54,9 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|string',
+            'country' => 'required|string',
+            'role' => 'required|string',
         ]);
     }
 
@@ -63,9 +68,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'state' => $data['country'],
+            'phone' => $data['phone'],
+            'role' => $data['role'],
             'password' => Hash::make($data['password']),
         ]);
     }

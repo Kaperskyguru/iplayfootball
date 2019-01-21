@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>iPlayFootball Player Panel</title>
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="{{asset('players_assets/dist/img/ico/iLOGO.png')}}" type="image/x-icon">
@@ -26,6 +26,7 @@
     <link href="{{asset('players_assets/themify-icons/themify-icons.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{asset('players_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
     @yield('styles')
 </head>
 
@@ -54,88 +55,42 @@
                     <span class="pe-7s-angle-left-circle"></span>
                 </a>
                 <!-- searchbar-->
-                <a href="#search">
+                {{-- <a href="#search">
                     <span class="pe-7s-search"></span>
-                </a>
+                </a> --}}
                 <div id="search">
                     <button type="button" class="close">×</button>
                     <form>
                         <input type="search" value="" placeholder="Search.." />
-                        <button type="submit" class="btn btn-add">Search...</button>
+                        {{-- <button type="submit" class="btn btn-add">Search...</button> --}}
                     </form>
                 </div>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages -->
                         <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="{{ count($messages) or 'dropdown'}}">
                                 <i class="pe-7s-mail"></i>
-                                <span class="label label-success">4</span>
+                                <span class="label label-success">{{ count($messages)}}</span>
                             </a>
+                            
                             <ul class="dropdown-menu">
                                 <li>
                                     <ul class="menu">
+                                        @foreach ($messages as $message)
                                         <li>
                                             <!-- start message -->
-                                            <a href="#" class="border-gray">
+                                            <a href="{{url('/admin/details/'.$message->id)}}" class="border-gray">
                                                 <div class="pull-left">
-                                                    <img src="{{asset('players_assets/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                                                    <img src="{{asset('admin_assets/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
                                                 </div>
-                                                <h4>Ronaldo</h4>
-                                                <p>Please oreder 10 pices of kits..</p>
-                                                <span class="badge badge-success badge-massege">
-                                                    <small>15 hours ago</small>
+                                                <h4>{{ $message->sender->name}}</h4>
+                                                <p>{{ $message->message_subject}}</p>
+                                                <span class="badge badge-success badge-massege"><small>{{getHours($message->created_at)}} hours ago</small>
                                                 </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('players_assets/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Leo messi</h4>
-                                                <p>Please oreder 10 pices of Sheos..</p>
-                                                <span class="badge badge-info badge-massege">
-                                                    <small>6 days ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('players_assets/dist/img/avatar3.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Modric</h4>
-                                                <p>Please oreder 6 pices of bats..</p>
-                                                <span class="badge badge-info badge-massege">
-                                                    <small>1 hour ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('players_assets/dist/img/avatar4.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Salman</h4>
-                                                <p>Hello i want 4 uefa footballs</p>
-                                                <span class="badge badge-danger badge-massege">
-                                                    <small>6 days ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="border-gray">
-                                                <div class="pull-left">
-                                                    <img src="{{asset('players_assets/dist/img/avatar5.png')}}" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Sergio Ramos</h4>
-                                                <p>Hello i want 9 uefa footballs</p>
-                                                <span class="badge badge-info badge-massege">
-                                                    <small>5 hours ago</small>
-                                                </span>
-                                            </a>
-                                        </li>
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>
@@ -177,54 +132,36 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <!-- Help -->
-                                                <li class="dropdown dropdown-help hidden-xs">
+                                               
+                                                <!-- user -->
+                                                <li class="dropdown dropdown-user">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="pe-7s-settings"></i>
+                                                        <img src="{{asset('players_assets/dist/img/avatar5.png')}}" class="img-circle" width="45" height="45" alt="user">
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a href="{{ url('/player/') }}">
-                                                                <i class="fa fa-line-chart"></i> Networking</a>
+                                                            <a href="{{ url('/player') }}">
+                                                                <i class="fa fa-user"></i> User Profile</a>
                                                             </li>
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa fa-bullhorn"></i> Lan settings</a>
+                                                                <a href="{{ url('/player/messages') }}">
+                                                                    <i class="fa fa-inbox"></i> Inbox</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">
-                                                                        <i class="fa fa-bar-chart"></i> Settings</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="{{ url('/player/login') }}">
-                                                                            <i class="fa fa-wifi"></i> wifi</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                                <!-- user -->
-                                                                <li class="dropdown dropdown-user">
-                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                                        <img src="{{asset('players_assets/dist/img/avatar5.png')}}" class="img-circle" width="45" height="45" alt="user">
+                                                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                                        <i class="fa fa-sign-out"></i> Signout
+                                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                            {{ csrf_field() }}
+                                                                        </form>
                                                                     </a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li>
-                                                                            <a href="{{ url('/player/') }}">
-                                                                                <i class="fa fa-user"></i> User Profile</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <i class="fa fa-inbox"></i> Inbox</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="{{ url('/player/login') }}">
-                                                                                        <i class="fa fa-sign-out"></i> Signout</a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </nav>
-                                                            </header>
+                                                                </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    </div> 
+                                                </nav>
+                                            </header>
                                                             <!-- =============================================== -->
                                                             <!-- Left side column. contains the sidebar -->
                                                             <aside class="main-sidebar">
@@ -256,14 +193,14 @@
                                                                                 </span>
                                                                             </a>
                                                                         </li>
-                                                                        <li>
+                                                                        {{-- <li>
                                                                             <a href="{{ url('/player/') }}">
                                                                                 <i class="fa fa-lock"></i>
                                                                                 <span>Insurance</span>
                                                                                 <span class="pull-right-container">
                                                                                 </span>
                                                                             </a>
-                                                                        </li>
+                                                                        </li> --}}
                                                                     </ul>
                                                                 </div>
                                                                 <!-- /.sidebar -->
@@ -305,8 +242,12 @@
                                                             =====================================================================-->
                                                             <!-- Start Theme label Script
                                                             =====================================================================-->
+                                                            <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
                                                             <!-- Dashboard js -->
                                                             <script src="{{asset('players_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
+                                                            <script>
+                                                                $('#dataTableExample1').dataTable();
+                                                            </script>
                                                             <!-- End Theme label Script
                                                             =====================================================================-->
                                                             @yield('scripts')

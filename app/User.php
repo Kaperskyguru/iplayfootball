@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone','role', 'state'
     ];
 
     /**
@@ -27,4 +27,40 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function academic()
+    {
+        return $this->hasOne('App\Academic');
+    }
+
+    public function player()
+    {
+        return $this->hasOne('App\Player', 'user_id', 'id');
+    }
+
+    public static function getUserType(string $role)
+    {
+        switch ($role) {
+            case '9':
+            return 'admin';
+                break;
+            case '6':
+                return 'team';
+                break;
+            case '8':
+                return 'player';
+                break;
+            case '5':
+                return 'academic';
+                break;
+            case '7':
+                return 'scout';
+                break;
+            default:
+                return 'admin';
+                break;
+                 
+        }
+    }
+
 }

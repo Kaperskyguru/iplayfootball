@@ -34,7 +34,7 @@
                 <div class="statistic-box">
                     <i class="fa fa-user fa-3x"></i>
                     <div class="counter-number pull-right">
-                        <span class="count-number">4</span>
+                        <span class="count-number">{{$totalPlayers}}</span>
                         <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
                         </span>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="statistic-box">
                     <i class="fa fa-user fa-3x"></i>
                     <div class="counter-number pull-right">
-                        <span class="count-number">965</span>
+                        <span class="count-number">{{$totalScouts}}</span>
                         <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
                         </span>
                     </div>
@@ -60,11 +60,11 @@
                 <div class="statistic-box">
                     <i class="fa fa-check-square-o fa-3x"></i>
                     <div class="counter-number pull-right">
-                        <span class="count-number">11</span>
+                        <span class="count-number">{{$totalPendingVerifications}}</span>
                         <span class="slight"><i class="fa fa-play fa-rotate-270"> </i>
                         </span>
                     </div>
-                    <h3> Pending Verifications</h3>
+                    <h3> {{ e('Pending Verifications') }}</h3>
                 </div>
             </div>
         </div>
@@ -78,18 +78,24 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="work-touchpoint">
-                        <div class="work-touchpoint-date">
-                            <span class="day">28</span>
-                            <span class="month">Apr</span>
+               <?php //dd($data) ?>
+                @if(count($notices) > 0)
+                
+                    @foreach($notices as $notice)
+                        <div class="work-touchpoint">
+                            <div class="work-touchpoint-date">
+                                <span class="day">{{getDay($notice->notice_startdate)}}</span>
+                                <span class="month">{{getMonth($notice->notice_startdate)}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="detailswork">
-                        <span class="label-custom label label-default pull-right">Everyone</span>
-                        <a href="#" title="headings">Marketing policy</a> <br>
-                        <p>Stadium Road - Port Harcourt,Rivers</p>
-                    </div>
-                    <div class="work-touchpoint">
+                        <div class="detailswork">
+                            <span class="label-custom label label-default pull-right">{{$notice->status->status_text}}</span>
+                            <a href="#" title="headings">{{$notice->notice_title}}</a> <br>
+                            <p>{{str_limit($notice->notice_desc, 30)}}</p>
+                        </div>
+                    @endforeach
+                @endif
+                    <!-- <div class="work-touchpoint">
                         <div class="work-touchpoint-date">
                             <span class="day">2</span>
                             <span class="month">Apr</span>
@@ -143,8 +149,7 @@
                         <span class="label-custom label label-default pull-right">Academies</span>
                         <a href="#" title="headings">Finance policy</a> <br>
                         <p>F.C.T - Abuja</p>
-                    </div>
-
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -158,15 +163,19 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="Pendingwork">
-                        <span class="label-warning label label-default pull-right">pending</span>
-                        <i class="fa fa-ban"></i>
-                        <a href="#">Welbeck</a>
-                        <div class="upworkdate">
-                            <p>Jul 25, 2017 for Silver Package</p>
-                        </div>
-                    </div>
-                    <div class="Pendingwork">
+                    @if(count($pendingVerifications) > 0)
+                        @foreach($pendingVerifications as $pending)
+                            <div class="Pendingwork">
+                                <span class="label-warning label label-default pull-right">{{$pending->status->status_text}}</span>
+                                <i class="fa fa-ban"></i>
+                                <a href="#">{{$pending->verification_type}}</a>
+                                <div class="upworkdate">
+                                    <p>{{dateFormat($pending->created_at)}} for Silver Package</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                    <!-- <div class="Pendingwork">
                         <span class="label-success label label-default pull-right">Verified</span>
                         <i class="fa fa-ban"></i>
                         <a href="#">Kompany</a>
@@ -197,7 +206,7 @@
                         <div class="upworkdate">
                             <p>jun 25, 2017 for Gold Package</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -16,7 +16,10 @@ class CreateScoutsTable extends Migration
         Schema::create('scouts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer("scout_image_id");
-            $table->integer("user_id")->unsigned();
+            $table->string('scout_name');
+            $table->string('scout_phone');
+            $table->string('scout_state');
+            $table->string('scout_email')->unique();
             $table->text("scout_licence");
             $table->integer("scout_team_id");
             $table->date("scout_dob");
@@ -29,7 +32,7 @@ class CreateScoutsTable extends Migration
 
         Schema::table('scouts', function($table)
         {
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             // $table->foreign('scout_team_id')->references('id')->on('teams');
             // $table->foreign('scout_image_id')->references('id')->on('images');
             // $table->foreign('scout_status_id')->references('id')->on('statuses');

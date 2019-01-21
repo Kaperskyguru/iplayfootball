@@ -16,10 +16,13 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->string("message_subject");
-            $table->text("message_body");
-            $table->integer("message_type");
+            $table->longText("message_body");
+            $table->integer("message_type")->nullable();
             $table->integer("message_sender_id");
-            $table->integer("message_receiver_id");
+            $table->string("message_receiver_id");
+            $table->string('message_sender_type')->nullable();
+            $table->string('message_receiver_type')->nullable();
+            $table->integer('message_status_id')->default(15);
             $table->timestamps();
         });
     }

@@ -1,8 +1,6 @@
 @extends('admin-dashboard.layouts.app')
 
 @section('styles')
-<link href="{{asset('admin_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
-
 <style>
 .assopla {
     margin: 20px;
@@ -80,6 +78,11 @@
                             <a class="btn btn-add" href="{{url('/admin/addscout')}}"> <i class="fa fa-plus"></i> Add Scout
                             </a>
                         </div>
+                        @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                         <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Table Data</button>
                         <ul class="dropdown-menu exp-drop" role="menu">
                             <li>
@@ -156,16 +159,16 @@
                                                                                 @foreach($Scouts as $scout)
                                                                                 <tr>
                                                                                     <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
-                                                                                    <td>{{$scout->scout_firstname}} {{$scout->scout_lastname}}</td>
-                                                                                    <td>+{{$scout->scout_mobile}}</td>
+                                                                                    <td>{{$scout->scout_name}}</td>
+                                                                                    <td>{{$scout->scout_phone}}</td>
                                                                                     <td><a href="#" class="__cf_email__">{{$scout->scout_email}}</a></td>
                                                                                     <td>{{$scout->scout_address}}</td>
                                                                                     <td>V.I.P</td>
-                                                                                    <td>27th April,2017</td>
-                                                                                    <td><span class="label-custom label label-default">Active</span></td>
+                                                                                    <td>{{dateFormat($scout->created_at)}}</td>
+                                                                                    <td><span class="label-custom label label-default">{{$scout->status->status_text}}</span></td>
                                                                                     <td>
-                                                                                        <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
+                                                                                        <button type="button" class="btn btn-add btn-sm" id="updateScout" data-id="{{$scout->id}}" data-token="{{ csrf_token() }}" data-toggle="modal" data-target="#customer1"><i class="fa fa-pencil"></i></button>
+                                                                                        <button type="button" id="deleteScout" data-id="{{$scout->id}}" data-token="{{ csrf_token() }}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2"><i class="fa fa-trash-o"></i> </button>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @endforeach
@@ -186,53 +189,8 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <form class="form-horizontal">
-                                                                                <fieldset>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Scout Name:</label>
-                                                                                        <input type="text" placeholder="Scout Name" class="form-control">
-                                                                                    </div>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Email:</label>
-                                                                                        <input type="email" placeholder="Email" class="form-control">
-                                                                                    </div>
-                                                                                    <!-- Text input-->
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Mobile</label>
-                                                                                        <input type="number" placeholder="Mobile" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Address</label><br>
-                                                                                        <textarea class="form-control" name="address" rows="3"></textarea>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 form-group">
-                                                                                        <label class="control-label">Profile Package</label>
-                                                                                        <input type="text" placeholder="type" class="form-control">
-                                                                                    </div>
-                                                                                    <div id="myDIV" class="col-md-12 form-group">
-                                                                                        <label class="control-label">add player</label>
-                                                                                        <input type="text" id="myInput" placeholder="add player" class="form-control">
-                                                                                        <span onclick="newElement()" class="addBtn btn-add btn btn-sm">Add</span>
-                                                                                    </div>
-                                                                                    <ul id="myUL" class="assopla col-md-12 form-group" style="padding-left:20px;">
-                                                                                        <li class="assopla-list">Victor Ighalo</li>
-                                                                                        <li class="assopla-list">Angel Dimaria</li>
-                                                                                        <li class="assopla-list">C. Ronaldo</li>
-                                                                                        <li class="assopla-list">Ronaldinho</li>
-                                                                                        <li class="assopla-list">Cesc Fabrigas</li>
-                                                                                        <li class="assopla-list">Eden Hazard</li>
-                                                                                    </ul>
-                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                        <div class="pull-right">
-                                                                                            <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                                                                                            <button type="submit" class="btn btn-add btn-sm">Save</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </fieldset>
-                                                                            </form>
+                                                                        <div class="col-md-12" id="update_box">
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -259,12 +217,8 @@
                                                                         <div class="col-md-12">
                                                                             <form class="form-horizontal">
                                                                                 <fieldset>
-                                                                                    <div class="col-md-12 form-group user-form-group">
-                                                                                        <label class="control-label">Delete Playerer</label>
-                                                                                        <div class="pull-right">
-                                                                                            <button type="button" class="btn btn-danger btn-sm">NO</button>
-                                                                                            <button type="submit" class="btn btn-add btn-sm">YES</button>
-                                                                                        </div>
+                                                                                    <div id="scout_info" class="col-md-12 form-group user-form-group">
+                                                                                     
                                                                                     </div>
                                                                                 </fieldset>
                                                                             </form>
@@ -293,10 +247,50 @@
                                                 <script src="{{asset('admin_assets/plugins/table-export/sprintf.js')}}" type="text/javascript"></script>
                                                 <script src="{{asset('admin_assets/plugins/table-export/jspdf.js')}}" type="text/javascript"></script>
                                                 <script src="{{asset('admin_assets/plugins/table-export/base64.js')}}" type="text/javascript"></script>
-                                                <!-- dataTables js -->
-                                                <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
-
                                                 <script>
+
+                                                    $(document).ready(function(){
+
+                                                        $('body').delegate('#deleteScout', 'click', function(){
+                                                            let id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/scouts/delete',
+                                                                type:'get',
+                                                                data:{'id':id, '_token': token},
+                                                                success: function(data) {
+                                                                    $('#scout_info').html(data);
+                                                                }
+                                                            });
+                                                        });
+
+                                                        $('body').delegate('#del_YES', 'click', function(){
+                                                            var id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/scouts',
+                                                                type:'DELETE',
+                                                                data:{'id':id, '_token': token, '_method': 'DELETE'},
+                                                                success: function(data) {
+
+                                                                }
+                                                            });
+                                                        });
+
+                                                        $('body').delegate('#updateScout', 'click', function(){
+                                                            let id = $(this).data('id');
+                                                            var token = $(this).data("token");
+                                                            $.ajax({
+                                                                url:'/admin/scouts/update',
+                                                                type:'get',
+                                                                data:{'id':id, '_token': token},
+                                                                success: function(data) {
+                                                                    $('#update_box').html(data);
+                                                                }
+                                                            });
+                                                        });
+
+                                                    });
                                                 // Create a "close" button and append it to each list item
                                                 var myNodelist = document.getElementsByClassName("assopla-list");
                                                 var i;

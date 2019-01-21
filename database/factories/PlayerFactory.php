@@ -1,15 +1,16 @@
 <?php
-use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(App\Player::class, function (Faker $faker) {
-    $gender = $faker->randomElement($array = array('male', 'female', 'mixed'));
+    $gender = $faker->randomElement($array = array('male', 'female'));
     $status = $faker->randomElement($array = array('Active', 'Pending', 'inactive'));
     $performance = $faker->randomKey($array = array('Okay', 'Impressive', 'Outstanding'));
     $position = $faker->randomElement($array = array('Winger','Striker','Mid-Fielder','Defender','Goal Keepeer'));
-    $user = $faker->randomElement(User::where('type', 'player')->get());
     return [
-        'user_id' => $user->id,
+        'player_name' => $faker->name($gender),
+        'player_phone' => $faker->e164PhoneNumber,
+        'player_state' => $faker->state,
+        'player_email' => $faker->unique()->safeEmail,
         'player_image_id' => $faker->numberBetween(1,20),
         'player_height' => $faker->numberBetween(50,100),
         'player_weight' => $faker->numberBetween(30,400),

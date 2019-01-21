@@ -101,86 +101,29 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <img src="{{asset('admin_assets/dist/img/m1.png')}}" class="img-circle" alt="User Image" width="50" height="50">
-                                                                                            </td>
-                                                                                            <td>Tony Kroos</td>
-                                                                                            <td>
-                                                                                                <span class="label-custom label label-default">Player</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <span class="label-custom label label-default">Verified</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#update">
-                                                                                                    <i class="fa fa-pencil"></i>
-                                                                                                </button>
-                                                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2">
-                                                                                                    <i class="fa fa-trash-o"></i>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <img src="{{asset('admin_assets/dist/img/m2.png')}}" class="img-circle" alt="User Image" width="50" height="50">
-                                                                                            </td>
-                                                                                            <td>Mateo kovocih</td>
-                                                                                            <td>
-                                                                                                <span class="label-warning label label-default">Scout</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <span class="label-custom label label-default">Verified</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#update">
-                                                                                                    <i class="fa fa-pencil"></i>
-                                                                                                </button>
-                                                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2">
-                                                                                                    <i class="fa fa-trash-o"></i>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <img src="{{asset('admin_assets/dist/img/m2.png')}}" class="img-circle" alt="User Image" width="50" height="50">
-                                                                                            </td>
-                                                                                            <td>Luca Modric</td>
-                                                                                            <td>
-                                                                                                <span class="label-primary label label-default">Player</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <span class="label-custom label label-default">Verified</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#update">
-                                                                                                    <i class="fa fa-pencil"></i>
-                                                                                                </button>
-                                                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2">
-                                                                                                    <i class="fa fa-trash-o"></i>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <img src="{{asset('admin_assets/dist/img/m4.png')}}" class="img-circle" alt="User Image" width="50" height="50">
-                                                                                            </td>
-                                                                                            <td>Alvaro morata</td>
-                                                                                            <td>
-                                                                                                <span class="label-primary label label-default">Scout</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <span class="label-custom label label-default">Verified</span>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#update">
-                                                                                                    <i class="fa fa-pencil"></i>
-                                                                                                </button>
-                                                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2">
-                                                                                                    <i class="fa fa-trash-o"></i>
-                                                                                                </button>
-                                                                                            </td>
-                                                                                        </tr>
+
+                                                                                            @foreach($Verifieds as $verified)
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <img src="{{asset('admin_assets/dist/img/m2.png')}}" class="img-circle" alt="User Image" width="50" height="50">
+                                                                                                </td>
+                                                                                                <td>{{$verified->user->name}}</td>
+                                                                                                <td>
+                                                                                                    <span class="label-warning label label-default">{{$verified->verification_type}}</span>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <span class="label-custom label label-default">{{$verified->status->status_text}}</span>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <button type="button" class="btn btn-add btn-sm" data-toggle="modal" data-target="#update">
+                                                                                                        <i class="fa fa-pencil"></i>
+                                                                                                    </button>
+                                                                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer2">
+                                                                                                        <i class="fa fa-trash-o"></i>
+                                                                                                    </button>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            @endforeach
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
