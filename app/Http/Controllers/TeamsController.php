@@ -7,12 +7,18 @@ use App\Team;
 use App\Player;
 use Validator;
 use App\Http\Requests\StoreTeam;
+use App\User;
+use App\Http\Controllers\MessagesController as Messages;
+use Faker\Factory as faker;
+use App\Http\Requests\StorePlayer;
+use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     
     public function index() {
@@ -96,10 +102,53 @@ class TeamsController extends Controller
         {
             $data = [
                 'team' => Team::findOrFail($request->id),
-                'players' => Player::where('player_associate_team', $request->id)->get()
+                'players' => Player::where('associate_team', $request->id)->get()
             ];
             
             return view('admin-dashboard.includes.modals.teamUpdateForm', compact('data'))->render();
+        }
+    }
+
+
+    public function team_view()
+    {
+        $message = new Messages;
+        return view('teams-dashboard.index', [
+            'user' => User::findOrFail(Auth::user()->id),
+            'messages' => $message->messages(4),
+            'team' => Team::where('user_id', Auth::user()->id)->first()
+        ]);
+    }
+
+    public function teamUpdateForm(Request $request)
+    {
+        if($request->ajax())
+        {            
+            $team = Team::where('user_id', $request->id)->first();
+            return view('teams-dashboard.includes.modals.teamUpdateForm', ['team' => $team])->render();
+        }
+    } 
+
+    public function teamUpdate(int $id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name" => 'bail|string|min:3|max:50',
+            "email" => 'bail|email|max:255',
+            "address" => 'nullable|string',
+            "state" => 'string',
+            "phone" => 'bail|nullable|numeric|min:11',
+        ]);
+        if ($validator->fails()) {
+            return redirect('/team')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $data = $request->all();
+        unset($data['_token']);
+        unset($data['_method']);
+        if(Team::whereId($id)->update($data)) {
+            return redirect('/team')->with('status', 'Team Updated!');
         }
     }
 }

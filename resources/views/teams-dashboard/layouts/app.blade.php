@@ -140,11 +140,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a href="{{ url('/player') }}">
+                                                            <a href="{{ url('/team') }}">
                                                                 <i class="fa fa-user"></i> User Profile</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/player/messages') }}">
+                                                                <a href="{{ url('/team/messages') }}">
                                                                     <i class="fa fa-inbox"></i> Inbox</a>
                                                                 </li>
                                                                 <li>
@@ -170,7 +170,7 @@
                                                                     <!-- sidebar menu -->
                                                                     <ul class="sidebar-menu">
                                                                         <li class="active">
-                                                                            <a href="{{ url('/player/') }}">
+                                                                            <a href="{{ url('/team') }}">
                                                                                 <i class="fa fa-tachometer"></i>
                                                                                 <span>Dashboard</span>
                                                                                 <span class="pull-right-container">
@@ -178,7 +178,15 @@
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="{{ url('/player/messages') }}">
+                                                                            <a href="{{ url('/team/players') }}">
+                                                                                <i class="fa fa-users"></i>
+                                                                                <span>Players</span>
+                                                                                <span class="pull-right-container">
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="{{ url('/team/messages') }}">
                                                                                 <i class="fa fa-envelope"></i>
                                                                                 <span>Messages</span>
                                                                                 <span class="pull-right-container">
@@ -186,7 +194,7 @@
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="{{ url('/player/notices') }}">
+                                                                            <a href="{{ url('/team/notices') }}">
                                                                                 <i class="fa fa-file-text"></i>
                                                                                 <span>Notice Board</span>
                                                                                 <span class="pull-right-container">
@@ -217,7 +225,7 @@
                                                             <!-- /.content-wrapper -->
                                                             <footer class="main-footer">
                                                                 <strong>Copyright &copy; 2017-2018
-                                                                    <a href="#">iPlayFootball</a>.</strong> All rights reserved.
+                                                                    <a href="/">iPlayFootball</a>.</strong> All rights reserved.
                                                                 </footer>
                                                             </div>
                                                             <!-- ./wrapper -->

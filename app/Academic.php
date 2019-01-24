@@ -23,4 +23,9 @@ class Academic extends Model
         return $this->belongsTo('App\Status', 'academic_status_id', 'id');
     }
 
+    public function verify()
+    {
+        return $this->belongsTo('App\Verification', 'id', 'verification_user_id');
+    }
+
 }

@@ -21,8 +21,8 @@ class PlayersController extends Controller
     private $faker;
 
     public function __construct() {
-        $this->middleware('auth'); 
-        $this->middleware('player');
+        // $this->middleware('auth'); 
+        // $this->middleware('player');
         // $this->middleware('guest')->except('logout');
     }
 
@@ -53,6 +53,7 @@ class PlayersController extends Controller
         $user->role = $validated['role'];
         $user->status_id = $validated['player_status'];
         $user->password = Hash::make($validated['password']);
+        $user->type = $validated['player_type'];
         // $user->user_facebook_id = $validated['facebook'];
         // $user->user_dob = $validated['dob'];
         // $user->user_address = $validated['address'];
@@ -179,6 +180,12 @@ class PlayersController extends Controller
         unset($data['_method']);
         if(Player::whereId($id)->update($data)) {
             return redirect('player/')->with('status', 'Player Updated!');
-        }
+        } 
+    }
+
+    public function teamPlayersListView()
+    {
+        return view('teams-dashboard.Players')
+        ->with('players', Player::where('player_associate_team', Auth::user()->id)->get());
     }
 }

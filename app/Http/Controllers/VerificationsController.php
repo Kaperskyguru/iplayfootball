@@ -79,12 +79,30 @@ class VerificationsController extends Controller
         $verification->verification_user_id = $validated['userID'];
         $verification->verification_firstfile_id = $validated['firstFile']->store('images');
         $verification->verification_ID_number = $validated['IDNumber'];
-        $verification->verification_secondfile_id = $validated['firstFile']->store('images');
+        $verification->verification_secondfile_id = $validated['secondFile']->store('images');
         $verification->verification_ID_type = $validated['IDType'];
         $verification->verification_package = $validated['package'];
         $verification->verification_status_id = 2;
         if($verification->save()){
             return redirect('player/')->with('status', 'verification saved!');
+        }
+    }
+
+    public function teamVerification(StoreVerification $request)
+    {
+        $validated = $request->validated();
+        
+        $verification = new Verification;
+        $verification->verification_type =  $validated['accountType'];
+        $verification->verification_user_id = $validated['userID'];
+        $verification->verification_firstfile_id = $validated['firstFile']->store('images');
+        $verification->verification_ID_number = $validated['IDNumber'];
+        $verification->verification_secondfile_id = $validated['secondFile']->store('images');
+        $verification->verification_ID_type = $validated['IDType'];
+        $verification->verification_package = $validated['package'];
+        $verification->verification_status_id = 2;
+        if($verification->save()){
+            return redirect('team/')->with('status', 'verification saved!');
         }
     }
 }

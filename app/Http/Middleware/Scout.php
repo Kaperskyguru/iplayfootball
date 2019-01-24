@@ -5,7 +5,7 @@ use Auth;
 
 use Closure;
 
-class Admin
+class Scout
 {
     /**
      * Handle an incoming request.
@@ -18,13 +18,13 @@ class Admin
     {
 
         if (Auth::check() && Auth::user()->role == 9) {
-            return $next($request);
+            return redirect('/admin');
         }
         elseif (Auth::check() && Auth::user()->role == 8) {
             return redirect('/player');
         }
         elseif (Auth::check() && Auth::user()->role == 7) {
-            return redirect('/scout');
+            return $next($request);
         }
         elseif (Auth::check() && Auth::user()->role == 6) {
             return redirect('/team');

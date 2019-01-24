@@ -103,13 +103,95 @@ Route::group(['prefix' => 'admin'], function()
 });
 
 // players route groups
-Route::prefix('/player')->group(function()
+Route::group(['middleware' => 'player', 'prefix' => 'player'], function()
 {
     Route::get('/', 'PlayersController@player_view')->name('player');
 
     Route::PATCH('/update/{id}', 'PlayersController@playerUpdate')->name('playerUpdate');
 
     Route::get('/update', 'PlayersController@playerUpdateForm');
+
+    Route::post('/verify', 'VerificationsController@playerVerification');
+
+    Route::get('/messages', 'MessagesController@playersInboxView');
+    Route::post('/messages', 'MessagesController@playerSendMessage');
+
+    Route::get('/sent', 'MessagesController@playersSentView');
+
+    Route::get('/details', 'MessagesController@playersDetailsView');
+
+    Route::get('/compose', 'MessagesController@playersComposeView');
+
+    Route::get('/notices', 'NoticesController@playerNotices');
+    Route::get('/notices/read', 'NoticesController@playerReadNotice');
+
+    Route::get('/users', function () {
+        return view('players-dashboard.users');
+    });
+});
+
+// Teams route groups
+Route::group(['middleware' => 'team', 'prefix' => 'team'], function()
+{
+    Route::get('/', 'TeamsController@team_view')->name('team');
+
+    Route::PATCH('/update/{id}', 'TeamsController@teamUpdate')->name('teamUpdate');
+
+    Route::get('/update', 'TeamsController@teamUpdateForm');
+
+    Route::post('/verify', 'VerificationsController@teamVerification');
+
+    Route::get('/messages', 'MessagesController@teamsInboxView');
+    Route::post('/messages', 'MessagesController@teamSendMessage');
+
+    Route::get('/sent', 'MessagesController@teamsSentView');
+
+    Route::get('/details/{id}', 'MessagesController@teamDetailsView');
+
+    Route::get('/compose', 'MessagesController@teamComposeView');
+
+    Route::get('/notices', 'NoticesController@teamNotices');
+    Route::get('/notices/read', 'NoticesController@teamReadNotice');
+
+    Route::get('/players', 'PlayersController@teamPlayersListView');
+});
+
+// Academics route groups
+Route::group(['middleware' => 'academic', 'prefix' => 'academic'], function()
+{
+    Route::get('/', 'AcademicsController@academic_view')->name('academic');
+
+    Route::PATCH('/update/{id}', 'AcademicsController@playerUpdate')->name('playerUpdate');
+
+    Route::get('/update', 'AcademicsController@playerUpdateForm');
+
+    Route::post('/verify', 'VerificationsController@playerVerification');
+
+    Route::get('/messages', 'MessagesController@playersInboxView');
+    Route::post('/messages', 'MessagesController@playerSendMessage');
+
+    Route::get('/sent', 'MessagesController@playersSentView');
+
+    Route::get('/details', 'MessagesController@playersDetailsView');
+
+    Route::get('/compose', 'MessagesController@playersComposeView');
+
+    Route::get('/notices', 'NoticesController@playerNotices');
+    Route::get('/notices/read', 'NoticesController@playerReadNotice');
+
+    Route::get('/users', function () {
+        return view('players-dashboard.users');
+    });
+});
+
+// Teams route groups
+Route::group(['middleware' => 'scout', 'prefix' => 'scout'], function()
+{
+    Route::get('/', 'ScoutsTeamsController@team_view')->name('scout');
+
+    Route::PATCH('/update/{id}', 'ScoutsController@playerUpdate')->name('playerUpdate');
+
+    Route::get('/update', 'ScoutsController@playerUpdateForm');
 
     Route::post('/verify', 'VerificationsController@playerVerification');
 

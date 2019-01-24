@@ -112,7 +112,8 @@
                                     <label class="radio-inline"><input type="radio" name="player_status" id="player_status" value="3" >Inctive</label>
                                 </div>
                                 <div class="reset-button">
-                                        <input type="text" class="hidden" id="role" value="8" name="role" required>
+                                    <input type="text" class="hidden" id="role" value="8" name="role" required>
+                                    <input type="hidden" class="hidden" id="player_type" value="player" name="player_type" required>
                                     <button type="reset" class="btn btn-warning">Reset</button>
                                     <button type="submit" class="btn btn-success">Save</button>
                                 </div>

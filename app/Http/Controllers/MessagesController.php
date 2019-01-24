@@ -12,31 +12,41 @@ class MessagesController extends Controller
 {
     public function sent()
     {
-        return view('admin-dashboard.sentmail',[
-            'Messages'=> Message::where('message_type', '16')->orderBy('id', 'desc')->paginate(10),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->count()
+        return view('admin-dashboard.sentmail', [
+        'Messages'=> Message::where('message_type', '16')->orderBy('id', 'desc')
+            ->paginate(10),
+        'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->count()
             ]);
     }
 
     public function inbox()
     {
         return view('admin-dashboard.message', [
-            'Messages'=> Message::where('message_type', '17')->orderBy('id', 'desc')->paginate(10), 
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->count()
+        'Messages'=> Message::where('message_type', '17')->orderBy('id', 'desc')
+            ->paginate(10), 
+        'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->count()
             ]);
     }
     public function details($id)
     {
         return view('admin-dashboard.maildetails', [
             'message'=> Message::findOrFail($id),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->count()
+            'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->count()
             ]);
     }
 
     public function compose()
     {
         return view('admin-dashboard.compose',[
-        'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->count()
+        'totalUreadMessages' => Message::where('message_type', '17')
+        ->where('message_status_id', '15')
+        ->count()
         ]);
     }
 
@@ -82,36 +92,122 @@ class MessagesController extends Controller
     public function playersInboxView()
     {
         return view('players-dashboard.messages', [
-            'Messages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id',Auth::user()->id)->orderBy('id', 'desc')->get(),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->count()
+        'Messages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')->where('message_receiver_id',Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->get(),
+        'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->where('message_receiver_id', Auth::user()->id)
+            ->count()
         ]);
     }
 
     public function playersSentView()
     {
         return view('players-dashboard.sentmail',[
-            'Messages'=> Message::where('message_type', '16')->where('message_receiver_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(15),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->count()
+            'Messages'=> Message::where('message_type', '16')
+            ->where('message_sender_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->paginate(15),
+            'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->where('message_receiver_id', Auth::user()->id)
+            ->count()
             ]);
     }
 
     public function playersDetailsView($id)
     {
-        return view('players-dashboard.maildetails', [
-            'message'=> Message::findOrFail($id),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_receiver_id', Auth::user()->id)->where('message_status_id', '15')->count()
+        if ( Message::find($id)->update(['message_status_id' => 14])) {
+            return view('players-dashboard.maildetails', [
+                'message'=> Message::findOrFail($id),
+                'totalUreadMessages' => Message::where('message_type', '17')
+                ->where('message_receiver_id', Auth::user()->id)
+                ->where('message_status_id', '15')
+                ->count()
             ]);
+        }
     }
 
     public function playersComposeView()
     {
         return view('players-dashboard.compose',[
-        'totalUreadMessages' => Message::where('message_type', '17')->where('message_receiver_id', Auth::user()->id)->where('message_status_id', '15')->count()
+        'totalUreadMessages' => Message::where('message_type', '17')
+        ->where('message_receiver_id', Auth::user()->id)
+        ->where('message_status_id', '15')
+        ->count()
         ]);
     }
 
     public function messages(int $limit = 0)
     {
-       return $limit == 0 ? Message::where('message_type', '17')->all() : Message::where('message_type', '17')->take($limit)->orderBy('id', 'desc')->where('message_receiver_id', Auth::user()->id)->get();
+       return $limit == 0 ? Message::where('message_type', '17')->all() : Message::where('message_type', '17')
+       ->take($limit)->orderBy('id', 'desc')
+       ->where('message_receiver_id', Auth::user()->id)
+       ->where('message_status_id',  15)
+       ->get();
+    }
+
+    public function teamsInboxView()
+    {
+        return view('teams-dashboard.messages', [
+        'Messages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->where('message_receiver_id',Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->get(),
+        'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->where('message_receiver_id', Auth::user()->id)
+            ->count()
+        ]);
+    }
+
+    public function teamsSentView()
+    {
+        return view('teams-dashboard.sentmail',[
+            'Messages'=> Message::where('message_type', '16')->where('message_sender_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(15),
+            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->count()
+            ]);
+    }
+
+    public function teamSendMessage(StoreMessage $request)
+    {
+        $validated = $request->validated();
+        $message = new Message;
+        $message->message_subject =  $validated['subject'];
+        $message->message_body = summernoteConverter($validated['body']);
+        $message->message_type = $request->message_type;
+        $message->message_sender_id = Auth::user()->id;//$validated['sender'];
+        $message->message_receiver_id = $this->getSupport($validated['to']);
+        $message->message_sender_type = User::getUserType(Auth::user()->role);
+        $message->message_receiver_type = User::getUserType($this->getSupport($validated['to']));
+        if($message->save()){
+            return redirect('team/messages/')->with('status', 'message sent!');
+        }
+    }
+
+    public function teamComposeView()
+    {
+        return view('teams-dashboard.compose',[
+        'totalUreadMessages' => Message::where('message_type', '17')
+        ->where('message_receiver_id', Auth::user()->id)
+        ->where('message_status_id', '15')
+        ->count()
+        ]);
+    }
+
+    public function teamDetailsView($id)
+    {
+        if ( Message::find($id)->update(['message_status_id' => 14])) {
+            return view('teams-dashboard.maildetails', [
+                'message'=> Message::findOrFail($id),
+                'totalUreadMessages' => Message::where('message_type', '17')
+                ->where('message_receiver_id', Auth::user()->id)
+                ->where('message_status_id', '15')
+                ->count()
+            ]);
+        }
     }
 }

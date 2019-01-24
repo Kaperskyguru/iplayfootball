@@ -20,6 +20,7 @@ class NotificationServiceProvider extends ServiceProvider
     {
         $this->adminMessages();
         $this->playerMessages();
+        $this->teamMessages();
     }
 
     /**
@@ -43,6 +44,15 @@ class NotificationServiceProvider extends ServiceProvider
     private function playerMessages()
     {
         view()->composer('players-dashboard.layouts.app', function($view) {
+            $messages = Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->limit(10)->orderBy('id', 'desc')->get();
+            $view->with('messages', $messages);
+        });
+    }
+
+
+    private function teamMessages()
+    {
+        view()->composer('teams-dashboard.layouts.app', function($view) {
             $messages = Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->limit(10)->orderBy('id', 'desc')->get();
             $view->with('messages', $messages);
         });

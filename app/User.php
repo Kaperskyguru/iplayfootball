@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone','role', 'state'
+        'name', 'email','status_id', 'password', 'phone','role', 'state'
     ];
 
     /**
@@ -36,6 +36,11 @@ class User extends Authenticatable
     public function player()
     {
         return $this->hasOne('App\Player', 'user_id', 'id');
+    }
+
+    public function team()
+    {
+        return $this->hasOne('App\Team', 'user_id', 'id');
     }
 
     public static function getUserType(string $role)

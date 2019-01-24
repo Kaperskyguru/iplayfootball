@@ -31,7 +31,7 @@ class StorePlayer extends FormRequest
             'role' => 'required|integer',
             'password' => 'bail|required|string|same:password_confirmation',
             'player_status' => 'bail|required|integer',
-            // 'height' => 'bail|required|integer',
+            'player_type' => 'string',
         ];
 
         // 'firstname' => 'bail|required|max:50|string',
@@ -65,7 +65,7 @@ class StorePlayer extends FormRequest
             'role.required' => 'Role is required',
             'password.same' => 'Password do not match',
             'player_status.required' => 'Your Status is required',
-            // 'height.required' => 'Your height is required',
+            'player_type.string' => 'Your player type is must be a string',
         ];
 
         // 'firstname.required' => 'A first name is required',

@@ -66,7 +66,12 @@
                     <input type="password" class="form-control" name="password_confirmation" id="password-confirm" placeholder="Confirm password" required>
                 </div>
                 <div class="col-12 form-group">
-                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Phone Number">
+                    <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" id="phone" name="phone" placeholder="Phone Number">
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 {{-- <div class="col-12 form-group">
                     <input type="date" class="form-control" id="formGroupExampleInput2" placeholder="Date of Birth">
@@ -85,6 +90,7 @@
                 </div> --}}
                 <div class="col-md-7 col-12 row">
                     <input type="hidden" name="role" id="role" value="8">
+                    <input type="hidden" name="user_status" id="user_status" value="2" required>
                     <button type="submit" class="btn mt-2 ml-3">Sign Up</button>
                 </div>
                 <div class="col-md-4 col-12 row" style="display:block; margin-left: 25px; padding:0px;">

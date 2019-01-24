@@ -107,12 +107,27 @@ class NoticesController extends Controller
         return view('players-dashboard.notices', ['notices' => Notice::where('notice_visibility_id', 8)->orderBy('id', 'desc')->get()]);
     }
 
+
     public function playerReadNotice(Request $request)
     {
         if($request->ajax())
         {
             $notice = Notice::findOrFail($request->id);
             return view('players-dashboard.includes.modals.noticeReadForm', compact('notice'))->render();
+        }
+    }
+
+    public function teamNotices()
+    {
+        return view('teams-dashboard.notices', ['notices' => Notice::where('notice_visibility_id', 6)->orderBy('id', 'desc')->get()]);
+    }
+
+    public function teamReadNotice(Request $request)
+    {
+        if($request->ajax())
+        {
+            $notice = Notice::findOrFail($request->id);
+            return view('teams-dashboard.includes.modals.noticeReadForm', compact('notice'))->render();
         }
     }
 }

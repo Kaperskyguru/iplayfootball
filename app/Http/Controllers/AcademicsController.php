@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Academic;
 use App\Player;
-use App\User;
 use Validator;
+use App\Http\Requests\StoreTeam;
+use App\Academic;
+use App\User;
+use App\Http\Controllers\MessagesController as Messages;
+use Faker\Factory as faker;
+use Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAcademy;
 
 class AcademicsController extends Controller
@@ -102,5 +107,15 @@ class AcademicsController extends Controller
             
             return view('admin-dashboard.includes.modals.academicUpdateForm', compact('data'))->render();
         }
+    }
+
+    public function academic_view()
+    {
+        $message = new Messages;
+        return view('academics-dashboard.index', [
+            'user' => User::findOrFail(Auth::user()->id),
+            'messages' => $message->messages(4),
+            'academy' => Academic::where('user_id', Auth::user()->id)->first()
+        ]);
     }
 }

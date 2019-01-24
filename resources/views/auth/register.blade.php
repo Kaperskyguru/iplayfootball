@@ -81,6 +81,7 @@
                     </select>
                 </div>
                 <div class="col-md-7 col-12 row">
+                    <input type="hidden" name="user_status" id="user_status" value="2" required>
                     <button type="submit" class="btn mt-2 ml-3">{{ __("Sign Up")}}</button>
                 </div>
                 <div class="col-md-4 col-12 row" style="display:block; margin-left: 25px; padding:0px;">
