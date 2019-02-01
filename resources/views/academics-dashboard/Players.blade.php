@@ -1,4 +1,4 @@
-@extends('teams-dashboard.layouts.app')
+@extends('academics-dashboard.layouts.app')
 
 @section('content')
 <!-- Content Header (Page header) -->

@@ -109,6 +109,8 @@ class AcademicsController extends Controller
         }
     }
 
+
+
     public function academic_view()
     {
         $message = new Messages;
@@ -117,5 +119,37 @@ class AcademicsController extends Controller
             'messages' => $message->messages(4),
             'academy' => Academic::where('user_id', Auth::user()->id)->first()
         ]);
+    }
+
+    public function academicUpdateForm(Request $request)
+    {
+        if($request->ajax())
+        {            
+            $academic = Academic::where('user_id', $request->id)->first();
+            return view('academics-dashboard.includes.modals.academicUpdateForm', ['academic' => $academic])->render();
+        }
+    } 
+
+    public function academicUpdate(int $id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name" => 'bail|string|min:3|max:50',
+            "email" => 'bail|email|max:255',
+            "address" => 'nullable|string',
+            "state" => 'string',
+            "phone" => 'bail|nullable|numeric|min:11',
+        ]);
+        if ($validator->fails()) {
+            return redirect('/academic')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $data = $request->all();
+        unset($data['_token']);
+        unset($data['_method']);
+        if(Academic::whereId($id)->update($data)) {
+            return redirect('/academic')->with('status', 'academic Updated!');
+        }
     }
 }

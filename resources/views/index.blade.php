@@ -19,7 +19,7 @@
                                 <div class="col-md-4 col-sm-6 col-12 mx-auto links">
                                     <div class="row">
                                         <a href="{{ url('/profiles') }}" class="btn mx-auto">view all profiles</a>
-                                        <a href="{{ url('/register') }}" class="tbtn mx-auto">New profile</a>
+                                        <a href="{{ url('/register') }}" class="tbtn mx-auto">Register</a>
                                     </div>
                                 </div>
                             </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Academic extends Model
 {
-    protected $guard = 'academeic';
+    protected $guard = 'academic';
 
     public function getAcademicName()
     {

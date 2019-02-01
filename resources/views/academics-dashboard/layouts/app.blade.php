@@ -140,11 +140,11 @@
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a href="{{ url('/team') }}">
+                                                            <a href="{{ url('/academic') }}">
                                                                 <i class="fa fa-user"></i> User Profile</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/team/messages') }}">
+                                                                <a href="{{ url('/academic/messages') }}">
                                                                     <i class="fa fa-inbox"></i> Inbox</a>
                                                                 </li>
                                                                 <li>
@@ -170,7 +170,7 @@
                                                                     <!-- sidebar menu -->
                                                                     <ul class="sidebar-menu">
                                                                         <li class="active">
-                                                                            <a href="{{ url('/team') }}">
+                                                                            <a href="{{ url('/academic') }}">
                                                                                 <i class="fa fa-tachometer"></i>
                                                                                 <span>Dashboard</span>
                                                                                 <span class="pull-right-container">
@@ -178,7 +178,7 @@
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="{{ url('/team/players') }}">
+                                                                            <a href="{{ url('/academic/players') }}">
                                                                                 <i class="fa fa-users"></i>
                                                                                 <span>Players</span>
                                                                                 <span class="pull-right-container">
@@ -186,7 +186,7 @@
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="{{ url('/team/messages') }}">
+                                                                            <a href="{{ url('/academic/messages') }}">
                                                                                 <i class="fa fa-envelope"></i>
                                                                                 <span>Messages</span>
                                                                                 <span class="pull-right-container">
@@ -194,7 +194,7 @@
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="{{ url('/team/notices') }}">
+                                                                            <a href="{{ url('/academic/notices') }}">
                                                                                 <i class="fa fa-file-text"></i>
                                                                                 <span>Notice Board</span>
                                                                                 <span class="pull-right-container">

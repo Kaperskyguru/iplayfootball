@@ -210,4 +210,66 @@ class MessagesController extends Controller
             ]);
         }
     }
+
+    public function academicInboxView()
+    {
+        return view('academics-dashboard.messages', [
+        'Messages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->where('message_receiver_id',Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->get(),
+        'totalUreadMessages' => Message::where('message_type', '17')
+            ->where('message_status_id', '15')
+            ->where('message_receiver_id', Auth::user()->id)
+            ->count()
+        ]);
+    }
+
+    public function academicSentView()
+    {
+        return view('academics-dashboard.sentmail',[
+            'Messages'=> Message::where('message_type', '16')->where('message_sender_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(15),
+            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->count()
+            ]);
+    }
+
+    public function academicSendMessage(StoreMessage $request)
+    {
+        $validated = $request->validated();
+        $message = new Message;
+        $message->message_subject =  $validated['subject'];
+        $message->message_body = summernoteConverter($validated['body']);
+        $message->message_type = $request->message_type;
+        $message->message_sender_id = Auth::user()->id;//$validated['sender'];
+        $message->message_receiver_id = $this->getSupport($validated['to']);
+        $message->message_sender_type = User::getUserType(Auth::user()->role);
+        $message->message_receiver_type = User::getUserType($this->getSupport($validated['to']));
+        if($message->save()){
+            return redirect('academic/messages/')->with('status', 'message sent!');
+        }
+    }
+
+    public function academicComposeView()
+    {
+        return view('academics-dashboard.compose',[
+        'totalUreadMessages' => Message::where('message_type', '17')
+        ->where('message_receiver_id', Auth::user()->id)
+        ->where('message_status_id', '15')
+        ->count()
+        ]);
+    }
+
+    public function academicDetailsView($id)
+    {
+        if ( Message::find($id)->update(['message_status_id' => 14])) {
+            return view('academics-dashboard.maildetails', [
+                'message'=> Message::findOrFail($id),
+                'totalUreadMessages' => Message::where('message_type', '17')
+                ->where('message_receiver_id', Auth::user()->id)
+                ->where('message_status_id', '15')
+                ->count()
+            ]);
+        }
+    }
 }

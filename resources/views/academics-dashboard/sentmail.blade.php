@@ -1,4 +1,4 @@
-@extends('teams-dashboard.layouts.app')
+@extends('academics-dashboard.layouts.app')
 @section('content')
             <!-- Main content -->
             <section class="content">
@@ -21,7 +21,7 @@
                                     <div class="col-xs-8">
                                         <div class="inbox-toolbar btn-toolbar">
                                             <div class="btn-group">
-                                                <a href="{{url('/team/compose')}}" class="btn btn-add">
+                                                <a href="{{url('/academic/compose')}}" class="btn btn-add">
                                                     <span class="fa fa-pencil-square-o"></span>
                                                 </a>
                                             </div>
@@ -56,13 +56,13 @@
                                                 <h6>Messages box</h6>
                                                 <ul class="nav">
                                                     <li>
-                                                        <a href="{{url('/team/messages')}}">
+                                                        <a href="{{url('/academic/messages')}}">
                                                             <i class="fa fa-inbox"></i>Inbox
                                                             <small class="label pull-right bg-green">{{$totalUreadMessages}}</small>
                                                         </a>
                                                     </li>
                                                     <li class="active">
-                                                        <a href="{{url('/team/sent')}}">
+                                                        <a href="{{url('/academic/sent')}}">
                                                             <i class="fa fa-envelope-o"></i>Send Mail</a>
                                                     </li>
 
@@ -74,7 +74,7 @@
                                     <div class="col-xs-12 col-sm-12 col-md-9 p-0 inbox-mail">
                                         <div class="mailbox-content">
                                         @foreach($Messages as $message)
-                                            <a href="{{url('/team/details/'.$message->id)}}" class="inbox_item unread">
+                                            <a href="{{url('/academic/details/'.$message->id)}}" class="inbox_item unread">
                                                 <div class="inbox-avatar">
                                                     <img src="{{asset('players_assets/dist/img/avatar.png')}}" class="border-green hidden-xs hidden-sm" alt="">
                                                     <div class="inbox-avatar-text">

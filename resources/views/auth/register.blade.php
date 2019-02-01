@@ -53,9 +53,9 @@
                 <div class="col-12 form-group">
                     <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number">
                 </div>
-                <div class="col-12 form-group">
+                {{-- <div class="col-12 form-group">
                     <input type="date" class="form-control"  name="dob" id="dob" placeholder="Date of Birth">
-                </div>
+                </div> --}}
                 <div class="col-12 form-group">
                     <input type="text" class="form-control" name="country" id="country" placeholder="National">
                 </div>

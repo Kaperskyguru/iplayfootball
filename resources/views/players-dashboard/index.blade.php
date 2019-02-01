@@ -110,7 +110,7 @@
                             <div>
                                 <p>STATUS:</p>
                                 <i class="fa fa-user"></i>
-                            <span>{{ $player->status->status_text}}</span>
+                            <span>{{ $user->status->status_text}}</span>
                             </div>
                             <div>
                                 <p>MESSAGES:</p>

@@ -26,7 +26,7 @@
         <header id="header" @yield('header_style')>
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <a class="navbar-brand row p-3" href=" {{ url('/') }}">
-                    <img src="img/iLOGO.png" class="img-responsive" style="width:50%; height:50%">
+                    <img src="/img/iLOGO.png" class="img-responsive" style="width:50%; height:50%">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -76,7 +76,7 @@
 
 
         <!-- Form Section -->
-        <section id="form" style=" padding: 30px;">
+        <section id="form" style=" padding: 0px;">
             <div class="container">
                 @yield('content')
             </div>

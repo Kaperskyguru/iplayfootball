@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
+use App\Notifications\UserActivate;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
@@ -78,6 +80,39 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'status_id' => $data['user_status'],
             'password' => Hash::make($data['password']),
+            // 'token' => str_random(40) . time(),
         ]);
+
+        // $user->notify(new UserActivate($user));
+        // return $user;
+
+    }
+
+    // public function register(Request $request)
+    // {
+    //     $this->validator($request->all())->validate();
+
+    //     event( new Registered($user = $this->create($request->all())));
+
+    //     return redirect()->route('login')
+    //     ->with('status' , "Congratulations! your account is registered, you will shortly receive an email to activate your account.");
+    // }
+
+    /**
+     * @param $token
+     */
+    public function activate($token = null)
+    {
+        $user = User::where('token', $token)->first();
+
+        if (empty($user)) {
+            return redirect()->to('/')
+                ->withErrors(['error' => 'Your activation code is either expired or invalid.']);
+        }
+
+        $user->update(['token' => null, 'status_id' => 1]);
+
+        return redirect()->route('login')
+            ->with('status', 'Congratulations! your account is now activated.');
     }
 }

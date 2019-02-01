@@ -161,27 +161,26 @@ Route::group(['middleware' => 'academic', 'prefix' => 'academic'], function()
 {
     Route::get('/', 'AcademicsController@academic_view')->name('academic');
 
-    Route::PATCH('/update/{id}', 'AcademicsController@playerUpdate')->name('playerUpdate');
+    Route::PATCH('/update/{id}', 'AcademicsController@academicUpdate')->name('academicUpdate');
 
-    Route::get('/update', 'AcademicsController@playerUpdateForm');
+    Route::get('/update', 'AcademicsController@academicUpdateForm');
 
-    Route::post('/verify', 'VerificationsController@playerVerification');
+    Route::post('/verify', 'VerificationsController@academicVerification');
 
-    Route::get('/messages', 'MessagesController@playersInboxView');
-    Route::post('/messages', 'MessagesController@playerSendMessage');
+    Route::get('/messages', 'MessagesController@academicInboxView');
+    Route::post('/messages', 'MessagesController@academicendMessage');
 
-    Route::get('/sent', 'MessagesController@playersSentView');
+    Route::get('/sent', 'MessagesController@academicSentView');
 
-    Route::get('/details', 'MessagesController@playersDetailsView');
+    Route::get('/details', 'MessagesController@academicDetailsView');
 
-    Route::get('/compose', 'MessagesController@playersComposeView');
+    Route::get('/compose', 'MessagesController@academicComposeView');
+    Route::post('/messages', 'MessagesController@academicSendMessage');
 
-    Route::get('/notices', 'NoticesController@playerNotices');
-    Route::get('/notices/read', 'NoticesController@playerReadNotice');
+    Route::get('/notices', 'NoticesController@academicNotices');
+    Route::get('/notices/read', 'NoticesController@academicReadNotice');
 
-    Route::get('/users', function () {
-        return view('players-dashboard.users');
-    });
+    Route::get('/players', 'PlayersController@academicPlayersListView');
 });
 
 // Teams route groups
@@ -212,6 +211,8 @@ Route::group(['middleware' => 'scout', 'prefix' => 'scout'], function()
     });
 });
 
+Route::get('activate/{token}', 'Auth\RegisterController@activate')
+    ->name('activate');
 
 //  Other routes
 Route::get('/', function () {
@@ -249,6 +250,6 @@ Route::get("/search", "SearchController@search");
 Route::get("/players", "PlayersController@players");
 Route::get("/profiles", "PlayersController@index");
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');

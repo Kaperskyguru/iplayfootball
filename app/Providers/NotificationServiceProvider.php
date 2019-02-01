@@ -21,6 +21,8 @@ class NotificationServiceProvider extends ServiceProvider
         $this->adminMessages();
         $this->playerMessages();
         $this->teamMessages();
+        $this->academicMessages();
+
     }
 
     /**
@@ -53,6 +55,14 @@ class NotificationServiceProvider extends ServiceProvider
     private function teamMessages()
     {
         view()->composer('teams-dashboard.layouts.app', function($view) {
+            $messages = Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->limit(10)->orderBy('id', 'desc')->get();
+            $view->with('messages', $messages);
+        });
+    }
+
+    private function academicMessages()
+    {
+        view()->composer('academics-dashboard.layouts.app', function($view) {
             $messages = Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->limit(10)->orderBy('id', 'desc')->get();
             $view->with('messages', $messages);
         });

@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="card-content-summary">
-                        <p> {{$academy->address ?: 'Nill'}} </p>
+                        <p> {{$academy->academic_address ?: 'Nill'}} </p>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -125,7 +125,7 @@
                         </div>
                         <div class="card-footer-message">
                                 {{-- <button type="button"  class="btn btn-add btn-sm"  data-toggle="modal"  data-target="#updateModal"><i class="fa fa-pencil"></i></button> --}}
-                            <a href="#customer1" data-id="{{$user->id}}" data-token="<?php echo csrf_token() ?>" id="updateacademy" data-toggle="modal" data-target="">
+                            <a href="#customer1" data-id="{{$user->id}}" data-token="<?php echo csrf_token() ?>" id="updateAcademic" data-toggle="modal" data-target="">
                                 <h4>
                                     <i class="fa fa-user-plus"></i> Update Profile
                                 </h4>
@@ -202,7 +202,7 @@
                                 <img src="{{asset('players_assets/dist/img/avatar.png')}}" class="img-rounded" alt="">
                             </div>
                             <div class="review-block-name">
-                                <a href="{{url('/team/details/'.$message->id)}}">{{ $message->sender->name }}</a>
+                                <a href="{{url('/academic/details/'.$message->id)}}">{{ $message->sender->name }}</a>
                             </div>
                             <div class="review-block-date">{{dateFormat($message->created_at)}}
                                 <br/>1 day ago</div>
@@ -255,7 +255,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12">academic_
-                                    <form class="form-horizontal" method="POST" action="{{ url('/team/verify') }}" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="POST" action="{{ url('/academic/verify') }}" enctype="multipart/form-data">
                                         <fieldset>
                                             @csrf
                                             <!-- Text input-->
@@ -318,11 +318,11 @@
         <script>
             $(document).ready(function(){
 
-                $('body').delegate('#updateTeam', 'click', function(){
+                $('body').delegate('#updateAcademic', 'click', function(){
                     let id = $(this).data('id');
                     var token = $(this).data("token");
                     $.ajax({
-                        url:'/team/update',
+                        url:'/academic/update',
                         type:'get',
                         data:{'id':id, '_token': token},
                         success: function(data) {

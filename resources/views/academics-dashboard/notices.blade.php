@@ -1,4 +1,4 @@
-@extends('teams-dashboard.layouts.app')
+@extends('academics-dashboard.layouts.app')
 
 @section('styles')
 <!-- dataTables css -->
@@ -273,7 +273,7 @@
                                                                             let id = $(this).data('id');
                                                                             var token = $(this).data("token");
                                                                             $.ajax({
-                                                                                url:'/team/notices/read',
+                                                                                url:'/academic/notices/read',
                                                                                 type:'get',
                                                                                 data:{'id':id, '_token': token},
                                                                                 success: function(data) {

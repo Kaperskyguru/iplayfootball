@@ -1,4 +1,4 @@
-@extends('teams-dashboard.layouts.app')
+@extends('academics-dashboard.layouts.app')
 @section('content')
 <!-- Main content -->
 <section class="content">
@@ -21,12 +21,12 @@
                         <div class="col-xs-8">
                             <div class="inbox-toolbar btn-toolbar">
                                 <div class="btn-group">
-                                    <a href="{{url('/team/messages')}}" class="btn btn-default">
+                                    <a href="{{url('/academic/messages')}}" class="btn btn-default">
                                         <span class="fa fa-long-arrow-left"></span>
                                     </a>
                                 </div>
                                 <div class="btn-group">
-                                    <a href="{{url('/team/compose')}}" class="btn btn-add">
+                                    <a href="{{url('/academic/compose')}}" class="btn btn-add">
                                         <span class="fa fa-pencil-square-o"></span>
                                     </a>
                                 </div>
@@ -42,13 +42,13 @@
                                     <h6>Mailbox</h6>
                                     <ul class="nav">
                                         <li class="active">
-                                            <a href="{{url('/team/messages')}}">
+                                            <a href="{{url('/academic/messages')}}">
                                                 <i class="fa fa-inbox"></i>Inbox
                                                 <small class="label pull-right bg-green">{{$totalUreadMessages}}</small>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/team/sent')}}">
+                                            <a href="{{url('/academic/sent')}}">
                                                 <i class="fa fa-envelope-o"></i>Send Mail</a>
                                             </li>
                                         </ul>
@@ -105,7 +105,7 @@
                                                     <div class="m-t-20 border-all p-20">
                                                         <p class="p-b-20">click here to
                                                             <a href="#">Reply</a> or
-                                                            <a href="{{url('/team/compose')}}">Forward</a>
+                                                            <a href="{{url('/academic/compose')}}">Forward</a>
                                                         </p>
                                                     </div>
                                                 </div>

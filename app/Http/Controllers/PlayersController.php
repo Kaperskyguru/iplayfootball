@@ -188,4 +188,10 @@ class PlayersController extends Controller
         return view('teams-dashboard.Players')
         ->with('players', Player::where('player_associate_team', Auth::user()->id)->get());
     }
+
+    public function academicPlayersListView()
+    {
+        return view('academics-dashboard.Players')
+        ->with('players', Player::where('player_associate_academic', Auth::user()->id)->get());
+    }
 }

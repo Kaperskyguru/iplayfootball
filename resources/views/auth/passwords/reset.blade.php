@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+@section('title', 'Reset password')
+
+@section('header_style', 'style="height: 600px"')
+
+@section('banner_display')
+<div class="container p-5 text-dark">
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-12 bg-white p-5 mx-auto" style="margin-top: 6.5rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 

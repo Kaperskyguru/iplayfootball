@@ -130,4 +130,18 @@ class NoticesController extends Controller
             return view('teams-dashboard.includes.modals.noticeReadForm', compact('notice'))->render();
         }
     }
+
+    public function academicNotices()
+    {
+        return view('academics-dashboard.notices', ['notices' => Notice::where('notice_visibility_id', 5)->orderBy('id', 'desc')->get()]);
+    }
+
+    public function academicReadNotice(Request $request)
+    {
+        if($request->ajax())
+        {
+            $notice = Notice::findOrFail($request->id);
+            return view('academics-dashboard.includes.modals.academicReadForm', compact('notice'))->render();
+        }
+    }
 }
