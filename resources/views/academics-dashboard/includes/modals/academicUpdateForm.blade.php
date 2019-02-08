@@ -25,6 +25,10 @@
             <label class="control-label">Country</label>
             <input type="text" name="academic_state" value="{{$academic->academic_state}}" placeholder="Country" class="form-control">
         </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Logo</label>
+            <input type="file" name="academic_image_id" class="form-control">
+        </div>
         <div class="col-md-12 form-group user-form-group">
             <div class="pull-right">
                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>

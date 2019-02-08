@@ -14,7 +14,6 @@ class Verification extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'verification_status_id');
+        return $this->hasOne('App\User', 'id', 'verification_user_id');
     }
-    
 }

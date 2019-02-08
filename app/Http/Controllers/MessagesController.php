@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreMessage;
 use App\Message;
 use App\User;
-use App\Http\Requests\StoreMessage;
 use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller
@@ -13,263 +12,243 @@ class MessagesController extends Controller
     public function sent()
     {
         return view('admin-dashboard.sentmail', [
-        'Messages'=> Message::where('message_type', '16')->orderBy('id', 'desc')
-            ->paginate(10),
-        'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->count()
-            ]);
+            'Messages' => Message::where('message_type_sender', '16')
+                ->where('message_sender_id', 'admin')
+                ->orderBy('id', 'desc')
+                ->paginate(10),
+            'totalUreadMessages' => Message::where('message_type_receiver', '17')
+                ->where('message_status_id', '15')
+                ->where('message_receiver_id', 'admin')
+                ->count(),
+        ]);
     }
 
     public function inbox()
     {
         return view('admin-dashboard.message', [
-        'Messages'=> Message::where('message_type', '17')->orderBy('id', 'desc')
-            ->paginate(10), 
-        'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->count()
-            ]);
+            'Messages' => Message::where('message_receiver_id', 'admin')->orderBy('id', 'desc')
+                ->paginate(10),
+            'totalUreadMessages' => Message::where('message_type_receiver', '17')
+                ->where('message_status_id', '15')
+                ->where('message_receiver_id', 'admin')
+                ->count(),
+        ]);
     }
     public function details($id)
     {
-        return view('admin-dashboard.maildetails', [
-            'message'=> Message::findOrFail($id),
-            'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->count()
+        if (Message::find($id)->update(['message_status_id' => 14])) {
+            return view('admin-dashboard.maildetails', [
+                'message' => Message::findOrFail($id),
+                'totalUreadMessages' => Message::where('message_type_receiver', '17')
+                    ->where('message_status_id', '15')
+                    ->where('message_receiver_id', 'admin')
+                    ->count(),
             ]);
+        }
     }
 
     public function compose()
     {
-        return view('admin-dashboard.compose',[
-        'totalUreadMessages' => Message::where('message_type', '17')
-        ->where('message_status_id', '15')
-        ->count()
+        return view('admin-dashboard.compose', [
+            'totalUreadMessages' => Message::where('message_type_receiver', '17')
+                ->where('message_status_id', '15')
+                ->where('message_receiver_id', 'admin')
+                ->count(),
         ]);
     }
 
+    public function inboxAll()
+    {
+        return [
+            'Messages' => Message::where('message_type_receiver', '17')
+                ->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)
+                ->orderBy('id', 'desc')
+                ->get(),
+            $this->totalUnreadMessages(),
+        ];
+    }
 
-    public function store(StoreMessage $request)
+    public function sentAll()
+    {
+        return [
+            'Messages' => Message::where('message_type_sender', '16')
+                ->where('message_sender_id', Auth::user()->id)
+                ->orderBy('id', 'desc')
+                ->paginate(15),
+            $this->totalUnreadMessages(),
+        ];
+    }
+
+    public function totalUnreadMessages()
+    {
+        return [
+            'totalUreadMessages' => Message::where('message_type_receiver', '17')
+                ->where('message_receiver_id', Auth::user()->id)
+                ->where('message_status_id', '15')
+                ->count(),
+        ];
+    }
+
+    public function messageDetails($id)
+    {
+        if (Message::find($id)->update(['message_status_id' => 14])) {
+            return [
+                'message' => Message::findOrFail($id),
+                $this->totalUnreadMessages(),
+            ];
+        }
+    }
+
+    public function storeAll(StoreMessage $request)
     {
         $validated = $request->validated();
         $message = new Message;
-        $message->message_subject =  $validated['subject'];
+        $message->message_subject = $validated['subject'];
         $message->message_body = summernoteConverter($validated['body']);
-        $message->message_type = $request->message_type;
-        $message->message_sender_id = Auth::user()->id;//$validated['sender'];
+        $message->message_type_sender = $request->message_type;
+        $message->message_type_receiver = 17;
+        $message->message_sender_id = Auth::user()->id; //$validated['sender'];
         $message->message_receiver_id = $this->getSupport($validated['to']);
-        $message->message_sender_type = User::getUserType(Auth::user()->role);
-        $message->message_receiver_type = User::getUserType($this->getSupport($validated['to']));
-        if($message->save()){
+        $message->message_sender_role = User::getUserType(Auth::user()->role);
+        $message->message_receiver_role = User::getUserType($this->getSupport($validated['to']));
+        if ($message->save()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function store(StoreMessage $request)
+    {
+        if ($this->storeAll($request)) {
             return redirect('admin/messages/')->with('status', 'message saved!');
         }
     }
 
     public function playerSendMessage(StoreMessage $request)
     {
-        $validated = $request->validated();
-        $message = new Message;
-        $message->message_subject =  $validated['subject'];
-        $message->message_body = summernoteConverter($validated['body']);
-        $message->message_type = $request->message_type;
-        $message->message_sender_id = Auth::user()->id;//$validated['sender'];
-        $message->message_receiver_id = $this->getSupport($validated['to']);
-        $message->message_sender_type = User::getUserType(Auth::user()->role);
-        $message->message_receiver_type = User::getUserType($this->getSupport($validated['to']));
-        if($message->save()){
+        if ($this->storeAll($request)) {
             return redirect('player/messages/')->with('status', 'message saved!');
         }
     }
 
-
     private function getSupport(string $to)
     {
-        return $to == 'Supports'? "admin" : User::where('email', $to)->first()->id;
+        return $to == 'Supports' ? "admin" : User::where('email', $to)->first()->id;
     }
 
     public function playersInboxView()
     {
-        return view('players-dashboard.messages', [
-        'Messages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')->where('message_receiver_id',Auth::user()->id)
-            ->orderBy('id', 'desc')
-            ->get(),
-        'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->where('message_receiver_id', Auth::user()->id)
-            ->count()
-        ]);
+        return view('players-dashboard.messages', $this->inboxAll());
     }
 
     public function playersSentView()
     {
-        return view('players-dashboard.sentmail',[
-            'Messages'=> Message::where('message_type', '16')
-            ->where('message_sender_id', Auth::user()->id)
-            ->orderBy('id', 'desc')
-            ->paginate(15),
-            'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->where('message_receiver_id', Auth::user()->id)
-            ->count()
-            ]);
+        return view('players-dashboard.sentmail', $this->sentAll());
     }
 
     public function playersDetailsView($id)
     {
-        if ( Message::find($id)->update(['message_status_id' => 14])) {
-            return view('players-dashboard.maildetails', [
-                'message'=> Message::findOrFail($id),
-                'totalUreadMessages' => Message::where('message_type', '17')
-                ->where('message_receiver_id', Auth::user()->id)
-                ->where('message_status_id', '15')
-                ->count()
-            ]);
-        }
+
+        return view('players-dashboard.maildetails', $this->messageDetails($id));
+
     }
 
     public function playersComposeView()
     {
-        return view('players-dashboard.compose',[
-        'totalUreadMessages' => Message::where('message_type', '17')
-        ->where('message_receiver_id', Auth::user()->id)
-        ->where('message_status_id', '15')
-        ->count()
-        ]);
+        return view('players-dashboard.compose', $this->totalUnreadMessages());
     }
 
     public function messages(int $limit = 0)
     {
-       return $limit == 0 ? Message::where('message_type', '17')->all() : Message::where('message_type', '17')
-       ->take($limit)->orderBy('id', 'desc')
-       ->where('message_receiver_id', Auth::user()->id)
-       ->where('message_status_id',  15)
-       ->get();
+        return $limit == 0 ? Message::where('message_type_receiver', '17')->all() : Message::where('message_type_receiver', '17')
+            ->take($limit)->orderBy('id', 'desc')
+            ->where('message_receiver_id', Auth::user()->id)
+            ->where('message_status_id', 15)
+            ->get();
     }
 
     public function teamsInboxView()
     {
-        return view('teams-dashboard.messages', [
-        'Messages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->where('message_receiver_id',Auth::user()->id)
-            ->orderBy('id', 'desc')
-            ->get(),
-        'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->where('message_receiver_id', Auth::user()->id)
-            ->count()
-        ]);
+        return view('teams-dashboard.messages', $this->inboxAll());
     }
 
     public function teamsSentView()
     {
-        return view('teams-dashboard.sentmail',[
-            'Messages'=> Message::where('message_type', '16')->where('message_sender_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(15),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->count()
-            ]);
+        return view('teams-dashboard.sentmail', $this->sentAll());
     }
 
     public function teamSendMessage(StoreMessage $request)
     {
-        $validated = $request->validated();
-        $message = new Message;
-        $message->message_subject =  $validated['subject'];
-        $message->message_body = summernoteConverter($validated['body']);
-        $message->message_type = $request->message_type;
-        $message->message_sender_id = Auth::user()->id;//$validated['sender'];
-        $message->message_receiver_id = $this->getSupport($validated['to']);
-        $message->message_sender_type = User::getUserType(Auth::user()->role);
-        $message->message_receiver_type = User::getUserType($this->getSupport($validated['to']));
-        if($message->save()){
+        if ($this->storeAll($request)) {
             return redirect('team/messages/')->with('status', 'message sent!');
         }
     }
 
     public function teamComposeView()
     {
-        return view('teams-dashboard.compose',[
-        'totalUreadMessages' => Message::where('message_type', '17')
-        ->where('message_receiver_id', Auth::user()->id)
-        ->where('message_status_id', '15')
-        ->count()
-        ]);
+        return view('teams-dashboard.compose', $this->totalUnreadMessages());
     }
 
     public function teamDetailsView($id)
     {
-        if ( Message::find($id)->update(['message_status_id' => 14])) {
-            return view('teams-dashboard.maildetails', [
-                'message'=> Message::findOrFail($id),
-                'totalUreadMessages' => Message::where('message_type', '17')
-                ->where('message_receiver_id', Auth::user()->id)
-                ->where('message_status_id', '15')
-                ->count()
-            ]);
-        }
+
+        return view('teams-dashboard.maildetails', $this->messageDetails($id));
+
     }
 
     public function academicInboxView()
     {
-        return view('academics-dashboard.messages', [
-        'Messages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->where('message_receiver_id',Auth::user()->id)
-            ->orderBy('id', 'desc')
-            ->get(),
-        'totalUreadMessages' => Message::where('message_type', '17')
-            ->where('message_status_id', '15')
-            ->where('message_receiver_id', Auth::user()->id)
-            ->count()
-        ]);
+        return view('academics-dashboard.messages', $this->inboxAll());
     }
 
     public function academicSentView()
     {
-        return view('academics-dashboard.sentmail',[
-            'Messages'=> Message::where('message_type', '16')->where('message_sender_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(15),
-            'totalUreadMessages' => Message::where('message_type', '17')->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)->count()
-            ]);
+        return view('academics-dashboard.sentmail', $this->sentAll());
     }
 
     public function academicSendMessage(StoreMessage $request)
     {
-        $validated = $request->validated();
-        $message = new Message;
-        $message->message_subject =  $validated['subject'];
-        $message->message_body = summernoteConverter($validated['body']);
-        $message->message_type = $request->message_type;
-        $message->message_sender_id = Auth::user()->id;//$validated['sender'];
-        $message->message_receiver_id = $this->getSupport($validated['to']);
-        $message->message_sender_type = User::getUserType(Auth::user()->role);
-        $message->message_receiver_type = User::getUserType($this->getSupport($validated['to']));
-        if($message->save()){
+        if ($this->storeAll($request)) {
             return redirect('academic/messages/')->with('status', 'message sent!');
         }
     }
 
     public function academicComposeView()
     {
-        return view('academics-dashboard.compose',[
-        'totalUreadMessages' => Message::where('message_type', '17')
-        ->where('message_receiver_id', Auth::user()->id)
-        ->where('message_status_id', '15')
-        ->count()
-        ]);
+        return view('academics-dashboard.compose', $this->totalUnreadMessages());
     }
 
     public function academicDetailsView($id)
     {
-        if ( Message::find($id)->update(['message_status_id' => 14])) {
-            return view('academics-dashboard.maildetails', [
-                'message'=> Message::findOrFail($id),
-                'totalUreadMessages' => Message::where('message_type', '17')
-                ->where('message_receiver_id', Auth::user()->id)
-                ->where('message_status_id', '15')
-                ->count()
-            ]);
+
+        return view('academics-dashboard.maildetails', $this->messageDetails($id));
+    }
+
+    public function scoutComposeView()
+    {
+        return view('scouts-dashboard.compose', $this->totalUnreadMessages());
+    }
+
+    public function scoutDetailsView($id)
+    {
+
+        return view('scouts-dashboard.maildetails', $this->messageDetails($id));
+    }
+
+    public function scoutInboxView()
+    {
+        return view('scouts-dashboard.messages', $this->inboxAll());
+    }
+
+    public function scoutSentView()
+    {
+        return view('scouts-dashboard.sentmail', $this->sentAll());
+    }
+
+    public function scoutSendMessage(StoreMessage $request)
+    {
+        if ($this->storeAll($request)) {
+            return redirect('scout/messages/')->with('status', 'message sent!');
         }
     }
 }

@@ -22,6 +22,10 @@
             <textarea name="player_address" rows="3" class="form-control">{{$player->player_address}}</textarea>
         </div>
         <div class="col-md-6 form-group">
+            <label class="control-label">Profile picture</label>
+            <input type="file" name="player_image_id" class="form-control">
+        </div>
+        <div class="col-md-6 form-group">
             <label class="control-label">Player Position:</label>
             <select class="form-control">
                 <option value="{{$player->player_position}}">{{$player->player_position}}</option>

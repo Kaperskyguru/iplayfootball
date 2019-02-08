@@ -31,6 +31,10 @@
                 <option value="16">Free</option>
             </select>
         </div>
+        <div class="form-group">
+            <label>Picture upload</label>
+            <input type="file" name="player_image_id" id="player_image_id">
+        </div>
         <div class="col-md-6 form-group">
             <label class="control-label">Player Position:</label>
             <input type="text" name="player_position" placeholder="Player Position" value="{{$data['player']->player_position}}" class="form-control">

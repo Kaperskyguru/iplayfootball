@@ -167,11 +167,11 @@
                                         <tbody>
                                             @foreach($Academics as $academic)
                                             <tr>
-                                                <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
+                                                <td><img src="{{ asset(extractFromImage($academic->academic_image_id)) }}" class="img-circle" alt="User Image" width="50" height="50"> </td>
                                                 <td>{{$academic->academic_name}}</td>
                                                 <td>{{$academic->academic_phone}}</td>
                                                 <td><a href="#" class="__cf_email__">{{$academic->academic_email}}</a></td>
-                                                <td>{{$academic->academic_address}}</td>
+                                                <td>{{$academic->academic_state}}</td>
                                                 <td>V.I.P</td>
                                                 <td>27th April,2017</td>
                                                 <td><span class="label-custom label label-default">{{$academic->status->status_text}}</span></td>
@@ -280,11 +280,10 @@
                 var id = $(this).data('id');
                 var token = $(this).data("token");
                 $.ajax({
-                    url:'/admin/academics/delete',
+                    url:'/admin/users/delete',
                     type:'DELETE',
                     data:{'id':id, '_token': token, '_method': 'DELETE'},
                     success: function(data) {
-
                     }
                 });
             });

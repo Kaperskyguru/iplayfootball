@@ -28,22 +28,18 @@
                         <form class="col-sm-6">
                             <div class="form-group">
                                 <label>Account Type</label>
-                                <select class="form-control" name="type" id="type">
-                                    <option>Player</option>
-                                    <option>Scout</option>
+                                <select class="form-control" data-token="<?php echo csrf_token() ?>" name="type" id="type">
+                                    <option selected disabled><small>Select a user</small></option>
+                                    <option value="8">Players</option>
+                                    <option value="7">Scouts</option>
+                                    <option value="6">Teams</option>
+                                    <option value="5">Academics</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Select Player / Scout</label>
                                 <select class="form-control" name="name" id="name">
-                                    <option>Player</option>
-                                    <option>Scout</option>
-                                    <option>Player</option>
-                                    <option>Scout</option>
-                                    <option>Player</option>
-                                    <option>Scout</option>
-                                    <option>Player</option>
-                                    <option>Scout</option>
+                                    <option selected disabled><small>Select a user</small></option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -69,4 +65,24 @@
             </div>
         </div>
     </section>
+    @endsection
+    @section('scripts')
+    <script>
+        $('#type').change(function () {
+            var type_id = $(this).val();
+            var token = $(this).data("token");
+            $.ajax({
+                url: '/admin/usersByRole',
+                method: "get",
+                data: {'_token': token, 'type_id': type_id},
+                success: function (data) {
+                    $('#name').empty();
+                    $('#name').html(data);
+                },
+                onerror: function (err) {
+                    alert(err);
+                }
+            });
+        });
+    </script>
     @endsection

@@ -44,6 +44,10 @@
             <label class="control-label">Country</label>
             <input type="text" name="state" value="{{$team->state}}" placeholder="Country" class="form-control">
         </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Logo</label>
+            <input type="file" name="image_id" class="form-control">
+        </div>
         {{-- <div class="col-md-6 form-group">
             <label class="control-label">Date of Birth</label>
             <input type="date" name="dob" value="{{strftime('%Y-%m-%d', strtotime($team->dob))}}" placeholder="DOB" class="form-control">

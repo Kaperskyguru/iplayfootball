@@ -20,8 +20,8 @@ class CreateMessagesTable extends Migration
             $table->integer("message_type")->nullable();
             $table->integer("message_sender_id");
             $table->string("message_receiver_id");
-            $table->string('message_sender_type')->nullable();
-            $table->string('message_receiver_type')->nullable();
+            $table->string('message_sender_role')->nullable();
+            $table->string('message_receiver_role')->nullable();
             $table->integer('message_status_id')->default(15);
             $table->timestamps();
         });

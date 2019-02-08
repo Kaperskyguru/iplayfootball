@@ -1,4 +1,3 @@
-@dd($data)
 <form class="form-horizontal" action="{{ route('scouts.update', ['id' => $data['scout']->id])}}" method="POST">        
     <fieldset>
     @method('PATCH')
@@ -25,6 +24,10 @@
         <div class="col-md-6 form-group">
             <label class="control-label">Profile Package</label>
             <input type="text" placeholder="type" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Picture upload</label>
+            <input type="file" name="scout_image_id" id="scout_image_id">
         </div>
         <div id="myDIV" class="col-md-12 form-group">
             <label class="control-label">add player</label>

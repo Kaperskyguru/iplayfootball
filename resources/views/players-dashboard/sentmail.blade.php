@@ -62,7 +62,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="active">
-                                                        <a href="{{url('/player/messages/sent')}}">
+                                                        <a href="{{url('/player/sent')}}">
                                                             <i class="fa fa-envelope-o"></i>Send Mail</a>
                                                     </li>
 
@@ -81,7 +81,7 @@
                                                         <div class="avatar-name">{{$message->sender->name}}</div>
                                                         <div>
                                                             <small>
-                                                                <span class="bg-green badge avatar-text">{{ $message->message_sender_type}}</span>
+                                                                <span class="bg-green badge avatar-text">{{ $message->message_sender_role}}</span>
                                                                 <span>
                                                                     <strong>{{ $message->message_subject}} </strong><br/>
                                                                     {{-- <span> {{ str_limit($message->message_body, 70) }}</span> --}}
@@ -91,9 +91,7 @@
                                                     </div>
                                                     <div class="inbox-date hidden-sm hidden-xs hidden-md">
                                                         <div class="date">{{dateFormat($message->created_at)}}</div>
-                                                        <!-- <div>
-                                                            <small>#1</small>
-                                                        </div> -->
+                                                        
                                                     </div>
                                                 </div>
                                             </a>

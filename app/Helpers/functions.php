@@ -50,4 +50,22 @@
           }
           return $dom->savehtml();
     }
+
+    function extractFromImage($image)
+    {
+        if(is_string($image) && !is_null($image) && !empty($image)) {
+            list($path, $path2, $image) = explode('/', $image);
+            return ('storage/'.$path2.'/'.$image);
+        } else {
+            return 'players_assets/dist/img/avatar5.png';
+        }
+    }
+
+    function extractPathFromImage($image)
+    {
+        if(is_string($image) && !is_null($image) && !empty($image)) {
+            list($path, $image) = explode('public/images/', $image);
+            return ($image);
+        }
+    }
     

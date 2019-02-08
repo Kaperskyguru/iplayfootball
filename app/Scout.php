@@ -13,6 +13,11 @@ class Scout extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function verify()
+    {
+        return $this->belongsTo('App\Verification', 'verification_user_id', 'id');
+    }
+
     public function status()
     {
         return $this->belongsTo('App\Status', 'scout_status_id', 'id');

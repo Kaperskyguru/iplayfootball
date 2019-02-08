@@ -25,6 +25,10 @@
             <label class="control-label">Profile Package</label>
             <input type="text" placeholder="type" class="form-control">
         </div>
+        <div class="form-group">
+            <label>Picture upload</label>
+            <input type="file" name="image_id" id="team_image_id">
+        </div>
         <div id="myDIV" class="col-md-12 form-group">
             <label class="control-label">add player</label>
             <input type="text" id="myInput" placeholder="add player" class="form-control">

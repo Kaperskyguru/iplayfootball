@@ -67,19 +67,22 @@
                                             <div class="avatar-name">{{$message->sender->name}}</div>
                                             <div>
                                                 <small>
-                                                    <span class="bg-green badge avatar-text">{{ $message->message_sender_type}}</span>
+                                                    <span class="bg-green badge avatar-text">{{ $message->message_sender_role}}</span>
                                                     <span>
                                                         <strong>{{ $message->message_subject}} </strong><br/>
-                                                        {{-- <span> {{ str_limit($message->message_body, 70) }}</span> --}}
                                                     </span>
                                                 </small>
                                             </div>
                                         </div>
                                         <div class="inbox-date hidden-sm hidden-xs hidden-md">
                                             <div class="date">{{dateFormat($message->created_at)}}</div>
-                                            <!-- <div>
-                                                <small>#1</small>
-                                            </div> -->
+                                            <div>
+                                                @if ($message->status->status_text =="Read")
+                                                <small class="label-default">{{ $message->status->status_text}}</small>
+                                                @else
+                                                <small class="label-success">{{ $message->status->status_text}}</small>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </a>

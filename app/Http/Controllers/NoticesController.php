@@ -104,7 +104,12 @@ class NoticesController extends Controller
 
     public function playerNotices()
     {
-        return view('players-dashboard.notices', ['notices' => Notice::where('notice_visibility_id', 8)->orderBy('id', 'desc')->get()]);
+        return view('players-dashboard.notices', 
+        ['notices' => Notice::where('notice_visibility_id', 8)
+            ->orWhere('notice_visibility_id', 4)
+            ->orderBy('id', 'desc')
+            ->get()
+        ]);
     }
 
 
@@ -119,7 +124,12 @@ class NoticesController extends Controller
 
     public function teamNotices()
     {
-        return view('teams-dashboard.notices', ['notices' => Notice::where('notice_visibility_id', 6)->orderBy('id', 'desc')->get()]);
+        return view('teams-dashboard.notices', 
+        ['notices' => Notice::where('notice_visibility_id', 6)
+            ->orWere('notice_visibility_id', 4)
+            ->orderBy('id', 'desc')
+            ->get()
+        ]);
     }
 
     public function teamReadNotice(Request $request)
@@ -133,7 +143,12 @@ class NoticesController extends Controller
 
     public function academicNotices()
     {
-        return view('academics-dashboard.notices', ['notices' => Notice::where('notice_visibility_id', 5)->orderBy('id', 'desc')->get()]);
+        return view('academics-dashboard.notices', 
+        ['notices' => Notice::where('notice_visibility_id', 5)
+            ->orWhere('notice_visibility_id', 4)
+            ->orderBy('id', 'desc')
+            ->get()
+        ]);
     }
 
     public function academicReadNotice(Request $request)
@@ -142,6 +157,25 @@ class NoticesController extends Controller
         {
             $notice = Notice::findOrFail($request->id);
             return view('academics-dashboard.includes.modals.academicReadForm', compact('notice'))->render();
+        }
+    }
+
+    public function scoutNotices()
+    {
+        return view('scouts-dashboard.notices', 
+        ['notices' => Notice::where('notice_visibility_id', 7)
+            ->orWhere('notice_visibility_id', 4)
+            ->orderBy('id', 'desc')
+            ->get()
+        ]);
+    }
+
+    public function scoutReadNotice(Request $request)
+    {
+        if($request->ajax())
+        {
+            $notice = Notice::findOrFail($request->id);
+            return view('scouts-dashboard.includes.modals.scoutReadForm', compact('notice'))->render();
         }
     }
 }

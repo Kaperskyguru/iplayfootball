@@ -25,6 +25,10 @@
             <label class="control-label">Profile Package</label>
             <input type="text" name="academic_package_id" placeholder="type" value="{{$data['academic']->academic_package_id}}" class="form-control">
         </div>
+        <div class="form-group">
+            <label>Picture upload</label>
+            <input type="file" name="academic_image_id" id="academic_image_id">
+        </div>
         <div id="myDIV" class="col-md-12 form-group">
             <label class="control-label">add player</label>
             <input type="email" id="myInput" placeholder="Add player" class="form-control">

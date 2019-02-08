@@ -5,8 +5,11 @@ use App\Scout;
 use App\Player;
 use Validator;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreScout;
-
+use App\User;
+use App\Http\Controllers\MessagesController as Messages;
+use App\Http\Controllers\UsersController as users;
+use App\Http\Requests\StoreUser;
+use Illuminate\Support\Facades\Auth;
 
 class ScoutsController extends Controller
 {
@@ -35,25 +38,9 @@ class ScoutsController extends Controller
 
     }
 
-    public function store(StoreScout $request)
+    public function store(StoreUser $request)
     {
-       
-        
-        $validated = $request->validated();
-        
-        $scout = new Scout;
-        $scout->scout_name =  strval($validated['firstname']). ' '. strval($validated['lastname']);
-        $scout->scout_phone = $validated['number'];
-        $scout->scout_email = $validated['email'];
-        $scout->scout_licence = $validated['licence'];
-        $scout->scout_team_id = $validated['team'];
-        $scout->scout_dob = $validated['dob'];
-        $scout->scout_address = $validated['address'];
-        $scout->scout_notes = $validated['notes'];
-        $scout->scout_gender = $validated['sex'];
-        $scout->scout_status_id = $validated['scout_status'];
-        $scout->scout_image_id = $validated['picture']->store('images');
-        if($scout->save()){
+        if(users::store($request)){
             return redirect('admin/scouts/')->with('status', 'Scout saved!');
         }
     }
@@ -66,7 +53,7 @@ class ScoutsController extends Controller
             <label class="control-label">Delete <?php echo $scout->scout_name ?> ?</label>
                 <div class="pull-right">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">NO</button>
-                    <button type="submit" id="del_YES" data-id="<?php echo $scout->id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
+                    <button type="submit" id="del_YES" data-id="<?php echo $scout->user_id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
                 </div>
         <?php
         }
@@ -104,6 +91,50 @@ class ScoutsController extends Controller
                 'players' => Player::where('player_associate_scout', $request->id)->get()
             ];
             return view('admin-dashboard.includes.modals.scoutUpdateForm', compact('data'))->render();
+        }
+    }
+
+    public function scout_view()
+    {
+        $message = new Messages;
+        return view('scouts-dashboard.index', [
+            'user' => User::findOrFail(Auth::user()->id),
+            'messages' => $message->messages(4),
+            'scout' => Scout::where('user_id', Auth::user()->id)->first()
+        ]);
+    }
+
+    public function scoutUpdateForm(Request $request)
+    {
+        if($request->ajax())
+        {           
+            $scout = Scout::where('user_id', $request->id)->first();
+            return view('scouts-dashboard.includes.modals.scoutUpdateForm', ['scout' => $scout])->render();
+        }
+    } 
+
+    public function scoutUpdate(int $id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name" => 'bail|string|min:3|max:50',
+            "email" => 'bail|email|max:255',
+            "address" => 'nullable|string',
+            "state" => 'string',
+            "phone" => 'bail|nullable|numeric|min:11',
+            "image_id" => 'nullable|image'
+        ]);
+        if ($validator->fails()) {
+            return redirect('/scout')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $data = $request->all();
+        (!array_key_exists('scout_image_id', $data)) ?: $data['scout_image_id'] = $data['scout_image_id']->store('public/images');
+        unset($data['_token']);
+        unset($data['_method']);
+        if(Scout::whereId($id)->update($data)) {
+            return redirect('/scout')->with('status', 'Scout Updated!');
         }
     }
 }

@@ -34,7 +34,7 @@
         <div class="col-sm-12 col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-header-headshot"></div>
+                    <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="card-header-headshot" alt="User Image">
                 </div>
                 <div class="card-content">
                     <div class="card-content-member text-center">

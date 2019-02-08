@@ -78,9 +78,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-               <?php //dd($data) ?>
                 @if(count($notices) > 0)
-                
                     @foreach($notices as $notice)
                         <div class="work-touchpoint">
                             <div class="work-touchpoint-date">
@@ -95,61 +93,6 @@
                         </div>
                     @endforeach
                 @endif
-                    <!-- <div class="work-touchpoint">
-                        <div class="work-touchpoint-date">
-                            <span class="day">2</span>
-                            <span class="month">Apr</span>
-                        </div>
-                    </div>
-                    <div class="detailswork">
-                        <span class="label-custom label label-default pull-right">Admin</span>
-                        <a href="#" title="headings">Accounting policy</a> <br>
-                        <p>Uyo, Akwa Ibom</p>
-                    </div>
-                    <div class="work-touchpoint">
-                        <div class="work-touchpoint-date2">
-                            <span class="day">17</span>
-                            <span class="month">Mrc</span>
-                        </div>
-                    </div>
-                    <div class="detailswork">
-                        <span class="label-custom label label-default pull-right">Player</span>
-                        <a href="#" title="headings">Marketing policy</a> <br>
-                        <p>Ikeja - Lagos</p>
-                    </div>
-                    <div class="work-touchpoint">
-                        <div class="work-touchpoint-date2">
-                            <span class="day">3</span>
-                            <span class="month">jan</span>
-                        </div>
-                    </div>
-                    <div class="detailswork">
-                        <span class="label-custom label label-default pull-right">Scout</span>
-                        <a href="#" title="headings">Finance policy</a> <br>
-                        <p>F.C.T - Abuja</p>
-                    </div>
-                    <div class="work-touchpoint">
-                        <div class="work-touchpoint-date2">
-                            <span class="day">3</span>
-                            <span class="month">jan</span>
-                        </div>
-                    </div>
-                    <div class="detailswork">
-                        <span class="label-custom label label-default pull-right">Teams</span>
-                        <a href="#" title="headings">Finance policy</a> <br>
-                        <p>F.C.T - Abuja</p>
-                    </div>
-                    <div class="work-touchpoint">
-                        <div class="work-touchpoint-date2">
-                            <span class="day">3</span>
-                            <span class="month">jan</span>
-                        </div>
-                    </div>
-                    <div class="detailswork">
-                        <span class="label-custom label label-default pull-right">Academies</span>
-                        <a href="#" title="headings">Finance policy</a> <br>
-                        <p>F.C.T - Abuja</p>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -175,38 +118,6 @@
                             </div>
                         @endforeach
                     @endif
-                    <!-- <div class="Pendingwork">
-                        <span class="label-success label label-default pull-right">Verified</span>
-                        <i class="fa fa-ban"></i>
-                        <a href="#">Kompany</a>
-                        <div class="upworkdate">
-                            <p>Jul 25, 2017 for Gold Package</p>
-                        </div>
-                    </div>
-                    <div class="Pendingwork">
-                        <span class="label-danger label label-default pull-right">Unverified</span>
-                        <i class="fa fa-ban"></i>
-                        <a href="#">Paulinho</a>
-                        <div class="upworkdate">
-                            <p>Feb 25, 2017 for Bronze Package</p>
-                        </div>
-                    </div>
-                    <div class="Pendingwork">
-                        <span class="label-warning label label-default pull-right">pending</span>
-                        <i class="fa fa-ban"></i>
-                        <a href="#">Milito</a>
-                        <div class="upworkdate">
-                            <p>apr 25, 2017 for Bronze Package</p>
-                        </div>
-                    </div>
-                    <div class="Pendingwork">
-                        <span class="label-success label label-default pull-right">Verified</span>
-                        <i class="fa fa-ban"></i>
-                        <a href="#">Iheanacho</a>
-                        <div class="upworkdate">
-                            <p>jun 25, 2017 for Gold Package</p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -223,31 +134,17 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Player Name</th>
+                                        <th>Names</th>
                                         <th>Sign-Up Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="info">
-                                        <th scope="row">Morata</th>
-                                        <td>Feb 25,2017</td>
-                                    </tr>
+                                    @foreach($recentUsers as $user)
                                     <tr>
-                                        <th scope="row">Ramos</th>
-                                        <td>jun 05,2017</td>
+                                        <th scope="row">{{$user->name}}</th>
+                                        <td>{{dateFormat($user->created_at)}}</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">Moses</th>
-                                        <td>Feb 05,2017</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Davis</th>
-                                        <td>jun 25,2017</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Konte</th>
-                                        <td>Jul 15,2017</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

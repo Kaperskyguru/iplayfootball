@@ -69,7 +69,6 @@ class User extends Authenticatable implements MustVerifyEmail
             default:
                 return 'admin';
                 break;
-                 
         }
     }
 

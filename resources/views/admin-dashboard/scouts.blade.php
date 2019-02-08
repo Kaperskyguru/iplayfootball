@@ -158,7 +158,7 @@
                                                                             <tbody>
                                                                                 @foreach($Scouts as $scout)
                                                                                 <tr>
-                                                                                    <td><img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" class="img-circle" alt="User Image" width="50" height="50"> </td>
+                                                                                    <td><img src="{{ asset(extractFromImage($scout->scout_image_id)) }}" class="img-circle" alt="User Image" width="50" height="50"> </td>
                                                                                     <td>{{$scout->scout_name}}</td>
                                                                                     <td>{{$scout->scout_phone}}</td>
                                                                                     <td><a href="#" class="__cf_email__">{{$scout->scout_email}}</a></td>
@@ -268,7 +268,7 @@
                                                             var id = $(this).data('id');
                                                             var token = $(this).data("token");
                                                             $.ajax({
-                                                                url:'/admin/scouts',
+                                                                url:'/admin/users/delete',
                                                                 type:'DELETE',
                                                                 data:{'id':id, '_token': token, '_method': 'DELETE'},
                                                                 success: function(data) {

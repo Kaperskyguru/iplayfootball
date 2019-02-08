@@ -6,19 +6,17 @@ use Illuminate\Http\Request;
 use App\Team;
 use App\Player;
 use Validator;
-use App\Http\Requests\StoreTeam;
 use App\User;
 use App\Http\Controllers\MessagesController as Messages;
-use Faker\Factory as faker;
-use App\Http\Requests\StorePlayer;
-use Hash;
+use App\Http\Controllers\UsersController as users;
+use App\Http\Requests\StoreUser;
 use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
     
     public function index() {
@@ -41,22 +39,11 @@ class TeamsController extends Controller
     }
 
 
-    public function store(StoreTeam $request)
+    public function store(StoreUser $request)
     {
-        $validated = $request->validated();
-        
-        $team = new Team;
-        $team->name =  strval($validated['firstname']). ' '. strval($validated['lastname']);
-        $team->phone = $validated['number'];
-        $team->email = $validated['email'];
-        $team->address = $validated['address'];
-        $team->type = $validated['package'];
-        $team->status_id = $validated['team_status'];
-        $team->image_id = $validated['picture']->store('images');
-        if($team->save()){
+        if(users::store($request)){
             return redirect('admin/teams/')->with('status', 'team saved!');
         }
-        
     }
 
     public function view_delete_confirmation(Request $request)
@@ -67,7 +54,7 @@ class TeamsController extends Controller
             <label class="control-label">Delete <?php echo $team->name ?> ?</label>
                 <div class="pull-right">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">NO</button>
-                    <button type="submit" id="del_YES" data-id="<?php echo $team->id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
+                    <button type="submit" id="del_YES" data-id="<?php echo $team->user_id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
                 </div>
         <?php
         }
@@ -77,9 +64,10 @@ class TeamsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "name" => 'bail|string|min:3|max:50',
-            "enail" => 'bail|email|max:255',
+            "email" => 'bail|email|max:255',
             "address" => 'string',
             "phone" => 'bail|numeric|min:11',
+            "image_id" => 'nullable|image'
         ]);
         if ($validator->fails()) {
             return redirect('admin/teams/')
@@ -88,6 +76,7 @@ class TeamsController extends Controller
         }
 
         $data = $request->all();
+        (!array_key_exists('image_id', $data)) ?: $data['image_id'] = $data['image_id']->store('public/images');
         unset($data['_token']);
         unset($data['_method']);
         if(Team::whereId($id)->update($data)) {
@@ -102,7 +91,7 @@ class TeamsController extends Controller
         {
             $data = [
                 'team' => Team::findOrFail($request->id),
-                'players' => Player::where('associate_team', $request->id)->get()
+                'players' => Player::where('player_associate_team', $request->id)->get()
             ];
             
             return view('admin-dashboard.includes.modals.teamUpdateForm', compact('data'))->render();
@@ -137,6 +126,7 @@ class TeamsController extends Controller
             "address" => 'nullable|string',
             "state" => 'string',
             "phone" => 'bail|nullable|numeric|min:11',
+            "image_id" => 'nullable|image'
         ]);
         if ($validator->fails()) {
             return redirect('/team')
@@ -145,6 +135,7 @@ class TeamsController extends Controller
         }
 
         $data = $request->all();
+        (!array_key_exists('image_id', $data)) ?: $data['image_id'] = $data['image_id']->store('public/images');
         unset($data['_token']);
         unset($data['_method']);
         if(Team::whereId($id)->update($data)) {

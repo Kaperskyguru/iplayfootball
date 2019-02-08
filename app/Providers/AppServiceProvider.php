@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->userCreated();
+        $this->userDeleted();
     }
 
     /**
@@ -29,6 +30,65 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    public function userDeleted()
+    {
+        User::deleted(function($user)
+        {
+            switch($user->role){
+                case 8:
+                    $this->deletePlayer($user);
+                break;
+
+                case 5:
+                    $this->deleteAcademy($user);
+                break;
+
+                case 6:
+                    $this->deleteTeam($user);
+                break;
+
+                case 7:
+                    $this->deleteScout($user);
+                break;
+
+                default:
+                break;
+            }
+        });
+    }
+
+    public function deleteTeam($user)
+    {
+        if(Team::where('user_id', $user->id)->delete()){
+            return true;
+        }
+        return false;
+    }
+
+    public function deletePlayer($user)
+    {
+        if(Player::where('user_id', $user->id)->delete()){
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteScout($user)
+    {
+        if(Scout::where('user_id', $user->id)->delete()){
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteAcademy($user)
+    {
+        if(Academic::where('user_id', $user->id)->delete()){
+            return true;
+        }
+        return false;
     }
 
     public function userCreated()

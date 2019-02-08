@@ -15,6 +15,7 @@ use App\Notice;
 use App\Verification;
 use App\Scout;
 use App\Player;
+use App\User;
 
 class DashboardController extends Controller
 {
@@ -35,8 +36,9 @@ class DashboardController extends Controller
             'pendingVerifications' => $verification->pending(5),
             'totalScouts' => Scout::count(),
             'totalPlayers' => Player::count(),
-            'totalPendingVerifications' => Verification::where('verification_state_id', 2)->count(),
+            'totalPendingVerifications' => Verification::where('verification_status_id', 11)->count(),
             'totalActiveAdmins',
+            'recentUsers' => User::orderBy('created_at', 'desc')->limit(5)->get(),
         ];
         return view('admin-dashboard.index', $data);
     }

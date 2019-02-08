@@ -47,7 +47,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/admin/sent')}}">
+                                            <a href="{{url('/admin/messages/sent')}}">
                                                 <i class="fa fa-envelope-o"></i>Send Mail</a>
                                             </li>
 

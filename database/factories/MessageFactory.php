@@ -10,8 +10,8 @@ $factory->define(App\Message::class, function (Faker $faker) {
         'message_type' => $faker->numberBetween(1,4),
         'message_sender_id' => $faker->numberBetween(1,20),
         'message_receiver_id' => $faker->numberBetween(1,20),
-        'message_receiver_type' => $type,
+        'message_receiver_role' => $type,
         'message_status_id' => $faker->numberBetween(1,4),
-        'message_sender_type' => $type,
+        'message_sender_role' => $type,
     ];
 });

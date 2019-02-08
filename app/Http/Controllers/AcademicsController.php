@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Player;
 use Validator;
-use App\Http\Requests\StoreTeam;
 use App\Academic;
 use App\User;
 use App\Http\Controllers\MessagesController as Messages;
-use Faker\Factory as faker;
-use Hash;
+use App\Http\Controllers\UsersController as users;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreAcademy;
+use App\Http\Requests\StoreUser;
 
 class AcademicsController extends Controller
 {
@@ -41,21 +39,10 @@ class AcademicsController extends Controller
 
     }
 
-    public function store(StoreAcademy $request)
+    public function store(StoreUser $request)
     {
-        $validated = $request->validated();
-        
-        $academic = new academic;
-        $academic->academic_name =  strval($validated['firstname']). ' '. strval($validated['lastname']);
-        $academic->academic_phone = $validated['mobile'];
-        $academic->academic_email = $validated['email'];
-        $academic->academic_facebook_id = $validated['facebook'];
-        $academic->academic_address = $validated['address'];
-        $academic->academic_status_id = $validated['academy_status'];
-        $academic->academic_package_id = $validated['package'];
-        $academic->academic_image_id = $validated['picture']->store('images');
-        if($academic->save()){
-            return redirect('admin/academics/')->with('status', 'academic saved!');
+        if(users::store($request)){
+            return redirect('admin/academics/')->with('status', 'Academy saved!');
         }
     }
 
@@ -67,7 +54,7 @@ class AcademicsController extends Controller
             <label class="control-label">Delete <?php echo $academic->academic_name ?> ?</label>
                 <div class="pull-right">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">NO</button>
-                    <button type="submit" id="del_YES" data-id="<?php echo $academic->id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
+                    <button type="submit" id="del_YES" data-id="<?php echo $academic->user_id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
                 </div>
         <?php
         }
@@ -77,9 +64,10 @@ class AcademicsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "name" => 'bail|string|min:3|max:50',
-            "enail" => 'bail|email|max:255',
+            "email" => 'bail|email|max:255',
             "address" => 'string',
             "phone" => 'bail|numeric|min:11',
+            "academic_image_id" => 'nullable|image'
         ]);
         if ($validator->fails()) {
             return redirect('admin/academics/')
@@ -88,6 +76,7 @@ class AcademicsController extends Controller
         }
 
         $data = $request->all();
+        (!array_key_exists('academic_image_id', $data)) ?: $data['academic_image_id'] = $data['academic_image_id']->store('public/images');        
         unset($data['_token']);
         unset($data['_method']);
         if(Academic::whereId($id)->update($data)) {
@@ -138,6 +127,7 @@ class AcademicsController extends Controller
             "address" => 'nullable|string',
             "state" => 'string',
             "phone" => 'bail|nullable|numeric|min:11',
+            "academic_image_id" => 'nullable|image'
         ]);
         if ($validator->fails()) {
             return redirect('/academic')
@@ -146,6 +136,7 @@ class AcademicsController extends Controller
         }
 
         $data = $request->all();
+        (!array_key_exists('academic_image_id', $data)) ?: $data['academic_image_id'] = $data['academic_image_id']->store('public/images');        
         unset($data['_token']);
         unset($data['_method']);
         if(Academic::whereId($id)->update($data)) {

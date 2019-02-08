@@ -9,10 +9,9 @@ use App\Academic;
 use App\Scout;
 use App\User;
 use App\Http\Controllers\MessagesController as Messages;
-use Faker\Factory as faker;
-use App\Http\Requests\StorePlayer;
+use App\Http\Controllers\UsersController as users;
+use App\Http\Requests\StoreUser;
 use Validator;
-use Hash;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,9 +20,7 @@ class PlayersController extends Controller
     private $faker;
 
     public function __construct() {
-        // $this->middleware('auth'); 
-        // $this->middleware('player');
-        // $this->middleware('guest')->except('logout');
+        
     }
 
     public function index()
@@ -41,32 +38,11 @@ class PlayersController extends Controller
         return Player::findOrFail($id);
     }
 
-    public function store(StorePlayer $request)
+    public function store(StoreUser $request)
     {
-        $validated = $request->validated();
-        
-        $user = new User;
-        $user->name =  $validated['name'];
-        $user->phone = $validated['phone'];
-        $user->email = $validated['email'];
-        $user->state = $validated['state'];
-        $user->role = $validated['role'];
-        $user->status_id = $validated['player_status'];
-        $user->password = Hash::make($validated['password']);
-        $user->type = $validated['player_type'];
-        // $user->user_facebook_id = $validated['facebook'];
-        // $user->user_dob = $validated['dob'];
-        // $user->user_address = $validated['address'];
-        // $user->user_height = $validated['height'];
-        // $user->user_weight = $validated['weight'];
-        // $user->user_gender = $validated['sex'];
-        // $user->user_status_id = $validated['user_status'];
-        // $user->user_package_id = $validated['package'];
-        // $user->user_image_id = $validated['picture']->store('images');
-        if($user->save()){
+        if(users::store($request)){
             return redirect('admin/players/')->with('status', 'player saved!');
         }
-
     }
 
     public function delete(Request $request)
@@ -84,6 +60,7 @@ class PlayersController extends Controller
         $validator = Validator::make($request->all(), [
             "player_name" => 'bail|string|min:3|max:50',
             "player_email" => 'bail|email|max:255',
+            "player_image_id" => 'nullable|image',
             // "player_address" => 'string',
             // "player_biography" => 'string',
             "player_phone" => 'bail|numeric|min:11',
@@ -98,6 +75,8 @@ class PlayersController extends Controller
         }
 
         $data = $request->all();
+
+        (!array_key_exists('player_image_id', $data)) ?: $data['player_image_id'] = $data['player_image_id']->store('public/images');
         unset($data['_token']);
         unset($data['_method']);
         if(Player::whereId($id)->update($data)) {
@@ -113,7 +92,7 @@ class PlayersController extends Controller
             <label class="control-label">Delete <?php echo $player->player_name ?> ?</label>
                 <div class="pull-right">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">NO</button>
-                    <button type="submit" id="del_YES" data-id="<?php echo $player->id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
+                    <button type="submit" id="del_YES" data-id="<?php echo $player->user_id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
                 </div>
         <?php
         }
@@ -168,6 +147,7 @@ class PlayersController extends Controller
             "player_position" => 'nullable|string',
             "player_height" => 'nullable|integer',
             "player_weight" => 'nullable|integer',
+            "player_image_id" => 'nullable|image',
         ]);
         if ($validator->fails()) {
             return redirect('player/')
@@ -176,6 +156,7 @@ class PlayersController extends Controller
         }
 
         $data = $request->all();
+        (!array_key_exists('player_image_id', $data)) ?: $data['player_image_id'] = $data['player_image_id']->store('public/images');
         unset($data['_token']);
         unset($data['_method']);
         if(Player::whereId($id)->update($data)) {
@@ -193,5 +174,11 @@ class PlayersController extends Controller
     {
         return view('academics-dashboard.Players')
         ->with('players', Player::where('player_associate_academic', Auth::user()->id)->get());
+    }
+
+    public function scoutPlayersListView()
+    {
+        return view('scouts-dashboard.Players')
+        ->with('players', Player::where('player_associate_scout', Auth::user()->id)->get());
     }
 }

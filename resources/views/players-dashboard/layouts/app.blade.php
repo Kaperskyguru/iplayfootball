@@ -136,7 +136,7 @@
                                                 <!-- user -->
                                                 <li class="dropdown dropdown-user">
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                        <img src="{{asset('players_assets/dist/img/avatar5.png')}}" class="img-circle" width="45" height="45" alt="user">
+                                                        <img src="{{ asset(extractFromImage($player->player_image_id))}}" class="img-circle" width="45" height="45" alt="user">
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
