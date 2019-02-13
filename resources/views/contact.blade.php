@@ -51,16 +51,16 @@
                     <div class="col-md-5 col-12 row mt-2" style="display:block; margin-left: 20px; padding:0px;">
                         <ul style="list-style-type: none; padding: 0px; margin-bottom: 5px">
                             <li style="display: inline;">
-                                <a href="https://www.facebook.com/iplayfootball007"><img src=" {{ asset('img/if_square-facebook_317727.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                                <a href="https://www.facebook.com/iplayfootball007"><img src=" {{ asset('public/img/if_square-facebook_317727.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                             </li>
                             <li style="display: inline;">
-                                <a href="https://twitter.com/ipf007"><img src="{{ asset('/img/if_square-twitter_317723.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                                <a href="https://twitter.com/ipf007"><img src="{{ asset('public//img/if_square-twitter_317723.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                             </li>
                             <li style="display: inline;">
-                                <a href="https://instagram.com/iplayfootball007"><img src="{{ asset('img/if_Instagram_381384.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                                <a href="https://instagram.com/iplayfootball007"><img src="{{ asset('public/img/if_Instagram_381384.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                             </li>
                             <li style="display: inline;">
-                                <a href="tel:08070538333"><img src="{{ asset('img/if_WhatsApp_1298775.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                                <a href="tel:08070538333"><img src="{{ asset('public/img/if_WhatsApp_1298775.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                             </li>
                         </ul>
                         <p style="color:darkred; padding-top:3px;">Connect on Social Media.</p>

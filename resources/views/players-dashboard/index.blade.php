@@ -198,7 +198,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="review-block-img">
-                                <img src="{{asset('players_assets/dist/img/avatar.png')}}" class="img-rounded" alt="">
+                                <img src="{{asset('public/players_assets/dist/img/avatar.png')}}" class="img-rounded" alt="">
                             </div>
                             <div class="review-block-name">
                                 <a href="#">{{ $message->sender->name }}</a>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('assets')
-    <link rel="stylesheet" href="{{asset('css/custom/c_register.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/custom/c_register.css')}}">
 @endsection
 
 @section('banner_display')

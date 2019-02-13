@@ -3,7 +3,7 @@
 @section('title', 'Homepage')
 
 @section('assets')
-    <link rel="stylesheet" href="{{asset('css/custom/c_index.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/custom/c_index.css')}}">
 @endsection
 
 @section('banner_display')
@@ -96,14 +96,14 @@
                 <div class="col-md-4 col-12 row" style="display:block; margin-left: 25px; padding:0px;">
                     <p style="color:forestgreen; padding-top:3px;">Register With:</p>
                     <ul style="list-style-type: none; padding: 0px; margin-bottom: 5px">
-                        <a href="https://www.facebook.com/TechPadi"><img src=" {{ asset('img/if_square-facebook_317727.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                        <a href="https://www.facebook.com/TechPadi"><img src=" {{ asset('public/img/if_square-facebook_317727.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                         <li style="display: inline;">
                         </li>
                         <li style="display: inline;">
-                            <a href="https://twitter.com/techpadi"><img src=" {{ asset('img/if_square-twitter_317723.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                            <a href="https://twitter.com/techpadi"><img src=" {{ asset('public/img/if_square-twitter_317723.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                         </li>
                         <li style="display: inline;">
-                            <a href="https://www.instagram.com/techpadi"><img src="{{ asset('img/if_new-google-favicon_682665.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
+                            <a href="https://www.instagram.com/techpadi"><img src="{{ asset('public/img/if_new-google-favicon_682665.png') }}" class="img-fluid" style="width:30px; height:30px;"></a>
                         </li>
                     </ul>
                 </div>
@@ -141,7 +141,7 @@
                 <div class="row">
                     <div class="card mt-2 mb-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div class="card-header row p-0 m-0">
-                            <img src="{{ asset('img/Orion_add-user.png') }}" alt="add user icon" class="mx-auto mt-3">
+                            <img src="{{ asset('public/img/Orion_add-user.png') }}" alt="add user icon" class="mx-auto mt-3">
                             <p class="col-12 text-center pt-2 mb-0">Sign-Up</p>
                         </div>
                         <div class="card-body">
@@ -159,7 +159,7 @@
                 <div class="row">
                     <div class="card mt-2 mb-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div class="card-header row p-0 m-0">
-                            <img src="{{ asset('img/Orion_starred-user.png') }}" alt="starred user icon" class="mx-auto mt-3">
+                            <img src="{{ asset('public/img/Orion_starred-user.png') }}" alt="starred user icon" class="mx-auto mt-3">
                             <p class="col-12 text-center pt-2 mb-0">Upgrade Profile</p>
                         </div>
                         <div class="card-body">
@@ -177,7 +177,7 @@
                 <div class="row">
                     <div class="card mt-2 mb-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div class="card-header row p-0 m-0">
-                            <img src="{{ asset('img/Orion_people.png') }}" alt="starred user icon" class="mx-auto mt-3">
+                            <img src="{{ asset('public/img/Orion_people.png') }}" alt="starred user icon" class="mx-auto mt-3">
                             <p class="col-12 text-center pt-2 mb-0">Meet The World</p>
                         </div>
                         <div class="card-body">

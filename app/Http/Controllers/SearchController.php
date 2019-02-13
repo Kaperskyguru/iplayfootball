@@ -41,7 +41,7 @@ class SearchController extends Controller
                     <div class="col-12 card" style="width:18rem">
                         <div class="col-12 card-header">
                             <div class="row">
-                                <img src="<?php echo asset('img/FREDRICK.jpg');?>" class="img-responsive" style="width:100%; height:100%">
+                                <img src="<?php echo asset('public/img/FREDRICK.jpg');?>" class="img-responsive" style="width:100%; height:100%">
                             </div>
                         </div>
                         <div class="col-12 card-body">
@@ -60,7 +60,7 @@ class SearchController extends Controller
                                             <div class="modal-header">
                                                 <h5 class="modal-title text-left" id="exampleModalCenterTitle" style="color:black;">Player Info
                                                 </h5>
-                                                <img src="<?php echo asset('img/FREDRICK.jpg');?>" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
+                                                <img src="<?php echo asset('public/img/FREDRICK.jpg');?>" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true" style="color:black;">&times;</span>
                                                 </button>

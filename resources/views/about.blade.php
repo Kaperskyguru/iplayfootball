@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('assets')
-<link rel="stylesheet" href="{{asset('css/custom/c_about.css')}}">
+<link rel="stylesheet" href="{{asset('public/css/custom/c_about.css')}}">
 @endsection
 
 @section('banner_display')
@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="card mt-2 mb-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div class="card-header row p-0 m-0">
-                            <img src="{{ asset('img/Orion_camera.png') }}" alt="camera icon" class="mx-auto mt-3">
+                            <img src="{{ asset('public/img/Orion_camera.png') }}" alt="camera icon" class="mx-auto mt-3">
                             <p class="col-12 text-center pt-2 mb-0">Vision</p>
                         </div>
                         <div class="card-body">
@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="card mt-2 mb-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div class="card-header row p-0 m-0">
-                            <img src="{{ asset('img/Orion_survey.png') }} " alt="survey chart icon" class="mx-auto mt-3">
+                            <img src="{{ asset('public/img/Orion_survey.png') }} " alt="survey chart icon" class="mx-auto mt-3">
                             <p class="col-12 text-center pt-2 mb-0">Mission</p>
                         </div>
                         <div class="card-body">
@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="card mt-2 mb-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div class="card-header row p-0 m-0">
-                            <img src="{{ asset('img/Orion_sales-performance-up.png') }}" alt="sales performance icon" class="mx-auto mt-3">
+                            <img src="{{ asset('public/img/Orion_sales-performance-up.png') }}" alt="sales performance icon" class="mx-auto mt-3">
                             <p class="col-12 text-center pt-2 mb-0">Core Values</p>
                         </div>
                         <div class="card-body">

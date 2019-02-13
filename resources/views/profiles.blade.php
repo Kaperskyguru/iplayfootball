@@ -3,7 +3,7 @@
 @section('title', 'All Profiles')
 
 @section('assets')
-<link rel="stylesheet" href="{{asset('css/custom/c_profiles.css')}}">
+<link rel="stylesheet" href="{{asset('public/css/custom/c_profiles.css')}}">
 @endsection
 
 @section('header_style')
@@ -65,7 +65,7 @@ style="height: 300px; position:relative"
                                     <div class="col-12 card-header">
                                         <i class="far fa-check-circle fa-2x" style="z-index:1;color:forestgreen;position:relative;top:7px;left:105%;"></i>
                                         <div class="row">
-                                            <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%">
+                                            <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%">
                                         </div>
                                     </div>
                                     <div class="col-12 card-body">
@@ -84,7 +84,7 @@ style="height: 300px; position:relative"
                                                         <div class="modal-header">
                                                             <h5 class="modal-title text-left" id="exampleModalCenterTitle" style="color:black;">Player Info
                                                             </h5>
-                                                            <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
+                                                            <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true" style="color:black;">&times;</span>
                                                             </button>
