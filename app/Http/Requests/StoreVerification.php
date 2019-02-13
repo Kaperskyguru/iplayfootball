@@ -26,8 +26,8 @@ class StoreVerification extends FormRequest
         return [
             'accountType' => 'bail|required|string',
             'userID' => 'bail|required|integer',
-            'IDNumber' => 'bail|required|alpha_num',
-            'IDType' => 'bail|required|alpha_num',
+            'IDNumber' => 'bail|required|string',
+            'IDType' => 'bail|required|string',
             'secondFile' => 'image',
             'verification_status' => 'bail|required|integer',
             'package' => 'bail|required|integer',
@@ -44,12 +44,12 @@ class StoreVerification extends FormRequest
     public function messages()
     {
         return [
-            'accountType.required' => 'A Account type is required',
+            'accountType.required' => 'An Account type is required',
             'userID.required'  => 'A User is required',
             'IDNumber.required' => 'Document ID number is required',
             'IDType.required'  => 'Document ID Type is required',
             'package.required'  => 'Package is required',
-            'scout_status.required'  => 'Status is required',
+            'verification_status.required'  => 'Status is required',
             'secondFile.image'  => 'Picture must be image file only',
             'firstFile.image'  => 'Picture must be image file only',
         ];

@@ -306,54 +306,74 @@
 
     });
 
-    // Create a "close" button and append it to each list item
-    var myNodelist = document.getElementsByClassName("assopla-list");
-    var i;
-    for (i = 0; i < myNodelist.length; i++) {
-        var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
-        span.className = "clos";
-        span.appendChild(txt);
-        myNodelist[i].appendChild(span);
-    }
-
-    // Click on a close button to hide the current list item
-    var close = document.getElementsByClassName("clos");
-    var i;
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
+   // Create a new list item when clicking on the "Add" button
+   function newElement() {
+            var teamId = document.getElementById('teamId').value;
+            var token = document.getElementById('token').value;
+            var inputValue = document.getElementById("myInput").value;
+            
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+               addPlayer(inputValue, teamId, token);  
+            }
+            removeSelOption(inputValue)   
         }
-    }
 
-    // Create a new list item when clicking on the "Add" button
-    function newElement() {
-        var li = document.createElement("li");
-        var inputValue = document.getElementById("myInput").value;
-        var t = document.createTextNode(inputValue);
-        li.className = "assopla-list";
-        li.appendChild(t);
-        if (inputValue === '') {
-            alert("You must write something!");
-        } else {
+        function addPlayer(playerID, teamID, token){
+            $.ajax({
+                url:'/admin/teams/associate',
+                type:'post',
+                data:{'player':playerID, 'id':teamID, '_token': token},
+                success: function(data) {
+                    addCloseButton(data, playerID, token);
+                    return data;
+                }
+            });
+        }
+
+        function addCloseButton(data, playerID, token){
+            var li = document.createElement("li");
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            var close = document.getElementsByClassName("clos");
+            span.className = "clos";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            var t = document.createTextNode(data);
+            li.className = "assopla-list";
+            li.appendChild(t);
             document.getElementById("myUL").appendChild(li);
-        }
-        document.getElementById("myInput").value = "";
 
-        var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
-        span.className = "clos";
-        span.appendChild(txt);
-        li.appendChild(span);
-
-        for (i = 0; i < close.length; i++) {
-            close[i].onclick = function() {
-                var div = this.parentElement;
-                div.style.display = "none";
+            //TODO: After Deleting from Database Remove from Form
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function() {
+                    removePlayer(this, playerID, token);
+                }
             }
         }
-    }
+
+        function removePlayer(el, playerID, token){
+            $.ajax({
+                url:'/admin/teams/associate',
+                type:'post',
+                data:{'player':playerID, 'id':null, '_token': token},
+                success: function(data) {
+                    var div = el.parentElement;
+                    div.remove();
+                }
+            });
+        }
+
+        function removeSelOption(inpt){
+            $("#myInput option[value='" + inpt + "']").remove();
+        }   
+
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
 
 </script>
 @endsection

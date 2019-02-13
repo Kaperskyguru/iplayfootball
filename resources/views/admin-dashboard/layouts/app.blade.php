@@ -44,7 +44,7 @@
     <!-- Site wrapper -->
     <div class="wrapper">
         <header class="main-header">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <!-- Logo -->
                 <span class="logo-mini">
                     <img src="{{asset('admin_assets/dist/img/iLOGO.png')}}" alt="" style="width:70%; height:70%">
@@ -272,7 +272,7 @@
                                                         </div>
 
                                                         <footer class="main-footer">
-                                                            <strong>Copyright &copy; 2017-2018 <a href="#">iPlayFootball</a>.</strong> All rights reserved.
+                                                            <strong>Copyright &copy; 2017-2018 <a href="/">iPlayFootball</a>.</strong> All rights reserved.
                                                         </footer>
                                                     </div>
                                                     <!-- /.wrapper -->

@@ -17,6 +17,8 @@ use App\Scout;
 use App\Player;
 use App\User;
 
+use Auth;
+
 class DashboardController extends Controller
 {
     public function __construct()
@@ -41,5 +43,10 @@ class DashboardController extends Controller
             'recentUsers' => User::orderBy('created_at', 'desc')->limit(5)->get(),
         ];
         return view('admin-dashboard.index', $data);
+    }
+
+    public function profile()
+    {
+        return view('admin-dashboard.profile', ['user' => User::findOrFail(Auth::user()->id)]);
     }
 }

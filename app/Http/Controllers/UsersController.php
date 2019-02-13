@@ -55,7 +55,7 @@ class UsersController extends Controller
         {
             $users = $this->getUsersByRole($request->type_id);
             foreach($users as $user):?>
-            <option> <?php echo $user->name?><small> (<?php echo $user->email ?>)</small></option>
+            <option value="<?php echo $user->id?>"> <?php echo $user->name?><small> (<?php echo $user->email ?>)</small></option>
         <?php endforeach;
         }
     }

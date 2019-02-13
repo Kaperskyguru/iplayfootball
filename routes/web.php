@@ -37,10 +37,8 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function()
     Route::get('/addverification', function () {
         return view('admin-dashboard.addverification');
     });
-    Route::get('/profile', function () {
-        return view('admin-dashboard.profile');
-    });
-
+    
+    Route::get('/profile', 'DashboardController@profile');
     Route::get('/', 'DashboardController@index')->name('admin');
     Route::get('/players/delete', 'PlayersController@view_delete_confirmation');
     Route::delete('/players/delete', 'PlayersController@delete');
@@ -49,13 +47,16 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function()
     Route::get('/players', 'PlayersController@players');
     Route::get('/scouts/delete', 'ScoutsController@view_delete_confirmation');
     Route::get('/scouts/update', 'ScoutsController@view_update_box');
+    Route::post('/scouts/associate', 'ScoutsController@setAssociatePlayer');
     Route::resource('/scouts', 'ScoutsController');
     Route::get('/scouts', 'ScoutsController@scouts');
     Route::get('/teams/delete', 'TeamsController@view_delete_confirmation');
     Route::get('/teams/update', 'TeamsController@view_update_box');
+    Route::post('/teams/associate', 'TeamsController@setAssociatePlayer');
     Route::resource('/teams', 'TeamsController');
     Route::get('/academics/delete', 'AcademicsController@view_delete_confirmation');
     Route::get('/academics/update', 'AcademicsController@view_update_box');
+    Route::post('/academics/associate', 'AcademicsController@setAssociatePlayer');
     Route::resource('/academics', 'AcademicsController');
     Route::get('/notices', 'NoticesController@noticeView');
     Route::get('/notices/delete', 'NoticesController@view_delete_confirmation');

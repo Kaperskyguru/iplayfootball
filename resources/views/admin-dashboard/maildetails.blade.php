@@ -11,7 +11,7 @@
                             <div class="inbox-avatar">
                                 <i class="fa fa-user-secret"> </i>
                                 <div class="inbox-avatar-text hidden-xs hidden-sm">
-                                    <div class="avatar-name">Alrazy</div>
+                                    <div class="avatar-name">{{Auth::user()->name}}</div>
                                     <div>
                                         <small>Mailbox</small>
                                     </div>

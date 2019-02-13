@@ -91,7 +91,8 @@ class TeamsController extends Controller
         {
             $data = [
                 'team' => Team::findOrFail($request->id),
-                'players' => Player::where('player_associate_team', $request->id)->get()
+                'players' => Player::where('player_associate_team', $request->id)->get(),
+                'allPlayers' => Player::whereNull('player_associate_team')->get(),
             ];
             
             return view('admin-dashboard.includes.modals.teamUpdateForm', compact('data'))->render();
@@ -140,6 +141,18 @@ class TeamsController extends Controller
         unset($data['_method']);
         if(Team::whereId($id)->update($data)) {
             return redirect('/team')->with('status', 'Team Updated!');
+        }
+    }
+
+    public function setAssociatePlayer(Request $request)
+    {
+        if ($request->ajax()) {
+            $player = Player::find($request->player);
+            $name = $player->player_name;
+            $player->player_associate_team = $request->id;
+            if ($player->save()) {
+                return $name;
+            } 
         }
     }
 }

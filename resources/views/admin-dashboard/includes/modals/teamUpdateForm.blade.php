@@ -31,16 +31,42 @@
         </div>
         <div id="myDIV" class="col-md-12 form-group">
             <label class="control-label">add player</label>
-            <input type="text" id="myInput" placeholder="add player" class="form-control">
-            <span onclick="newElement()" class="addBtn btn-add btn btn-sm">Add</span>
+            <select type="email" id="myInput" placeholder="Add player" class="form-control">
+                @foreach ($data['allPlayers'] as $players)
+                    <option value="{{$players->id}}">{{$players->player_email}}</option>
+                @endforeach
+            </select>
+            <input type="hidden" id="teamId" value="{{$data['team']->id}}">
+            <input type="hidden" id="token" value="{{csrf_token()}}">
+            <span onclick="newElement()" id="addPlayer" class="addBtn btn-add btn btn-sm">Add</span>
         </div>
         <ul id="myUL" class="assopla col-md-12 form-group" style="padding-left:20px;">
             @if(count($data['players']) > 0)
+                <script>
+                    var x = -1;
+                    var token = document.getElementById('token').value;
+                    var myNodelist = document.getElementsByClassName("assopla-list");
+                    var close = document.getElementsByClassName("clos");
+                </script>
                 @foreach($data['players'] as $player)
                     <li class="assopla-list">{{$player->player_name}}</li>
+                    <script>
+                        x++;
+                        var span = document.createElement("SPAN");
+                        var txt = document.createTextNode("\u00D7");
+                        var id = document.createAttribute("playerID");
+                        id.value = {{$player->id}}
+                        span.className = "clos";
+                        span.setAttributeNode(id);
+                        span.appendChild(txt);
+                        myNodelist[x].appendChild(span);
+
+                        // Click on a close button to hide the current list item
+                        close[x].onclick = function() {
+                            removePlayer(this, this.getAttribute('playerid'), token);
+                        }
+                    </script>
                 @endforeach
-            @else 
-                <p> No player yet </p>
             @endif
         </ul>
         <div class="col-md-12 form-group user-form-group">

@@ -63,7 +63,7 @@ class ScoutsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "scout_name" => 'bail|string|min:3|max:50',
-            "scout_enail" => 'bail|email|max:255',
+            "scout_email" => 'bail|email|max:255',
             "scout_address" => 'string',
             "scout_phone" => 'bail|numeric|min:11',
         ]);
@@ -88,7 +88,8 @@ class ScoutsController extends Controller
             // $scout = Scout::findOrFail($request->id);
             $data = [
                 'scout' => Scout::findOrFail($request->id),
-                'players' => Player::where('player_associate_scout', $request->id)->get()
+                'players' => Player::where('player_associate_scout', $request->id)->get(),
+                'allPlayers' => Player::whereNull('player_associate_scout')->get(),
             ];
             return view('admin-dashboard.includes.modals.scoutUpdateForm', compact('data'))->render();
         }
@@ -135,6 +136,18 @@ class ScoutsController extends Controller
         unset($data['_method']);
         if(Scout::whereId($id)->update($data)) {
             return redirect('/scout')->with('status', 'Scout Updated!');
+        }
+    }
+
+    public function setAssociatePlayer(Request $request)
+    {
+        if ($request->ajax()) {
+            $player = Player::find($request->player);
+            $name = $player->player_name;
+            $player->player_associate_scout = $request->id;
+            if ($player->save()) {
+                return $name;
+            } 
         }
     }
 }

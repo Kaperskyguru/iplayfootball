@@ -23,13 +23,26 @@
                         <a href="#">
                             <h4>Verified Users</h4>
                         </a>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="panel-body">
                     <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
                     <div class="btn-group">
                         <div class="buttonexport">
-                        <a href="{{url('/admin/addverification')}}" class="btn btn-add">
+                            <a href="{{url('/admin/addverification')}}" class="btn btn-add">
                                 <i class="fa fa-plus"></i> Add new verification</a>
                         </div>
                         <button class="btn btn-exp btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -116,24 +129,24 @@
                                     <td>{{$verified->user->name}}</td>
                                     <td>
                                         @if ($verified->verification_type == 'team')
-                                            <span class="label-warning label label-default">{{$verified->verification_type}}</span>                                        
-                                        @elseif($verified->verification_type == 'player')
-                                            <span class="label-success label label-default">{{$verified->verification_type}}</span>   
-                                        @else
-                                            <span class="label-danger label label-default">{{$verified->verification_type}}</span>   
-                                        @endif
+                                        <span class="label-warning label label-default">{{$verified->verification_type}}</span>                                        @elseif($verified->verification_type == 'player')
+                                        <span class="label-success label label-default">{{$verified->verification_type}}</span>                                        @else
+                                        <span class="label-danger label label-default">{{$verified->verification_type}}</span>                                        @endif
                                     </td>
                                     <td>
                                         <span class="label-custom label label-default">{{$verified->status->status_text}}</span>
                                     </td>
                                     <td>
-                                    <button type="button" class="btn btn-add btn-sm" data-id="{{$verified->id}}" data-token="{{csrf_token()}}" id="viewVerificationBtn" data-toggle="modal" data-target="#view">
+                                        <button type="button" class="btn btn-add btn-sm" data-id="{{$verified->id}}" data-token="{{csrf_token()}}" id="viewVerificationBtn"
+                                            data-toggle="modal" data-target="#view">
                                             <i class="fa fa-eye"></i>
                                         </button>
-                                        <button type="button" class="btn btn-add btn-sm" data-id="{{$verified->id}}" data-token="{{csrf_token()}}" id="editVerificationBtn" data-toggle="modal" data-target="#update">
+                                        <button type="button" class="btn btn-add btn-sm" data-id="{{$verified->id}}" data-token="{{csrf_token()}}" id="editVerificationBtn"
+                                            data-toggle="modal" data-target="#update">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-                                        <button type="button" data-id="{{$verified->id}}" data-token="{{csrf_token()}}" id="deleteVerificationBtn" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete">
+                                        <button type="button" data-id="{{$verified->id}}" data-token="{{csrf_token()}}" id="deleteVerificationBtn" class="btn btn-danger btn-sm"
+                                            data-toggle="modal" data-target="#delete">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
                                     </td>
@@ -159,7 +172,7 @@
                     <div class="row">
                         <div class="col-md-12" id="viewVerification">
 
-                           
+
                         </div>
                     </div>
                 </div>
@@ -187,7 +200,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" id="editVerification">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -200,7 +213,7 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-    
+
     <!-- delete user Modal2 -->
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -213,7 +226,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" id="verification_info">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -242,7 +255,7 @@
 <!-- dataTables js -->
 <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
 <script>
-        $(document).ready(function(){
+    $(document).ready(function(){
  
              $('body').delegate('#viewVerificationBtn', 'click', function(){
                  let id = $(this).data('id');
@@ -309,5 +322,6 @@
              });
  
         });
- </script>
+
+</script>
 @endsection
