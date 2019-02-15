@@ -7,7 +7,7 @@
 @endsection
 
 @section('assets')
-    <link rel="stylesheet" href="{{asset('public/css/custom/c_profile.css')}}">
+    <link rel="stylesheet" href="{{asset('css/custom/c_profile.css')}}">
 @endsection
 
 @section('banner_display')
@@ -18,7 +18,7 @@
             <div class="col-6 col-md-8 p-3" style="background-color: crimson;">
                 <div class="row">
                     <div class="col-12 col-md-3">
-                        <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive rounded-circle" style="width:10rem; height:10rem">
+                        <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive rounded-circle" style="width:10rem; height:10rem">
                     </div>
                     <div class="col-12 col-md-9">
                         <p class="col-12">
@@ -33,7 +33,7 @@
                                         <h5 class="modal-title text-left" id="exampleModalCenterTitle" style="color:black;">Player Request
                                         </h5><br>
                                         <p class="text-left" style="color:forestgreen; font-weight:700;margin-top:30px;">Franklin Andy Toma</p>
-                                        <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
+                                        <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true" style="color:black;">&times;</span>
                                         </button>
@@ -287,7 +287,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -296,7 +296,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -305,7 +305,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -314,7 +314,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -323,7 +323,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -332,7 +332,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -341,7 +341,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -350,7 +350,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -359,7 +359,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -368,7 +368,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -377,7 +377,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -386,7 +386,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -399,7 +399,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -408,7 +408,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -417,7 +417,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -426,7 +426,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -435,7 +435,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -444,7 +444,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -453,7 +453,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -462,7 +462,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -471,7 +471,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -480,7 +480,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -489,7 +489,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>
@@ -498,7 +498,7 @@
                                         <div class="row">
                                             <div class="col-12 icard">
                                                 <div class="row">
-                                                    <img src="{{ asset('public/img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
+                                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%;">
                                                 </div>
                                             </div>
                                         </div>

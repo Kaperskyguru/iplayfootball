@@ -107,7 +107,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>    
  
-    <!-- <script src="{{asset('public/admin_assets/plugins/summernote/summernote.js')}}" type="text/javascript"></script> -->
+    <!-- <script src="{{asset('admin_assets/plugins/summernote/summernote.js')}}" type="text/javascript"></script> -->
     <script>
     //Summernote
     function sumnote() {

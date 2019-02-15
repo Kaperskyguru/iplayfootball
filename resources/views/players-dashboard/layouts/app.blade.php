@@ -8,25 +8,25 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>iPlayFootball Player Panel</title>
     <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="{{asset('public/players_assets/dist/img/ico/iLOGO.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('players_assets/dist/img/ico/iLOGO.png')}}" type="image/x-icon">
 
     <!-- jquery-ui css -->
-    <link href="{{asset('public/players_assets/plugins/jquery-ui-1.12.1/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/plugins/jquery-ui-1.12.1/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap -->
-    <link href="{{asset('public/players_assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 
-    <link href="{{asset('public/players_assets/plugins/lobipanel/lobipanel.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/plugins/lobipanel/lobipanel.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Pace css -->
-    <link href="{{asset('public/players_assets/plugins/pace/flash.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/plugins/pace/flash.css')}}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome -->
-    <link href="{{asset('public/players_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Pe-icon -->
-    <link href="{{asset('public/players_assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/pe-icon-7-stroke/css/pe-icon-7-stroke.css')}}" rel="stylesheet" type="text/css" />
     <!-- Themify icons -->
-    <link href="{{asset('public/players_assets/themify-icons/themify-icons.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/themify-icons/themify-icons.css')}}" rel="stylesheet" type="text/css" />
 
-    <link href="{{asset('public/players_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('public/admin_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('players_assets/dist/css/stylecrm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
     @yield('styles')
 </head>
 
@@ -41,10 +41,10 @@
             <a href="{{ url('/player') }}" class="logo">
                 <!-- Logo -->
                 <span class="logo-mini">
-                    <img src="{{asset('public/players_assets/dist/img/iLOGO.png')}}" alt="" style="width:70%; height:70%">
+                    <img src="{{asset('players_assets/dist/img/iLOGO.png')}}" alt="" style="width:70%; height:70%">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{asset('public/players_assets/dist/img/iLOGO.png')}}" alt="">
+                    <img src="{{asset('players_assets/dist/img/iLOGO.png')}}" alt="">
                 </span>
             </a>
             <!-- Header Navbar -->
@@ -82,7 +82,7 @@
                                             <!-- start message -->
                                             <a href="{{url('/admin/details/'.$message->id)}}" class="border-gray">
                                                 <div class="pull-left">
-                                                    <img src="{{asset('public/admin_assets/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                                                    <img src="{{asset('admin_assets/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
                                                 </div>
                                                 <h4>{{ $message->sender->name}}</h4>
                                                 <p>{{ $message->message_subject}}</p>
@@ -223,28 +223,28 @@
                                                             <!-- ./wrapper -->
 
                                                             <!-- jQuery -->
-                                                            <script src="{{asset('public/players_assets/plugins/jQuery/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/plugins/jQuery/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
                                                             <!-- jquery-ui -->
-                                                            <script src="{{asset('public/players_assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/plugins/jquery-ui-1.12.1/jquery-ui.min.js')}}" type="text/javascript"></script>
                                                             <!-- Bootstrap -->
-                                                            <script src="{{asset('public/players_assets/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
                                                             <!-- lobipanel -->
-                                                            <script src="{{asset('public/players_assets/plugins/lobipanel/lobipanel.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/plugins/lobipanel/lobipanel.min.js')}}" type="text/javascript"></script>
                                                             <!-- Pace js -->
-                                                            <script src="{{asset('public/players_assets/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
                                                             <!-- SlimScroll -->
-                                                            <script src="{{asset('public/players_assets/plugins/slimScroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/plugins/slimScroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
                                                             <!-- FastClick -->
-                                                            <script src="{{asset('public/players_assets/plugins/fastclick/fastclick.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/plugins/fastclick/fastclick.min.js')}}" type="text/javascript"></script>
                                                             <!-- CRMadmin frame -->
-                                                            <script src="{{asset('public/players_assets/dist/js/custom.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/dist/js/custom.js')}}" type="text/javascript"></script>
                                                             <!-- End Core Plugins
                                                             =====================================================================-->
                                                             <!-- Start Theme label Script
                                                             =====================================================================-->
-                                                            <script src="{{asset('public/admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('admin_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
                                                             <!-- Dashboard js -->
-                                                            <script src="{{asset('public/players_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
+                                                            <script src="{{asset('players_assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
                                                             <script>
                                                                 $('#dataTableExample1').dataTable();
                                                             </script>

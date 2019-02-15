@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-9 p-0 inbox-mail">
                             <div class="inbox-avatar p-20 border-btm">
-                                <img src="{{asset('public/admin_assets/dist/img/avatar5.png')}}" class="border-green hidden-xs hidden-sm" alt="">
+                                <img src="{{asset('admin_assets/dist/img/avatar5.png')}}" class="border-green hidden-xs hidden-sm" alt="">
                                 <div class="inbox-avatar-text">
                                     <div class="avatar-name">
                                         <strong>From: </strong> {{$message->sender->name}} -

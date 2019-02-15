@@ -76,7 +76,7 @@
                                         @foreach($Messages as $message)
                                             <a href="{{url('/player/details/'.$message->id)}}" class="inbox_item unread">
                                                 <div class="inbox-avatar">
-                                                    <img src="{{asset('public/players_assets/dist/img/avatar.png')}}" class="border-green hidden-xs hidden-sm" alt="">
+                                                    <img src="{{asset('players_assets/dist/img/avatar.png')}}" class="border-green hidden-xs hidden-sm" alt="">
                                                     <div class="inbox-avatar-text">
                                                         <div class="avatar-name">{{$message->sender->name}}</div>
                                                         <div>

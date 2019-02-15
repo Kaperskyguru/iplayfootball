@@ -2,7 +2,7 @@
 
 @section('styles')
 <!-- dataTables css -->
-<link href="{{asset('public/players_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('players_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Content Header (Page header) -->
@@ -41,55 +41,55 @@
                                 <ul class="dropdown-menu exp-drop" role="menu">
                                     <li>
                                         <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false'});">
-                                            <img src="{{asset('public/players_assets/dist/img/json.png')}}" width="24" alt="logo"> JSON</a>
+                                            <img src="{{asset('players_assets/dist/img/json.png')}}" width="24" alt="logo"> JSON</a>
                                         </li>
                                         <li>
                                             <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});">
-                                                <img src="{{asset('public/players_assets/dist/img/json.png')}}" width="24" alt="logo"> JSON (ignoreColumn)</a>
+                                                <img src="{{asset('players_assets/dist/img/json.png')}}" width="24" alt="logo"> JSON (ignoreColumn)</a>
                                             </li>
                                             <li>
                                                 <a href="#" onclick="$('#dataTableExample1').tableExport({type:'json',escape:'true'});">
-                                                    <img src="{{asset('public/players_assets/dist/img/json.png')}}" width="24" alt="logo"> JSON (with Escape)</a>
+                                                    <img src="{{asset('players_assets/dist/img/json.png')}}" width="24" alt="logo"> JSON (with Escape)</a>
                                                 </li>
                                                 <li class="divider"></li>
                                                 <li>
                                                     <a href="#" onclick="$('#dataTableExample1').tableExport({type:'xml',escape:'false'});">
-                                                        <img src="{{asset('public/players_assets/dist/img/xml.png')}}" width="24" alt="logo"> XML</a>
+                                                        <img src="{{asset('players_assets/dist/img/xml.png')}}" width="24" alt="logo"> XML</a>
                                                     </li>
                                                     <li>
                                                         <a href="#" onclick="$('#dataTableExample1').tableExport({type:'sql'});">
-                                                            <img src="{{asset('public/players_assets/dist/img/sql.png')}}" width="24" alt="logo"> SQL</a>
+                                                            <img src="{{asset('players_assets/dist/img/sql.png')}}" width="24" alt="logo"> SQL</a>
                                                         </li>
                                                         <li class="divider"></li>
                                                         <li>
                                                             <a href="#" onclick="$('#dataTableExample1').tableExport({type:'csv',escape:'false'});">
-                                                                <img src="{{asset('public/players_assets/dist/img/csv.png')}}" width="24" alt="logo"> CSV</a>
+                                                                <img src="{{asset('players_assets/dist/img/csv.png')}}" width="24" alt="logo"> CSV</a>
                                                             </li>
                                                             <li>
                                                                 <a href="#" onclick="$('#dataTableExample1').tableExport({type:'txt',escape:'false'});">
-                                                                    <img src="{{asset('public/players_assets/dist/img/txt.png')}}" width="24" alt="logo"> TXT</a>
+                                                                    <img src="{{asset('players_assets/dist/img/txt.png')}}" width="24" alt="logo"> TXT</a>
                                                                 </li>
                                                                 <li class="divider"></li>
                                                                 <li>
                                                                     <a href="#" onclick="$('#dataTableExample1').tableExport({type:'excel',escape:'false'});">
-                                                                        <img src="{{asset('public/players_assets/dist/img/xls.png')}}" width="24" alt="logo"> XLS</a>
+                                                                        <img src="{{asset('players_assets/dist/img/xls.png')}}" width="24" alt="logo"> XLS</a>
                                                                     </li>
                                                                     <li>
                                                                         <a href="#" onclick="$('#dataTableExample1').tableExport({type:'doc',escape:'false'});">
-                                                                            <img src="{{asset('public/players_assets/dist/img/word.png')}}" width="24" alt="logo"> Word</a>
+                                                                            <img src="{{asset('players_assets/dist/img/word.png')}}" width="24" alt="logo"> Word</a>
                                                                         </li>
                                                                         <li>
                                                                             <a href="#" onclick="$('#dataTableExample1').tableExport({type:'powerpoint',escape:'false'});">
-                                                                                <img src="{{asset('public/players_assets/dist/img/ppt.png')}}" width="24" alt="logo"> PowerPoint</a>
+                                                                                <img src="{{asset('players_assets/dist/img/ppt.png')}}" width="24" alt="logo"> PowerPoint</a>
                                                                             </li>
                                                                             <li class="divider"></li>
                                                                             <li>
                                                                                 <a href="#" onclick="$('#dataTableExample1').tableExport({type:'png',escape:'false'});">
-                                                                                    <img src="{{asset('public/players_assets/dist/img/png.png')}}" width="24" alt="logo"> PNG</a>
+                                                                                    <img src="{{asset('players_assets/dist/img/png.png')}}" width="24" alt="logo"> PNG</a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <a href="#" onclick="$('#dataTableExample1').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">
-                                                                                        <img src="{{asset('public/players_assets/dist/img/pdf.png')}}" width="24" alt="logo"> PDF</a>
+                                                                                        <img src="{{asset('players_assets/dist/img/pdf.png')}}" width="24" alt="logo"> PDF</a>
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
@@ -260,14 +260,14 @@
                                                                     @endsection
                                                                     @section('scripts')
                                                                     <!-- table-export js -->
-                                                                    <script src="{{asset('public/players_assets/plugins/table-export/tableExport.js')}}" type="text/javascript"></script>
-                                                                    <script src="{{asset('public/players_assets/plugins/table-export/jquery.base64.js')}}" type="text/javascript"></script>
-                                                                    <script src="{{asset('public/players_assets/plugins/table-export/html2canvas.js')}}" type="text/javascript"></script>
-                                                                    <script src="{{asset('public/players_assets/plugins/table-export/sprintf.js')}}" type="text/javascript"></script>
-                                                                    <script src="{{asset('public/players_assets/plugins/table-export/jspdf.js')}}" type="text/javascript"></script>
-                                                                    <script src="{{asset('public/players_assets/plugins/table-export/base64.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/table-export/tableExport.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/table-export/jquery.base64.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/table-export/html2canvas.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/table-export/sprintf.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/table-export/jspdf.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/table-export/base64.js')}}" type="text/javascript"></script>
                                                                     <!-- dataTables js -->
-                                                                    <script src="{{asset('public/players_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
+                                                                    <script src="{{asset('players_assets/plugins/datatables/dataTables.min.js')}}" type="text/javascript"></script>
                                                                     <script>
                                                                         $('body').delegate('#readNotice', 'click', function(){
                                                                             let id = $(this).data('id');
