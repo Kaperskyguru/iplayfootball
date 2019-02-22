@@ -100,16 +100,16 @@ style="height: 300px; position:relative"
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th scope="row">Nationality</th>
-                                                                        <td>Nigerian</td>
+                                                                        <th scope="row">State</th>
+                                                                        <td>{{$player->player_state}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th scope="row">Team</th>
-                                                                        <td>Jacob fc</td>
+                                                                        <td>{{$player->player_associate_team}}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Age</th>
-                                                                        <td>{{$player->player_age}}</td>
+                                                                        <th scope="row">DOB</th>
+                                                                        <td>{{$player->player_dob}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th scope="row">Height(cm)</th>
@@ -140,7 +140,7 @@ style="height: 300px; position:relative"
                                 </div>
                                 @endforeach
                                 @else
-
+                                   <p>No players found</p>
                                 @endif
                             </div>
                         </div>

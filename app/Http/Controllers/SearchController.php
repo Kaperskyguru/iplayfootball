@@ -10,7 +10,7 @@ class SearchController extends Controller
 {
     public function index()
     {
-
+        
     }
 
     public function search(Request $request)
