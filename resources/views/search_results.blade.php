@@ -27,7 +27,7 @@ style="height:110px; position:relative"
                     <div class="col-12 card-body">
                         <div class="row">
                             <h6 style="font-size: 20px; display:block">
-                                <a data-toggle="modal" href="" style="text-decoration:underline" class="col-md-12;">{{$player->player_name}}</a>
+                                <a href="/view_profile/{{$player->id}}" title="view more details" style="text-decoration:underline" class="col-md-12;">{{$player->player_name}}</a>
                                 <br><span style="font-size:18px; font-weight:bolder; color:gray">Position: {{$player->player_position}}</span>
                             </h6>
                         </div>

@@ -13,6 +13,15 @@ class SearchController extends Controller
         
     }
 
+//display player profile onclick
+    public function view_profile($id){ // the id in the url
+        
+        $players = Player::find($id);
+        return view('view_profile')->with('players', $players);
+    }
+
+    
+
     public function search(Request $request)
     {
         if($request->ajax())
