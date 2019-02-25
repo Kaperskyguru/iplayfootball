@@ -7,6 +7,8 @@ use App\Http\Controllers\VerificationsController as Verifications;
 use App\Http\Controllers\TeamsController as Teams;
 use App\Http\Controllers\MessagesController as Messages;
 use App\Http\Middleware;
+use Illuminate\Support\Facades\Input;
+use App\Player;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -180,3 +182,18 @@ Route::get("/players", "PlayersController@players");
 Route::get("/profiles", "PlayersController@index");
 
 Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//universal player search
+Route::any('/search_results',function(){
+    $query = Input::get ( 'query' );
+        $players = Player::where('player_name','LIKE','%'.$query.'%')->get();
+            return view('search_results')->with('players', $players)->withQuery($query);
+});
+
+//display player profile onclick
+Route::get('view_profile', 'SearchController@view_profile');
+Route::get('view_profile/{id}', 'SearchController@view_profile');
+
+

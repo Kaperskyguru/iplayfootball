@@ -101,8 +101,9 @@
                             <div class="col-md-4 col-sm-6 col-12 mx-auto">
                                 <div class="row">
                                     <h4 class="col-12 p-2 pt-5 text-left">Find A Player</h4>
-                                    <form class="form-inline p-3 row">
-                                        <input class="form-control form-control-sm mr-sm-2 col-md-8 col-sm-8 col-12" type="search" aria-label="Search">
+                                    <form class="form-inline p-3 row" action="/search_results" method="POST" role="search">
+                                        @csrf
+                                        <input class="form-control form-control-sm mr-sm-2 col-md-8 col-sm-8 col-12" type="text" name ="query"  aria-label="Search" placeholder="Enter player name">
                                         <button class="btn btn-sm btn-danger my-2 my-sm-0 col-md-3 col-sm-3 col-5" type="submit">Search</button>
                                     </form>
                                 </div>

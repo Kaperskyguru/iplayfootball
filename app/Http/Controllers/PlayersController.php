@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon;
 use App\Player;
 use App\Team;
 use App\Academic;
@@ -25,7 +26,8 @@ class PlayersController extends Controller
 
     public function index()
     {
-        return View('profiles')->with('players', Player::all());
+        $players = Player::all();
+        return View('profiles')->with('players', $players);
     }
 
     public function players()
