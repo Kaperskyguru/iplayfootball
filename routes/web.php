@@ -1,14 +1,6 @@
 <?php
-use App\Http\Controllers\PlayersController as Players;
-use App\Http\Controllers\ScoutsController as Scouts;
-use App\Http\Controllers\NoticesController as Notices;
-use App\Http\Controllers\AcademicsController as Academics;
-use App\Http\Controllers\VerificationsController as Verifications;
-use App\Http\Controllers\TeamsController as Teams;
-use App\Http\Controllers\MessagesController as Messages;
-use App\Http\Middleware;
-use Illuminate\Support\Facades\Input;
 use App\Player;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +10,10 @@ use App\Player;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
+ */
 
 // Admin route groups
-Route::group(['middleware' => 'admin','prefix' => 'admin'], function()
-{
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/addPlayer', function () {
         return view('admin-dashboard.addPlayer');
     });
@@ -39,7 +29,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function()
     Route::get('/addverification', function () {
         return view('admin-dashboard.addverification');
     });
-    
+
     Route::get('/profile', 'DashboardController@profile');
     Route::get('/', 'DashboardController@index')->name('admin');
     Route::get('/players/delete', 'PlayersController@view_delete_confirmation');
@@ -83,8 +73,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function()
 });
 
 // players route groups
-Route::group(['middleware' => 'player', 'prefix' => 'player'], function()
-{
+Route::group(['middleware' => 'player', 'prefix' => 'player'], function () {
     Route::get('/', 'PlayersController@player_view')->name('player');
     Route::PATCH('/update/{id}', 'PlayersController@playerUpdate')->name('playerUpdate');
     Route::get('/update', 'PlayersController@playerUpdateForm');
@@ -99,8 +88,7 @@ Route::group(['middleware' => 'player', 'prefix' => 'player'], function()
 });
 
 // Teams route groups
-Route::group(['middleware' => 'team', 'prefix' => 'team'], function()
-{
+Route::group(['middleware' => 'team', 'prefix' => 'team'], function () {
     Route::get('/', 'TeamsController@team_view')->name('team');
     Route::PATCH('/update/{id}', 'TeamsController@teamUpdate')->name('teamUpdate');
     Route::get('/update', 'TeamsController@teamUpdateForm');
@@ -116,8 +104,7 @@ Route::group(['middleware' => 'team', 'prefix' => 'team'], function()
 });
 
 // Academics route groups
-Route::group(['middleware' => 'academic', 'prefix' => 'academic'], function()
-{
+Route::group(['middleware' => 'academic', 'prefix' => 'academic'], function () {
     Route::get('/', 'AcademicsController@academic_view')->name('academic');
     Route::PATCH('/update/{id}', 'AcademicsController@academicUpdate')->name('academicUpdate');
     Route::get('/update', 'AcademicsController@academicUpdateForm');
@@ -134,8 +121,7 @@ Route::group(['middleware' => 'academic', 'prefix' => 'academic'], function()
 });
 
 // Scouts route groups
-Route::group(['middleware' => 'scout', 'prefix' => 'scout'], function()
-{
+Route::group(['middleware' => 'scout', 'prefix' => 'scout'], function () {
     Route::get('/', 'ScoutsController@scout_view')->name('scout');
     Route::PATCH('/update/{id}', 'ScoutsController@scoutUpdate')->name('scoutUpdate');
     Route::get('/update', 'ScoutsController@scoutUpdateForm');
@@ -186,14 +172,14 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 //universal player search
-Route::any('/search_results',function(){
-    $query = Input::get ( 'query' );
-        $players = Player::where('player_name','LIKE','%'.$query.'%')->get();
-            return view('search_results')->with('players', $players)->withQuery($query);
+Route::any('/search_results', function () {
+    $query = Input::get('query');
+    $players = Player::where('player_name', 'LIKE', '%' . $query . '%')->get();
+    return view('search_results')->with('players', $players)->withQuery($query);
 });
 
 //display player profile onclick
 Route::get('view_profile', 'SearchController@view_profile');
 Route::get('view_profile/{id}', 'SearchController@view_profile');
 
-
+Route::get('/load_player_info', 'PlayersController@prayer_info');

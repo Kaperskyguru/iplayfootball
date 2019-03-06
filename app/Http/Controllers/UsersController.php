@@ -17,7 +17,6 @@ class UsersController extends Controller
     public static function store(StoreUser $request)
     {
         $validated = $request->validated();
-        // dd($validated);
         $user = new User;
         $user->name =  $validated['name'];
         $user->phone = $validated['phone'];

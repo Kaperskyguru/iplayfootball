@@ -2,32 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Carbon;
-use App\Player;
-use App\Team;
 use App\Academic;
-use App\Scout;
-use App\User;
 use App\Http\Controllers\MessagesController as Messages;
 use App\Http\Controllers\UsersController as users;
 use App\Http\Requests\StoreUser;
-use Validator;
+use App\Player;
+use App\Scout;
+use App\Team;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Validator;
 
 class PlayersController extends Controller
 {
     private $faker;
 
-    public function __construct() {
-        
+    public function __construct()
+    {
+
     }
 
     public function index()
     {
         $players = Player::all();
         return View('profiles')->with('players', $players);
+
+    }
+
+    public function prayer_info(Request $request)
+    {
+        if ($request->ajax()) {
+            $player = player::findOrFail($request->id);
+            return view('includes.player_details', ['player' => $player])->render();
+        }
+        
     }
 
     public function players()
@@ -42,16 +51,16 @@ class PlayersController extends Controller
 
     public function store(StoreUser $request)
     {
-        if(users::store($request)){
+        if (users::store($request)) {
             return redirect('admin/players/')->with('status', 'player saved!');
         }
     }
 
     public function delete(Request $request)
     {
-        if(Player::find($request->id)->delete()) {
+        if (Player::find($request->id)->delete()) {
             return response()->json([
-                'success' => 'Record has been deleted successfully!'
+                'success' => 'Record has been deleted successfully!',
             ]);
         }
 
@@ -72,8 +81,8 @@ class PlayersController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect('admin/players/')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $data = $request->all();
@@ -81,15 +90,14 @@ class PlayersController extends Controller
         (!array_key_exists('player_image_id', $data)) ?: $data['player_image_id'] = $data['player_image_id']->store('public/images');
         unset($data['_token']);
         unset($data['_method']);
-        if(Player::whereId($id)->update($data)) {
+        if (Player::whereId($id)->update($data)) {
             return redirect('admin/players/')->with('status', 'Player Updated!');
         }
     }
 
     public function view_delete_confirmation(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $player = player::findOrFail($request->id);?>
             <label class="control-label">Delete <?php echo $player->player_name ?> ?</label>
                 <div class="pull-right">
@@ -97,13 +105,12 @@ class PlayersController extends Controller
                     <button type="submit" id="del_YES" data-id="<?php echo $player->user_id ?> " data-token="<?php echo csrf_token() ?>" class="btn btn-add btn-sm">YES</button>
                 </div>
         <?php
-        }
+}
     }
 
     public function view_update_box(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             // $player = player::findOrFail($request->id);
             $data = [
                 'player' => Player::findOrFail($request->id),
@@ -121,22 +128,21 @@ class PlayersController extends Controller
         return View('players-dashboard.index', [
             'user' => User::findOrFail(Auth::user()->id),
             'messages' => $message->messages(4),
-            'player' => $player = Player::where('user_id', Auth::user()->id)->first()
+            'player' => $player = Player::where('user_id', Auth::user()->id)->first(),
         ]);
     }
 
     public function playerUpdateForm(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             // dd($request->id);
             // $player = player::findOrFail($request->id);
-            
+
             $player = Player::where('user_id', $request->id)->first();
-            
+
             return view('players-dashboard.includes.modals.playerUpdateForm', ['player' => $player])->render();
         }
-    } 
+    }
 
     public function playerUpdate(int $id, Request $request)
     {
@@ -153,34 +159,34 @@ class PlayersController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect('player/')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $data = $request->all();
         (!array_key_exists('player_image_id', $data)) ?: $data['player_image_id'] = $data['player_image_id']->store('public/images');
         unset($data['_token']);
         unset($data['_method']);
-        if(Player::whereId($id)->update($data)) {
+        if (Player::whereId($id)->update($data)) {
             return redirect('player/')->with('status', 'Player Updated!');
-        } 
+        }
     }
 
     public function teamPlayersListView()
     {
         return view('teams-dashboard.Players')
-        ->with('players', Player::where('player_associate_team', Auth::user()->id)->get());
+            ->with('players', Player::where('player_associate_team', Auth::user()->id)->get());
     }
 
     public function academicPlayersListView()
     {
         return view('academics-dashboard.Players')
-        ->with('players', Player::where('player_associate_academic', Auth::user()->id)->get());
+            ->with('players', Player::where('player_associate_academic', Auth::user()->id)->get());
     }
 
     public function scoutPlayersListView()
     {
         return view('scouts-dashboard.Players')
-        ->with('players', Player::where('player_associate_scout', Auth::user()->id)->get());
+            ->with('players', Player::where('player_associate_scout', Auth::user()->id)->get());
     }
 }
