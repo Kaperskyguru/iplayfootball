@@ -3,7 +3,7 @@
 @section('assets')
 <link rel="stylesheet" href="{{asset('css/custom/c_about.css')}}">
 @endsection
-
+@section('id', "header")
 @section('banner_display')
 <!-- Banner Section -->
 <div class="container">

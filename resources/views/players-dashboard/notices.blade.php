@@ -3,6 +3,22 @@
 @section('styles')
 <!-- dataTables css -->
 <link href="{{asset('players_assets/plugins/datatables/dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+<style>
+    .form-control-plaintext {
+        display: block;
+        width: 95%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        border: 0px solid transparent;
+    }
+    
+    textarea.form-control-plaintext {
+        height: auto;
+    }
+</style>
 @endsection
 @section('content')
 <!-- Content Header (Page header) -->

@@ -1,79 +1,74 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('assets')
-    <link rel="stylesheet" href="{{asset('css/custom/c_register.css')}}">
+<link rel="stylesheet" href="{{asset('css/custom/c_register.css')}}">
 @endsection
-
+ 
+@section('id', "header") 
 @section('banner_display')
-    <!-- Banner Section -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-12 banner-inner-wrapper">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-12 banner-text">
-                        <div class="row">
-                            <h1 class="col-12 text-center" style="text-shadow: 2px 2px 4px #000000">{{ __('...registration area')}}</h1>
-                            <h2 class="col-12 text-center" style="text-shadow: 2px 2px 4px #000000">{{ __('it\'s ')}}<strong>{{ __('FREE')}}</strong>
-                                <br>{{ __(' on a single platform...')}}</h2>
-                        </div>
+<!-- Banner Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-12 banner-inner-wrapper">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-12 banner-text">
+                    <div class="row">
+                        <h1 class="col-12 text-center" style="text-shadow: 2px 2px 4px #000000">{{ __('...registration area')}}</h1>
+                        <h2 class="col-12 text-center" style="text-shadow: 2px 2px 4px #000000">{{ __('it\'s ')}}<strong>{{ __('FREE')}}</strong>
+                            <br>{{ __(' on a single platform...')}}</h2>
                     </div>
                 </div>
-                <!-- banner text -->
             </div>
+            <!-- banner text -->
         </div>
     </div>
-@endsection()
-
+</div>
+@endsection
 @section('content')
 <div class="row">
     <div class="col-md-7 col-sm-6 col-12 pt-5 pb-5 banner-form" style="background-color: white">
         <h5 class="text-center" style="color: rgba(0, 0, 0, 0.555)">{{ __('REGISTER')}}</h5>
         <form role="form" class="form" method="POST" action="{{ route('register') }}" style="padding: 20px;">
-                @csrf
+            @csrf
             <div class="row">
                 <div class="col-12 form-group">
-                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" placeholder="Full Name" value="{{ old('name') }}" required autofocus>
-                    
-                    @if ($errors->has('name'))
+                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" placeholder="Full Name"
+                        value="{{ old('name') }}" required autofocus> @if ($errors->has('name'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                @endif
+                    </span> @endif
                 </div>
                 <div class="col-12 form-group">
-                    <input type="email" id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="Email Address">
-
-                    @if ($errors->has('email'))
+                    <input type="email" id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
+                        required placeholder="Email Address"> @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
+                    </span> @endif
 
                 </div>
                 <div class="col-12 form-group">
                     <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number">
                 </div>
-                {{-- <div class="col-12 form-group">
-                    <input type="date" class="form-control"  name="dob" id="dob" placeholder="Date of Birth">
+                {{--
+                <div class="col-12 form-group">
+                    <input type="date" class="form-control" name="dob" id="dob" placeholder="Date of Birth">
                 </div> --}}
                 <div class="col-12 form-group">
                     <input type="text" class="form-control" name="country" id="country" placeholder="National">
                 </div>
                 <div class="col-12 form-group">
-                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Enter password" required>
-                   
-                    @if ($errors->has('password'))
+                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password"
+                        placeholder="Enter password" required> @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
+                    </span> @endif
 
                 </div>
                 <div class="col-12 form-group">
-                    <input type="password" class="form-control" name="password_confirmation" id="password-confirm" placeholder="Enter confirm password" required>
+                    <input type="password" class="form-control" name="password_confirmation" id="password-confirm" placeholder="Enter confirm password"
+                        required>
                 </div>
                 <div class="col-12 form-group">
-                        <label for="type" class="col-form-label text-md-right">{{ __('Type') }}</label> 
+                    <label for="type" class="col-form-label text-md-right">{{ __('Type') }}</label>
                     <select name="role" class="form-control">
                          <option value="7"> {{ __('Scout')}} </option>
                          <option value="5"> {{ __('Academics')}} </option>
@@ -111,11 +106,8 @@
     </div>
 </div>
 @endsection
-
-
-
-
-{{-- @section('content')
+ {{-- 
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -130,13 +122,11 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}"
+                                    required autofocus> @if ($errors->has('name'))
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                    </span> @endif
                             </div>
                         </div>
 
@@ -144,13 +134,11 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
+                                    required> @if ($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                    </span> @endif
                             </div>
                         </div>
 
@@ -158,13 +146,11 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
+                                    required> @if ($errors->has('password'))
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                                    </span> @endif
                             </div>
                         </div>
 
@@ -189,4 +175,5 @@
         </div>
     </div>
 </div>
-@endsection --}}
+@endsection
+ --}}

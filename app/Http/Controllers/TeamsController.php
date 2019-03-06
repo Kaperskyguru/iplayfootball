@@ -38,6 +38,15 @@ class TeamsController extends Controller
 
     }
 
+    public function photos()
+    {
+        return view('teams-dashboard.photogallery');
+    }
+
+    public function videos()
+    {
+        return view('teams-dashboard.videogallery');
+    }
 
     public function store(StoreUser $request)
     {

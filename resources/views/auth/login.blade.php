@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Login')
-
-@section('header_style', 'style="height: 600px"')
-
+@section('id', "header") 
 @section('banner_display')
 <!--Login Form-->
 

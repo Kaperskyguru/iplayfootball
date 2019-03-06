@@ -94,6 +94,16 @@ class PlayersController extends Controller
         }
     }
 
+    public function photos()
+    {
+        return view('players-dashboard.photogallery');
+    }
+
+    public function videos()
+    {
+        return view('players-dashboard.videogallery');
+    }
+
     public function view_delete_confirmation(Request $request)
     {
         if ($request->ajax()) {

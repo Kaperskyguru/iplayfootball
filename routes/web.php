@@ -70,6 +70,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/compose', 'MessagesController@compose');
     Route::get('/usersByRole', 'UsersController@usersByRole');
     Route::resource('/users', 'UsersController');
+    Route::get('/photos', 'DashboardController@photos');
+    Route::get('/videos', 'DashboardController@videos');
 });
 
 // players route groups
@@ -85,6 +87,8 @@ Route::group(['middleware' => 'player', 'prefix' => 'player'], function () {
     Route::get('/compose', 'MessagesController@playersComposeView');
     Route::get('/notices', 'NoticesController@playerNotices');
     Route::get('/notices/read', 'NoticesController@playerReadNotice');
+    Route::get('/photos', 'PlayersController@photos');
+    Route::get('/videos', 'PlayersController@videos');
 });
 
 // Teams route groups
@@ -101,6 +105,8 @@ Route::group(['middleware' => 'team', 'prefix' => 'team'], function () {
     Route::get('/notices', 'NoticesController@teamNotices');
     Route::get('/notices/read', 'NoticesController@teamReadNotice');
     Route::get('/players', 'PlayersController@teamPlayersListView');
+    Route::get('/photos', 'TeamsController@photos');
+    Route::get('/videos', 'TeamsController@videos');
 });
 
 // Academics route groups
@@ -118,6 +124,8 @@ Route::group(['middleware' => 'academic', 'prefix' => 'academic'], function () {
     Route::get('/notices', 'NoticesController@academicNotices');
     Route::get('/notices/read', 'NoticesController@academicReadNotice');
     Route::get('/players', 'PlayersController@academicPlayersListView');
+    Route::get('/photos', 'AcademicsController@photos');
+    Route::get('/videos', 'AcademicsController@videos');
 });
 
 // Scouts route groups
@@ -134,6 +142,8 @@ Route::group(['middleware' => 'scout', 'prefix' => 'scout'], function () {
     Route::get('/notices', 'NoticesController@scoutNotices');
     Route::get('/notices/read', 'NoticesController@scoutReadNotice');
     Route::get('/players', 'PlayersController@scoutPlayersListView');
+    Route::get('/photos', 'ScoutsController@photos');
+    Route::get('/videos', 'ScoutsController@videos');
 });
 
 //  Other routes
@@ -165,7 +175,7 @@ Route::get('about', function () {
 Route::post("contact", "PagesController@sendContact");
 Route::get("/search", "SearchController@search");
 Route::get("/players", "PlayersController@players");
-Route::get("/profiles", "PlayersController@index");
+Route::get("/profiles", "PlayersController@index")->name('profiles');
 
 Auth::routes(['verify' => true]);
 
@@ -183,3 +193,4 @@ Route::get('view_profile', 'SearchController@view_profile');
 Route::get('view_profile/{id}', 'SearchController@view_profile');
 
 Route::get('/load_player_info', 'PlayersController@prayer_info');
+Route::get('/404', 'PagesController@error404')->name('404');

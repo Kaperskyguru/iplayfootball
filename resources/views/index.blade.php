@@ -1,35 +1,104 @@
-@extends('layouts.app')
-
-@section('title', 'Homepage')
-
+@extends('layouts.app') 
+@section('title', 'Homepage') 
+@section('nav', 'bg-dark')
 @section('assets')
-    <link rel="stylesheet" href="{{asset('css/custom/c_index.css')}}">
+<link rel="stylesheet" href="{{asset('css/custom/c_index.css')}}">
 @endsection
-
+ 
 @section('banner_display')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-12 banner-inner-wrapper">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-12 banner-text">
-                        <div class="row">
-                            <h1 class="col-12 text-center" style="text-shadow: 2px 2px 4px #000000">...exposing football talents to the world.</h1>
-                            <h2 class="col-12 text-center" style="text-shadow: 2px 2px 4px #000000">find talented players from far and wide now
-                                <br> on a single platform...</h2>
-                                <div class="col-md-4 col-sm-6 col-12 mx-auto links">
-                                    <div class="row">
-                                        <a href="{{ url('/profiles') }}" class="btn mx-auto">view all profiles</a>
-                                        <a href="{{ url('/register') }}" class="tbtn mx-auto">Register</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- banner text -->
-                </div>
-        </div>
-@endsection
 
+<!-- Carousel Section -->
+<div class="bd-example">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/slide1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-block float-right">
+                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    </h2>
+                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                        <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/slide2.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-block float-right">
+                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    </h2>
+                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                        <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/slide3.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-block float-right">
+                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    </h2>
+                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                        <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/slide4.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-block float-right">
+                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    </h2>
+                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                        <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/slide5.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-block float-right">
+                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    </h2>
+                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                        <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/slide6.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-block float-right">
+                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    </h2>
+                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                        <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+    </div>
+</div>
+<!-- Carousel Section -->
+@endsection
+ 
 @section('content')
 <div class="row">
     <div class="col-md-7 col-sm-6 col-12 pt-5 pb-5 banner-form" style="background-color: white">
@@ -38,48 +107,45 @@
             @csrf
             <div class="row">
                 <div class="col-12 form-group">
-                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name" id="name"placeholder="Full Name">
-                    @if ($errors->has('name'))
+                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name"
+                        id="name" placeholder="Full Name"> @if ($errors->has('name'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                @endif
+                    </span> @endif
                 </div>
                 <div class="col-12 form-group">
-                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" id="email" aria-describedby="emailHelp" placeholder="Email Address">
-                    @if ($errors->has('email'))
+                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
+                        id="email" aria-describedby="emailHelp" placeholder="Email Address"> @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
+                    </span> @endif
                 </div>
                 <div class="col-12 form-group">
-                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" aria-describedby="emailHelp" placeholder="Password" required>
-                                       
-                    @if ($errors->has('password'))
+                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password"
+                        aria-describedby="emailHelp" placeholder="Password" required> @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
+                    </span> @endif
                 </div>
                 <div class="col-12 form-group">
-                    <input type="password" class="form-control" name="password_confirmation" id="password-confirm" placeholder="Confirm password" required>
+                    <input type="password" class="form-control" name="password_confirmation" id="password-confirm" placeholder="Confirm password"
+                        required>
                 </div>
                 <div class="col-12 form-group">
-                    <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" id="phone" name="phone" placeholder="Phone Number">
-                    @if ($errors->has('email'))
-                        <span class="invalid-feedback" role="alert">
+                    <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" id="phone" name="phone" placeholder="Phone Number">                    @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('phone') }}</strong>
-                        </span>
-                    @endif
+                        </span> @endif
                 </div>
-                {{-- <div class="col-12 form-group">
+                {{--
+                <div class="col-12 form-group">
                     <input type="date" class="form-control" id="formGroupExampleInput2" placeholder="Date of Birth">
                 </div> --}}
                 <div class="col-12 form-group">
                     <input type="text" class="form-control" name="country" id="country" placeholder="State">
                 </div>
-                {{-- <div class="col-12 form-group">
+                {{--
+                <div class="col-12 form-group">
                     <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Height(ft)">
                 </div>
                 <div class="col-12 form-group">
@@ -127,7 +193,7 @@
     </div>
 </div>
 @endsection
-
+ 
 @section('content2')
 <div class="row">
     <div class="col-12 intro-content-1">
@@ -195,7 +261,14 @@
     </div>
     <div class="col-12 intro-content-3">
         <div class="row">
-            <p class="text-center">The chances that a footballer would get discovered by talent scouts and teams in search of his skill have been greatly increased, just by signing up with us. Focus on building your skill, we got your publicity taken care of</p>
+            <p class="text-center">The chances that a footballer would get discovered by talent scouts and teams in search of his skill have been
+                greatly increased, just by signing up with us. Focus on building your skill, we got your publicity taken
+                care of</p>
+            <div class="col-12">
+                <div class="row">
+                    <a href="{{route('profiles')}}" class="btn btn-bdr p-2 ml-3 text-white mx-auto">See All Profiles</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

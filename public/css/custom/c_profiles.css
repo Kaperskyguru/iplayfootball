@@ -1,7 +1,6 @@
-<style>
 #header {
     background-color: darkred;
-    background-image: url( "/img/hm_bg_sm.png" );
+    background-image: url("/img/hm_bg_sm.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -28,13 +27,12 @@
 }
 
 .sidenav {
-    height: 800px;
     width: 0;
     z-index: 1000;
     top: 0;
     left: 0;
     background-color: crimson;
-    height: 800px;
+    height: 933px;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -139,4 +137,3 @@ h5,
         font-size: 18px;
     }
 }
-</style>

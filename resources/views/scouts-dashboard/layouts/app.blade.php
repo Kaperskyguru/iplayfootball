@@ -193,6 +193,18 @@
                                                                                 </span>
                                                                             </a>
                                                                         </li>
+                                                                        <li class="treeview">
+                                                                            <a href="#">
+                                                                                <i class="fa fa-folder"></i><span>Media</span>
+                                                                                <span class="pull-right-container">
+                                                                                                 <i class="fa fa-angle-left pull-right"></i>
+                                                                                                 </span>
+                                                                            </a>
+                                                                            <ul class="treeview-menu">
+                                                                                <li><a href="{{ url('/scout/photos') }}">Photos</a></li>
+                                                                                <li><a href="{{ url('/scout/videos') }}">Videos</a></li>
+                                                                            </ul>
+                                                                        </li>
                                                                         <li>
                                                                             <a href="{{ url('/scout/notices') }}">
                                                                                 <i class="fa fa-file-text"></i>

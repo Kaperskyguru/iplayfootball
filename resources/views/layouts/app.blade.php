@@ -23,8 +23,8 @@
     <!-- Header Section -->
     <section class="banner" role="banner">
         <!-- Navigation Section -->
-        <header id="header" @yield('header_style')>
-            <nav class="navbar navbar-expand-lg navbar-dark">
+        <header id="@yield('id')"  style="@yield('header_style')">
+            <nav class="navbar navbar-expand-lg @yield('nav')">
                 <a class="navbar-brand row p-3" href=" {{ url('/') }}">
                     <img src="/img/iLOGO.png" class="img-responsive" style="width:50%; height:50%">
                 </a>
@@ -34,21 +34,21 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
+                            <a class="nav-link text-white" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/profiles">All-Profiles</a>
+                            <a class="nav-link text-white" href="/profiles">All-Profiles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
+                            <a class="nav-link text-white" href="#">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Shop</a>
+                            <a class="nav-link text-white" href="#">Shop</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Quick-Links
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,7 +58,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Contact-Us
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -76,7 +76,7 @@
 
 
         <!-- Form Section -->
-        <section id="form" style=" padding: 0px;">
+        <section id="form">
             <div class="container">
                 @yield('content')
             </div>

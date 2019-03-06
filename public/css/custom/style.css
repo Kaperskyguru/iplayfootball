@@ -13,16 +13,54 @@ p {
     font: 16px;
 }
 
-/* #form {
+#form {
     background-color: rgb(245, 245, 245);
-    background-image: url( "/img/iplayfootball/side_of_form_art.gif" );
+    background-image: url("/img/iplayfootball/side_of_form_art.gif");
     background-size: 45%;
     background-repeat: no-repeat;
     background-position: right center;
-} */
+}
 
 .form {
     margin: 2em 0;
+}
+
+.form select {
+    margin-bottom: -0.5em;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgb(226, 222, 222);
+    border-radius: 0px;
+    font-size: 18px;
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.form select:hover {
+    border-bottom: 1px solid darkred;
+    margin-bottom: -0.5em;
+    background-color: transparent;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.form select:focus {
+    border-bottom: 1px solid darkred;
+    margin-bottom: -0.5em;
+    background-color: transparent;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.form select:active {
+    border-bottom: 1px solid darkred;
+    margin-bottom: -0.5em;
+    background-color: transparent;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
 }
 
 .form textarea {
@@ -152,6 +190,18 @@ p {
     border-radius: 0px;
 }
 
+.form .btn::after {
+    content: "";
+    max-height: 40px;
+    max-width: inherit;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
 .form .btn:focus {
     background-color: transparent;
     color: forestgreen;
@@ -222,12 +272,24 @@ p {
     margin-top: 19.5rem;
 }
 
-#header .banner-inner-wrapper .banner-text h1 {
-    font-size: 300%;
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    top: 120px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center;
 }
 
-#header .banner-inner-wrapper .banner-text h2 {
-    font-size: 200%;
+.carousel-item .carousel-caption h1 {
+    font-size: 2rem;
+}
+
+.carousel-item .carousel-caption h2 {
+    font-size: 1rem;
 }
 
 #header .banner-form {
@@ -375,9 +437,24 @@ p {
 }
 
 #introduction .intro-content-3 {
-    background: black;
     padding: 40px;
     margin-top: -30px;
+    background-image: url("/img/slide-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom left;
+    position: relative;
+    overflow: hidden;
+}
+
+#introduction .intro-content-3::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.151);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
 }
 
 #introduction .intro-content-3 p {

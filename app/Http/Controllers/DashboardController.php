@@ -49,4 +49,14 @@ class DashboardController extends Controller
     {
         return view('admin-dashboard.profile', ['user' => User::findOrFail(Auth::user()->id)]);
     }
+
+    public function photos()
+    {
+        return view('admin-dashboard.photogallery');
+    }
+
+    public function videos()
+    {
+        return view('admin-dashboard.videogallery');
+    }
 }

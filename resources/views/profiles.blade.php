@@ -4,9 +4,8 @@
 <link rel="stylesheet" href="{{asset('css/custom/c_profiles.css')}}">
 @endsection
  
-@section('header_style') style="height: 300px; position:relative"
-@endsection
- 
+@section('id', "header") 
+@section('header_style', 'height: 300px; position:relative') 
 @section('banner_display')
 <h1 class="col-12 text-center header-text mx-auto" style="text-shadow: 2px 2px 4px #000000">All Players Profile.</h1>
 @endsection
@@ -36,8 +35,25 @@
                     <a href="#">Male</a>
                     <a href="#">Female</a>
                 </div>
-                <a href="#">Age</a>
-                <a href="#">Profile Package</a>
+                <button class="dropdown-btn">Age
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a href="#">Under 13</a>
+                    <a href="#">Under 15</a>
+                    <a href="#">Under 17</a>
+                    <a href="#">Under 21</a>
+                    <a href="#">Under 25</a>
+                    <a href="#">Above 25</a>
+                </div>
+                <button class="dropdown-btn">Profile Package
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a href="#">Silver</a>
+                    <a href="#">GOld</a>
+                    <a href="#">Premium</a>
+                </div>
             </div>
             <div class="column" style="margin-left:20px; margin-bottom:1px">
                 <span style="font-size:30px;cursor:pointer;color:darkred" onclick="openNav()">&#9776; Filter Profile</span>
@@ -61,7 +77,7 @@
                             <div class="col-md-4 col-sm-6 col-12  card-container">
                                 <div class="col-12 card" style="width:18rem">
                                     <div class="col-12 card-header">
-                                        <i class="far fa-check-circle fa-2x" style="z-index:1;color:forestgreen;position:relative;top:7px;left:105%;"></i>
+                                        <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i>
                                         <div class="row">
                                             <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%">
                                         </div>
@@ -73,14 +89,15 @@
                                                 <br>
                                                 <small>{{$player->player_position}}</small>
                                             </p>
-                                            <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}" href="#exampleModalCenter">
+                                            <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
+                                                href="#exampleModalCenter">
                                                 See More...
                                             </button>
                                             <div class="modal fade mt-5" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                 aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content" id="modalDetails">
-                                     
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,6 +149,5 @@
             }
         });
     });
-    
- </script>
+                </script>
 @endsection

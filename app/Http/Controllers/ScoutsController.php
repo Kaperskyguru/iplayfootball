@@ -46,6 +46,16 @@ class ScoutsController extends Controller
         }
     }
 
+    public function photos()
+    {
+        return view('scouts-dashboard.photogallery');
+    }
+
+    public function videos()
+    {
+        return view('scouts-dashboard.videogallery');
+    }
+
     public function view_delete_confirmation(Request $request)
     {
         if ($request->ajax()) {
