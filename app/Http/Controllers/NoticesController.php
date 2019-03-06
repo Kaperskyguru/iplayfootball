@@ -126,7 +126,7 @@ class NoticesController extends Controller
     {
         return view('teams-dashboard.notices', 
         ['notices' => Notice::where('notice_visibility_id', 6)
-            ->orWere('notice_visibility_id', 4)
+            ->orWhere('notice_visibility_id', 4)
             ->orderBy('id', 'desc')
             ->get()
         ]);

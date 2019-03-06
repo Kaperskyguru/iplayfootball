@@ -64,7 +64,7 @@ class MessagesController extends Controller
                 ->where('message_status_id', '15')->where('message_receiver_id', Auth::user()->id)
                 ->orderBy('id', 'desc')
                 ->get(),
-            $this->totalUnreadMessages(),
+            'totalUreadMessages' => $this->totalUnreadMessages(),
         ];
     }
 
@@ -75,18 +75,17 @@ class MessagesController extends Controller
                 ->where('message_sender_id', Auth::user()->id)
                 ->orderBy('id', 'desc')
                 ->paginate(15),
-            $this->totalUnreadMessages(),
+            'totalUreadMessages' => $this->totalUnreadMessages(),
         ];
     }
 
     public function totalUnreadMessages()
     {
-        return [
-            'totalUreadMessages' => Message::where('message_type_receiver', '17')
-                ->where('message_receiver_id', Auth::user()->id)
-                ->where('message_status_id', '15')
-                ->count(),
-        ];
+        return Message::where('message_type_receiver', '17')
+            ->where('message_receiver_id', Auth::user()->id)
+            ->where('message_status_id', '15')
+            ->count();
+
     }
 
     public function messageDetails($id)
@@ -94,7 +93,7 @@ class MessagesController extends Controller
         if (Message::find($id)->update(['message_status_id' => 14])) {
             return [
                 'message' => Message::findOrFail($id),
-                $this->totalUnreadMessages(),
+                'totalUreadMessages' => $this->totalUnreadMessages(),
             ];
         }
     }
@@ -155,7 +154,7 @@ class MessagesController extends Controller
 
     public function playersComposeView()
     {
-        return view('players-dashboard.compose', $this->totalUnreadMessages());
+        return view('players-dashboard.compose', ['totalUreadMessages' => $this->totalUnreadMessages()]);
     }
 
     public function messages(int $limit = 0)
@@ -186,7 +185,7 @@ class MessagesController extends Controller
 
     public function teamComposeView()
     {
-        return view('teams-dashboard.compose', $this->totalUnreadMessages());
+        return view('teams-dashboard.compose', ['totalUreadMessages' => $this->totalUnreadMessages()]);
     }
 
     public function teamDetailsView($id)
@@ -215,7 +214,7 @@ class MessagesController extends Controller
 
     public function academicComposeView()
     {
-        return view('academics-dashboard.compose', $this->totalUnreadMessages());
+        return view('academics-dashboard.compose', ['totalUreadMessages' => $this->totalUnreadMessages()]);
     }
 
     public function academicDetailsView($id)
@@ -226,7 +225,7 @@ class MessagesController extends Controller
 
     public function scoutComposeView()
     {
-        return view('scouts-dashboard.compose', $this->totalUnreadMessages());
+        return view('scouts-dashboard.compose', ['totalUreadMessages' => $this->totalUnreadMessages()]);
     }
 
     public function scoutDetailsView($id)

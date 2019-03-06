@@ -16,7 +16,6 @@ use Validator;
 
 class PlayersController extends Controller
 {
-    private $faker;
 
     public function __construct()
     {

@@ -1,3 +1,4 @@
+{{-- @dd($totalUreadMessages) --}}
 @extends('players-dashboard.layouts.app')
 @section('content')
 <!-- Main content -->

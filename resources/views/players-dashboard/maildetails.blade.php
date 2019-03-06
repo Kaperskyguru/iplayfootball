@@ -44,7 +44,7 @@
                                         <li class="active">
                                             <a href="{{url('/player/messages')}}">
                                                 <i class="fa fa-inbox"></i>Inbox
-                                                <small class="label pull-right bg-green">61</small>
+                                            <small class="label pull-right bg-green">{{$totalUreadMessages}}</small>
                                             </a>
                                         </li>
                                         <li>
