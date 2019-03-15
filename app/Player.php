@@ -51,7 +51,7 @@ class Player extends Model
         "player_assist_ability",
         "player_chances_creation",
         "player_penalties_winnings",
-        "player_offsides"
+        "player_offsides",
     ];
 
     public function status()
@@ -71,6 +71,11 @@ class Player extends Model
 
     public function verify()
     {
-        return $this->belongsTo('App\Verification', 'id', 'verification_user_id');
+        return $this->belongsTo('App\Verification', 'user_id', 'verification_user_id');
     }
+
+    // public function veri()
+    // {
+    //     return $this->belongsToMany('App\Verification');//->wherePivot('verification_user_id', 10);
+    // }
 }

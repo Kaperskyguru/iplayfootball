@@ -252,7 +252,7 @@ p {
 
 #header nav {
     width: 100%;
-    background: black;
+    background: #A9A9A9;
     position: fixed;
     z-index: 3000;
 }

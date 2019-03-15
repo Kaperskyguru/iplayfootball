@@ -12,6 +12,7 @@ use App\Team;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class PlayersController extends Controller
@@ -24,8 +25,23 @@ class PlayersController extends Controller
 
     public function index()
     {
-        $players = Player::all();
-        return View('profiles')->with('players', $players);
+        $verified = DB::table('players')
+            ->leftJoin('verifications', 'players.user_id', '=', 'verifications.verification_user_id')
+            ->where('verifications.verification_status_id', 10)
+            ->select('players.*')
+            ->get();
+        $unverified = DB::table('players')
+            ->leftJoin('verifications', 'players.user_id', '=', 'verifications.verification_user_id')
+            ->where('verifications.verification_status_id', 10)
+            ->select('players.*')
+            ->get();
+
+        $data = [
+            'players' => Player::all(),
+            'verified' => $verified,
+            'unverified' => $unverified,
+        ];
+        return View('profiles', $data);//->with('players', $data);
 
     }
 
@@ -35,7 +51,7 @@ class PlayersController extends Controller
             $player = player::findOrFail($request->id);
             return view('includes.player_details', ['player' => $player])->render();
         }
-        
+
     }
 
     public function players()

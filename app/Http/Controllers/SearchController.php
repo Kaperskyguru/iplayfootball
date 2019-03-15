@@ -23,18 +23,57 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         if ($request->ajax()) {
+            strtolower($request->position);
             if (isset($request->position)) {
-                $players = Player::where('player_position', $request->position)->get();
-                return view('includes.player_full_details', ['players' => $players])->render();
+                if ($request->position == 'Male' || $request->position == 'Female') {
+                    $players = Player::where('player_gender', $request->position)->get();
+                    return view('includes.player_full_details', ['players' => $players])->render();
+
+                } elseif (strstr($request->position, 'Under')) {
+                    echo 'asa';
+                    $players = Player::where('player_gender', $request->position)->get();
+                    return view('includes.player_full_details', ['players' => $players])->render();
+                } else {
+                    $players = Player::where('player_position', $request->position)->get();
+                    return view('includes.player_full_details', ['players' => $players])->render();
+                }
             } else {
-                $players = Player::where('player_firstname', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('player_lastname', 'LIKE', '%' . $request->search . "%")
-                    ->orWhere('player_username', 'LIKE', '%' . $request->search . "%")
+                $players = Player::where('player_name', 'LIKE', '%' . $request->search . "%")
+                // ->orWhere('player_name', 'LIKE', '%' . $request->search . "%")
+                // ->orWhere('player_username', 'LIKE', '%' . $request->search . "%")
                     ->get();
                 return view('includes.player_full_details', ['players' => $players])->render();
-                // return $this->displayPlayerDetails($players);
             }
 
+        }
+    }
+
+    public function s()
+    {
+        if ($request->ajax()) {
+            echo ($request->position);
+            if (isset($request->position)) {
+
+                $players = Player::where('player_position', $request->position)->get();
+
+                return view('includes.player_full_details', ['players' => $players])->render();
+
+            } elseif (isset($request->position) && ($request->position == 'Male' || $request->position == 'Female')) {
+                $players = Player::where('player_gender', $request->position)->get();
+
+                return view('includes.player_full_details', ['players' => $players])->render();
+            } else {
+
+                $players = Player::where('player_firstname', 'LIKE', '%' . $request->search . "%")
+
+                    ->orWhere('player_lastname', 'LIKE', '%' . $request->search . "%")
+
+                    ->orWhere('player_username', 'LIKE', '%' . $request->search . "%")
+
+                    ->get();
+
+                return view('includes.player_full_details', ['players' => $players])->render();
+            }
         }
     }
 

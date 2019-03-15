@@ -3,7 +3,7 @@
     <div class="col-12 card" style="width:18rem">
         <div class="col-12 card-header">
             <div class="row">
-                <img src="{{ asset('img/FREDRICK.jpg')}}" class="img-responsive" style="width:100%; height:100%">
+                <img src="{{ asset(extractFromImage($player->player_image_id))}}" class="img-responsive" style="width:100%; height:100%">
             </div>
         </div>
         <div class="col-12 card-body">
@@ -11,7 +11,7 @@
                 <p class="mx-auto p-0" style="color:black; font-size: 23px">
                     {{ $player->player_name}}
                     <br>
-                    <small>Mid-Fielder</small>
+                    <small>{{ $player->player_position}}</small>
                 </p>
                 <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}" href="#exampleModalCenter">
                         See More...

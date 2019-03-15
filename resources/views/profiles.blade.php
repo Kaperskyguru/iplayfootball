@@ -32,27 +32,27 @@
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">
-                    <a href="#">Male</a>
-                    <a href="#">Female</a>
+                    <a id="position">Male</a>
+                    <a id="position">Female</a>
                 </div>
                 <button class="dropdown-btn">Age
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">
-                    <a href="#">Under 13</a>
-                    <a href="#">Under 15</a>
-                    <a href="#">Under 17</a>
-                    <a href="#">Under 21</a>
-                    <a href="#">Under 25</a>
-                    <a href="#">Above 25</a>
+                    <a id="position">Under 13</a>
+                    <a id="position">Under 15</a>
+                    <a id="position">Under 17</a>
+                    <a id="position">Under 21</a>
+                    <a id="position">Under 25</a>
+                    <a id="position">Above 25</a>
                 </div>
                 <button class="dropdown-btn">Profile Package
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">
-                    <a href="#">Silver</a>
-                    <a href="#">GOld</a>
-                    <a href="#">Premium</a>
+                    <a id="position">Silver</a>
+                    <a id="position">GOld</a>
+                    <a id="position">Premium</a>
                 </div>
             </div>
             <div class="column" style="margin-left:20px; margin-bottom:1px">
@@ -77,9 +77,9 @@
                             <div class="col-md-4 col-sm-6 col-12  card-container">
                                 <div class="col-12 card" style="width:18rem">
                                     <div class="col-12 card-header">
-                                        <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i>
+                                        {{-- <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i> --}}
                                         <div class="row">
-                                            <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:100%; height:100%">
+                                            <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="img-responsive" style="width:100%; height:100%">
                                         </div>
                                     </div>
                                     <div class="col-12 card-body">
