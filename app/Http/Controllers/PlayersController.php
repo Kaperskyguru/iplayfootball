@@ -32,7 +32,7 @@ class PlayersController extends Controller
             ->get();
         $unverified = DB::table('players')
             ->leftJoin('verifications', 'players.user_id', '=', 'verifications.verification_user_id')
-            ->where('verifications.verification_status_id', 10)
+            ->where('verifications.verification_status_id', 11)
             ->select('players.*')
             ->get();
 
@@ -41,7 +41,19 @@ class PlayersController extends Controller
             'verified' => $verified,
             'unverified' => $unverified,
         ];
-        return View('profiles', $data);//->with('players', $data);
+        return View('profiles', $data); //->with('players', $data);
+
+    }
+
+    public function profile($id)
+    {
+        $player = DB::table('players')
+            ->leftJoin('verifications', 'players.user_id', '=', 'verifications.verification_user_id')
+            ->where('players.id', $id)
+            ->select('players.*')
+            ->first();
+
+        return View('profile', ['player' => $player]);
 
     }
 

@@ -1,7 +1,8 @@
 @extends('layouts.app') 
 @section('title', 'Profile') 
 @section('id', "header") 
-@section('header_style') style="height: 600px; position:relative"
+@section('header_style') style="height: 600px;
+position:relative"
 @endsection
  
 @section('assets')
@@ -16,13 +17,13 @@
         <div class="col-6 col-md-8 p-3" style="background-color: crimson;">
             <div class="row">
                 <div class="col-12 col-md-3">
-                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive rounded-circle" style="width:10rem; height:10rem">
+                    <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="img-responsive rounded-circle" style="width:10rem; height:10rem">
                 </div>
                 <div class="col-12 col-md-9">
                     <p class="col-12">
-                        <strong>FRANKLIN ANDY TOMA</strong>
+                        <strong>{{__($player->player_name)}}</strong>
                     </p>
-                    <P class="col-12">Striker</P>
+                    <P class="col-12">{{__($player->player_position) ?: 'Nil'}}</P>
                     <a href="#exampleModalCenter2" class="btn btn-success" data-toggle="modal">Request Player</a>
                     <div class="modal fade mt-5" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                         aria-hidden="true">
@@ -31,8 +32,8 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title text-left" id="exampleModalCenterTitle" style="color:black;">Player Request
                                     </h5><br>
-                                    <p class="text-left" style="color:forestgreen; font-weight:700;margin-top:30px;">Franklin Andy Toma</p>
-                                    <img src="{{ asset('img/FREDRICK.jpg') }}" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
+                                    <p class="text-left" style="color:forestgreen; font-weight:700;margin-top:30px;">{{__($player->player_name)}}</p>
+                                    <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="img-responsive" style="width:20%; height:auto; border-radius: 50%; margin-left:auto;">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true" style="color:black;">&times;</span>
                                         </button>
@@ -71,13 +72,13 @@
         <div class="col-md-4 col-6 p-5" style="background-color:darkred">
             <ul class="col-12">
                 <li>
-                    <strong>NATIONALITY</strong>: Nigerian</li>
+                    <strong>NATIONALITY</strong>: {{__($player->player_state)}}</li>
                 <li>
-                    <strong>DATE OF BIRTH</strong>: 17/05/1995</li>
+                    <strong>DATE OF BIRTH</strong>: {{__($player->player_dob)}}</li>
                 <li>
-                    <strong>WEIGHT</strong>: 70kg</li>
+                    <strong>WEIGHT</strong>: {{__($player->player_weight)}} kg</li>
                 <li>
-                    <strong>HEIGHT</strong>: 5.8ft</li>
+                    <strong>HEIGHT</strong>: {{__($player->player_height)}} ft</li>
             </ul>
         </div>
     </div>
@@ -149,31 +150,31 @@
                             <tbody>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">PLAY POSITION</th>
-                                    <td>Outstanding</td>
+                                    <td>{{__($player->player_position) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">TOTAL GAMES PLAYED</th>
-                                    <td>Impressive</td>
+                                    <td>{{__($player->player_games_played) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">PASSING ACCURACY</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_passing_accuracy) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">GROUND DUEL WINNING</th>
-                                    <td>Impressive</td>
+                                    <td>{{__($player->player_ground_duel_winning) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">ARIEL DUEL WINNING</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_ariel_duel_winning) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">RECOVERY</th>
-                                    <td>Outstanding</td>
+                                    <td>{{__($player->player_recovery) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" style="font-weight: 10">STARTS GAMES</th>
-                                    <td>Outstanding</td>
+                                    <th scope="row" style="font-weight: 10">Start Games</th>
+                                    <td>{{__($player->player_interceptions) ?: 'Nil'}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -183,27 +184,27 @@
                             <tbody>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">TACKLES WINNING</th>
-                                    <td>Impressive</td>
+                                    <td>{{__($player->player_tackles_winning) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">CLEARANCE</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_clearance) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">BLOCKING</th>
-                                    <td>Impressive</td>
+                                    <td>{{__($player->player_blocking) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">INTERCEPTIONS</th>
-                                    <td>Outstanding</td>
+                                    <td>{{__($player->player_goal_scoring) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">PENALTIES CONCEDED</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_penalties_conceded) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">FOUL WINNINGS</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_foul_winnings) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">YELLOW CARD</th>
@@ -221,35 +222,35 @@
                             <tbody>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">GOAL SCORING</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_goal_scoring) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">PENALTY GOALS</th>
-                                    <td>Outstanding</td>
+                                    <td>{{__($player->player_goal_scoring) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">SHOOTING ACCURACY</th>
-                                    <td>Impressive</td>
+                                    <td>{{__($player->player_shooting_accuracy) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">SUCCESSFUL CROSSES</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_successful_crosses) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">ASSIST ABILITY</th>
-                                    <td>Impressive</td>
+                                    <td>{{__($player->player_assist_ability) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">CHANCES CREATION</th>
-                                    <td>Outstanding</td>
+                                    <td>{{__($player->player_chances_creation) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">PENALTIES WINNING</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_penalties_winnings) ?: 'Nil'}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="font-weight: 10">OFFSIDES</th>
-                                    <td>Okay</td>
+                                    <td>{{__($player->player_offsides) ?: 'Nil'}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -258,33 +259,7 @@
             </div>
             <div class="tab-pane fade row" id="biography" role="tabpanel" aria-labelledby="biography-tab">
                 <p class="col-12 p-4">
-                    Every media feature defines its “type” as either “range” or “discrete” in its definition table. “Discrete” media features,
-                    like pointer take their values from a set. The values may be keywords or boolean numbers (0 and 1), but
-                    the common factor is that there’s no intrinsic “order” to them—none of the values are “less than” or
-                    “greater than” each other. “Range” media features like width, on the other hand, take their values from
-                    a range. Any two values can be compared to see which is lesser and which is greater. The only significant
-                    difference between the two types is that “range” media features can be evaluated in a range context and
-                    accept “min-” and “max-” prefixes on their name. Doing either of these changes the meaning of the feature—rather
-                    than the media feature being true when the feature exactly matches the given value, it matches when the
-                    feature is greater than/less than/equal to the given value. Every media feature defines its “type” as
-                    either “range” or “discrete” in its definition table. “Discrete” media features, like pointer take their
-                    values from a set. The values may be keywords or boolean numbers (0 and 1), but the common factor is
-                    that there’s no intrinsic “order” to them—none of the values are “less than” or “greater than” each other.
-                    “Range” media features like width, on the other hand, take their values from a range. Any two values
-                    can be compared to see which is lesser and which is greater. The only significant difference between
-                    the two types is that “range” media features can be evaluated in a range context and accept “min-” and
-                    “max-” prefixes on their name. Doing either of these changes the meaning of the feature—rather than the
-                    media feature being true when the feature exactly matches the given value, it matches when the feature
-                    is greater than/less than/equal to the given value. Every media feature defines its “type” as either
-                    “range” or “discrete” in its definition table. “Discrete” media features, like pointer take their values
-                    from a set. The values may be keywords or boolean numbers (0 and 1), but the common factor is that there’s
-                    no intrinsic “order” to them—none of the values are “less than” or “greater than” each other. “Range”
-                    media features like width, on the other hand, take their values from a range. Any two values can be compared
-                    to see which is lesser and which is greater. The only significant difference between the two types is
-                    that “range” media features can be evaluated in a range context and accept “min-” and “max-” prefixes
-                    on their name. Doing either of these changes the meaning of the feature—rather than the media feature
-                    being true when the feature exactly matches the given value, it matches when the feature is greater than/less
-                    than/equal to the given value.
+                    {{__($player->player_biography) ?: 'Nil'}}
                 </p>
             </div>
             <div class="tab-pane fade p-5" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">

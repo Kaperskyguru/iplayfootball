@@ -51,12 +51,13 @@
                 </button>
                 <div class="dropdown-container">
                     <a id="position">Silver</a>
-                    <a id="position">GOld</a>
+                    <a id="position">Gold</a>
                     <a id="position">Premium</a>
                 </div>
             </div>
             <div class="column" style="margin-left:20px; margin-bottom:1px">
                 <span style="font-size:30px;cursor:pointer;color:darkred" onclick="openNav()">&#9776; Filter Profile</span>
+
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">all</a>
@@ -70,14 +71,16 @@
                             aria-selected="false">unverified</a>
                     </li>
                 </ul>
+
                 <div class="tab-content" id="pills-tabContent">
+
                     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab" style="height: 800px; overflow-y:auto; overflow-x:hidden">
                         <div class="row" id="players_list">
                             @if(count($players) > 0) @foreach($players as $player)
                             <div class="col-md-4 col-sm-6 col-12  card-container">
                                 <div class="col-12 card" style="width:18rem">
                                     <div class="col-12 card-header">
-                                        {{-- <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i> --}}
+                                        {{-- <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i>                                        --}}
                                         <div class="row">
                                             <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="img-responsive" style="width:100%; height:100%">
                                         </div>
@@ -93,14 +96,6 @@
                                                 href="#exampleModalCenter">
                                                 See More...
                                             </button>
-                                            <div class="modal fade mt-5" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content" id="modalDetails">
-
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -110,12 +105,90 @@
                             @endif
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="pills-verified" role="tabpanel" aria-labelledby="pills-verified-tab" style="height: 800px; overflow-y:auto; overflow-x:hidden">
+                        <div class="row">
+                            @if(count($verified) > 0) @foreach($verified as $player)
+                            <div class="col-md-4 col-sm-6 col-12  card-container">
+                                <div class="col-12 card" style="width:18rem">
+                                    <div class="col-12 card-header">
+                                        {{-- <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i>                                        --}}
+                                        <div class="row">
+                                            <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="img-responsive" style="width:100%; height:100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 card-body">
+                                        <div class="row">
+                                            <p class="mx-auto p-0" style="color:black; font-size: 23px">
+                                                {{$player->player_name}}
+                                                <br>
+                                                <small>{{$player->player_position}}</small>
+                                            </p>
+                                            <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
+                                                href="#exampleModalCenter">
+                                                See More...
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach @else
+                            <p>No verified players found</p>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-unverified" role="tabpanel" aria-labelledby="pills-unverified-tab" style="height: 800px; overflow-y:auto; overflow-x:hidden">
+                        <div class="row">
+                            @if(count($unverified) > 0) @foreach($unverified as $player)
+                            <div class="col-md-4 col-sm-6 col-12  card-container">
+                                <div class="col-12 card" style="width:18rem">
+                                    <div class="col-12 card-header">
+                                        {{-- <i class="far fa-check-circle fa-2x" style="z-index:1000;color:forestgreen;position:relative;top:7px;left:105%;"></i>                                        --}}
+                                        <div class="row">
+                                            <img src="{{ asset(extractFromImage($player->player_image_id)) }}" class="img-responsive" style="width:100%; height:100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 card-body">
+                                        <div class="row">
+                                            <p class="mx-auto p-0" style="color:black; font-size: 23px">
+                                                {{$player->player_name}}
+                                                <br>
+                                                <small>{{$player->player_position}}</small>
+                                            </p>
+                                            <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
+                                                href="#exampleModalCenter">
+                                                See More...
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach @else
+                            <p>No unverified players found</p>
+                            @endif
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade mt-5" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1Title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" id="modalDetails">
+
+        </div>
+    </div>
+</div>
 @endsection
  
 @section('footer_assests')
-                <script>
-                    // loadPlayers();
+<script>
+    // loadPlayers();
         function openNav() {
                 document.getElementById("mySidenav").style.width = "250px";
             }
@@ -149,5 +222,6 @@
             }
         });
     });
-                </script>
+
+</script>
 @endsection

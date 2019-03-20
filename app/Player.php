@@ -74,8 +74,8 @@ class Player extends Model
         return $this->belongsTo('App\Verification', 'user_id', 'verification_user_id');
     }
 
-    // public function veri()
-    // {
-    //     return $this->belongsToMany('App\Verification');//->wherePivot('verification_user_id', 10);
-    // }
+    public function team()
+    {
+        return $this->hasOne('App\Team', 'id', 'player_associate_team');
+    }
 }
