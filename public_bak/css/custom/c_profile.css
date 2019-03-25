@@ -1,0 +1,29 @@
+
+    .banner h1 {
+        position: absolute;
+        top: -60%;
+    }
+
+    .icard {
+        width: auto;
+        height: auto;
+        padding: 0px;
+    }
+
+    #singleProfile .nav-tabs .nav-item .nav-link {
+        color: darkred;
+        background: transparent;
+    }
+
+    #singleProfile .nav-tabs .nav-item .nav-link.active {
+        color: black;
+        background: transparent;
+    }
+
+    @media screen and (max-width: 600px) {
+        .banner h1 {
+            font-size: 2em !important;
+            position: absolute;
+            top: -35%;
+        }
+    }
