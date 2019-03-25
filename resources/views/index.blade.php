@@ -61,6 +61,7 @@
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url(/img/slide5.jpg);background-repeat:no-repeat;background-size:100%;">
+                
                 <div class="carousel-caption d-block float-right">
                     <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
