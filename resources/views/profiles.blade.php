@@ -5,7 +5,7 @@
 @endsection
  
 @section('id', "header") 
-@section('header_style', 'height: 300px; position:relative') 
+@section('header_style', 'position:relative') 
 @section('banner_display')
 <h1 class="col-12 text-center header-text mx-auto" style="text-shadow: 2px 2px 4px #000000">All Players Profile.</h1>
 @endsection
@@ -92,10 +92,12 @@
                                                 <br>
                                                 <small>{{$player->player_position}}</small>
                                             </p>
-                                            <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
-                                                href="#exampleModalCenter">
+                                            <div class="col-12 row">
+                                                <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
+                                                    href="#exampleModalCenter">
                                                 See More...
                                             </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -124,10 +126,12 @@
                                                 <br>
                                                 <small>{{$player->player_position}}</small>
                                             </p>
-                                            <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
-                                                href="#exampleModalCenter">
+                                            <div class="col-12 row">
+                                                <button class="btn btn-danger mx-auto" id="player_details" data-player_id="{{$player->id}}" data-toggle="modal" data-token="{{csrf_token()}}"
+                                                    href="#exampleModalCenter">
                                                 See More...
                                             </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
