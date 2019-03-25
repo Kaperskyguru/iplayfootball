@@ -12,7 +12,7 @@
     <title>iPlayfootball - @yield('title')</title>
     <link rel="shortcut icon" href="{{asset('img/iLOGO.png')}}" type="image/gif">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('css/custom/style.css?v=2')}}">
+    <link rel="stylesheet" href="{{asset('css/custom/style.css?v=3')}}">
     <script defer="defer" src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 
     @yield('assets')
@@ -24,9 +24,9 @@
     <section class="banner" role="banner">
         <!-- Navigation Section -->
         <header id="@yield('id')"  style="@yield('header_style')">
-            <nav class="navbar navbar-expand-lg @yield('nav')">
+            <nav class="navbar navbar-expand-lg navbar-dark @yield('nav') lg-dark">
                 <a class="navbar-brand row p-3" href=" {{ url('/') }}">
-                    <img src="/img/iLOGO.png" class="img-responsive" style="width:50%; height:50%">
+                    <img src="{{asset('img/iLOGO.png')}}" class="img-responsive" style="width:50%; height:50%">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

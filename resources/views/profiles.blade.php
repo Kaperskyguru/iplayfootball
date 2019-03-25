@@ -5,7 +5,8 @@
 @endsection
  
 @section('id', "header") 
-@section('header_style', 'position:relative') 
+@section('nav', 'bg-dark') 
+@section('header_style', 'height:300px; position:relative') 
 @section('banner_display')
 <h1 class="col-12 text-center header-text mx-auto" style="text-shadow: 2px 2px 4px #000000">All Players Profile.</h1>
 @endsection

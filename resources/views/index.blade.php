@@ -2,7 +2,7 @@
 @section('title', 'Homepage') 
 @section('nav', 'bg-dark') 
 @section('assets')
-<link rel="stylesheet" href="{{asset('css/custom/c_index.css')}}">
+<link rel="stylesheet" href="{{asset('css/custom/c_index.css?v=2')}}">
 @endsection
  
 @section('banner_display')
@@ -19,11 +19,11 @@
             <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url(/img/slide1.jpg);background-repeat:no-repeat;background-size:100%;">
-                {{-- <img src="img/slide1.jpg" class="d-block w-100" alt="..."> --}}
+            <div class="carousel-item active">
+                <img src="img/slide1.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
                 <div class="carousel-caption d-block float-right">
-                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
-                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
                     <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
@@ -31,9 +31,10 @@
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url(/img/slide2.jpg);background-repeat:no-repeat;background-size:100%;">
+                <img src="img/slide2.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
                 <div class="carousel-caption d-block float-right">
-                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
-                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
                     <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
@@ -41,9 +42,10 @@
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url(/img/slide3.jpg);background-repeat:no-repeat;background-size:100%;">
+                <img src="img/slide3.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
                 <div class="carousel-caption d-block float-right">
-                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
-                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
                     <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
@@ -51,9 +53,10 @@
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url(/img/slide4.jpg);background-repeat:no-repeat;background-size:100%;">
+                <img src="img/slide4.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
                 <div class="carousel-caption d-block float-right">
-                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
-                    <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
+                    <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
                     <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
@@ -61,9 +64,9 @@
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url(/img/slide5.jpg);background-repeat:no-repeat;background-size:100%;">
-                
-                <div class="carousel-caption d-block float-right">
-                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                <img src="img/slide5.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+                <div class="carousel-caption float-right">
+                    <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
                     <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
@@ -72,8 +75,9 @@
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url(/img/slide6.jpg);background-repeat:no-repeat;background-size:100%;">
+                <img src="img/slide6.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
                 <div class="carousel-caption d-block float-right">
-                    <h1 class="text-right" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
+                    <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
                     <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
