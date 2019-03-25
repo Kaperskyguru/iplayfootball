@@ -12,7 +12,11 @@
     <title>iPlayfootball - @yield('title')</title>
     <link rel="shortcut icon" href="{{asset('img/iLOGO.png')}}" type="image/gif">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{asset('css/custom/style.css?v=1')}}">
+=======
+    <link rel="stylesheet" href="{{asset('css/custom/style.css?v=2')}}">
+>>>>>>> 906ac3052dea87013eaf33b8e40e120627ab04e2
     <script defer="defer" src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 
     @yield('assets')
