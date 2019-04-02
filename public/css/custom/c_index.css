@@ -8,21 +8,21 @@
     width: auto;
     padding: 6px;
     border-radius: 4.5px;
-    border: 1.5px solid forestgreen;
+    border: 1.5px solid white;
     background-color: transparent;
-    color: #fff;
+    color: forestgreen;
     margin-left: 7px;
 }
 
 .tbtn:focus {
-    background-color: forestgreen;
-    color: #fff;
+    background-color: #fff;
+    color: forestgreen;
     border-color: transparent;
 }
 
 .tbtn:hover {
-    background-color: forestgreen;
-    color: #fff;
+    background-color: #fff;
+    color: forestgreen;
     border-color: transparent;
 }
 

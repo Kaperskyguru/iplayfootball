@@ -10,7 +10,7 @@ a:hover {
 }
 
 p {
-    font: 16px;
+    font-size: 16px;
 }
 
 #form {
@@ -266,10 +266,38 @@ header nav .dropdown {
     height: 85.5vh;
 }
 
+.carousel-div {
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: bottom left;
+}
+
+.img-1{
+    background-image: url("/img/slide1.jpg");
+}
+
+.img-2 {
+    background-image: url("/img/slide2.jpg");
+}
+
+.img-3 {
+    background-image: url("/img/slide3.jpg");
+}
+
+.img-4 {
+    background-image: url("/img/slide4.jpg");
+}
+
+.img-5 {
+    background-image: url("/img/slide5.jpg");
+}
+
+.img-6 {
+    background-image: url("/img/slide6.jpg");
+}
+
 
 /*Navigation*/
-
-
 
 #header {
     width: 100%;

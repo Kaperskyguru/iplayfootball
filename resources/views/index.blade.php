@@ -19,81 +19,82 @@
             <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/slide1.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+            <div class="carousel-item carousel-div active img-1">
+                {{-- <img src="img/slide1.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">                --}}
                 <div class="carousel-caption d-block float-right">
                     <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
-                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                    <p class="float-right mt-2 row p-block"> <a href="{{route('profiles')}}" class="btn d-inline p-2">View all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
                     </p>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url(/img/slide2.jpg);background-repeat:no-repeat;background-size:100%;">
-                <img src="img/slide2.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+            <div class="carousel-item carousel-div img-2">
+                {{-- <img src="img/slide2.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">                --}}
                 <div class="carousel-caption d-block float-right">
                     <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
-                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                    <p class="float-right mt-2 row p-block"> <a href="{{route('profiles')}}" class="btn d-inline p-2">View all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
                     </p>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url(/img/slide3.jpg);background-repeat:no-repeat;background-size:100%;">
-                <img src="img/slide3.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+            <div class="carousel-item carousel-div img-3">
+                {{-- <img src="img/slide3.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">                --}}
                 <div class="carousel-caption d-block float-right">
                     <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
-                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                    <p class="float-right mt-2 row p-block"> <a href="{{route('profiles')}}" class="btn d-inline p-2">View all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
-                    </p>
+                    </p>                    
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url(/img/slide4.jpg);background-repeat:no-repeat;background-size:100%;">
-                <img src="img/slide4.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+            <div class="carousel-item carousel-div img-4">
+                {{-- <img src="img/slide4.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">                --}}
                 <div class="carousel-caption d-block float-right">
                     <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right hidden-xs" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
-                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                    <p class="float-right mt-2 row p-block"> <a href="{{route('profiles')}}" class="btn d-inline p-2">View all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
                     </p>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url(/img/slide5.jpg);background-repeat:no-repeat;background-size:100%;">
-                <img src="img/slide5.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+            <div class="carousel-item carousel-div img-5">
+                {{-- <img src="img/slide5.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">                --}}
                 <div class="carousel-caption float-right">
                     <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
-                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                    <p class="float-right mt-2 row p-block"> <a href="{{route('profiles')}}" class="btn d-inline p-2">View all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
                     </p>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url(/img/slide6.jpg);background-repeat:no-repeat;background-size:100%;">
-                <img src="img/slide6.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">
+            <div class="carousel-item carousel-div img-6">
+                {{-- <img src="img/slide6.jpg" class="d-block w-100" alt="..." style="background-repeat:no-repeat;background-size:100%;">                --}}
                 <div class="carousel-caption d-block float-right">
                     <h1 class="text-right d-none d-sm-block" style="text-shadow: 2px 2px 4px #000000">Exposing football talents to the world.</h1>
                     <h2 class="text-right" style="text-shadow: 2px 2px 4px #000000">Find talented players from far and wide now on a single platform.
                     </h2>
-                    <p class="float-right mt-2"> <a href="{{route('profiles')}}" class="btn d-inline p-2">view all profiles</a>
+                    <p class="float-right mt-2 row p-block"> 
+                        <a href="{{route('profiles')}}" class="btn d-inline p-2">View all profiles</a>
                         <a href="{{route('register')}}" class="tbtn d-inline p-2">New profile</a>
                     </p>
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        {{-- <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
         <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
-                    </a>
+                    </a> --}}
     </div>
 </div>
 <!-- Carousel Section -->
