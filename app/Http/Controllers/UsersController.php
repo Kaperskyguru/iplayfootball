@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use Iplayfootball\User;
 use Hash;
-use App\Http\Requests\StoreUser;
+use Iplayfootball\Http\Requests\StoreUser;
 
 class UsersController extends Controller
 {
@@ -45,7 +45,7 @@ class UsersController extends Controller
 
     public function academic()
     {
-        return $this->hasOne('App\Academic');
+        return $this->hasOne('Iplayfootball\Academic');
     }
     
     public function usersByRole(Request $request)

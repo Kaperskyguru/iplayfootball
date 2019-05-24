@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Iplayfootball;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,17 +15,17 @@ class Academic extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('Iplayfootball\User');
     }
 
     public function status()
     {
-        return $this->belongsTo('App\Status', 'academic_status_id', 'id');
+        return $this->belongsTo('Iplayfootball\Status', 'academic_status_id', 'id');
     }
 
     public function verify()
     {
-        return $this->belongsTo('App\Verification', 'id', 'verification_user_id');
+        return $this->belongsTo('Iplayfootball\Verification', 'id', 'verification_user_id');
     }
 
 }

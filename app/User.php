@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Iplayfootball;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -30,22 +30,22 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function academic()
     {
-        return $this->hasOne('App\Academic');
+        return $this->hasOne('Iplayfootball\Academic');
     }
 
     public function player()
     {
-        return $this->hasOne('App\Player', 'user_id', 'id');
+        return $this->hasOne('Iplayfootball\Player', 'user_id', 'id');
     }
 
     public function status()
     {
-        return $this->belongsTo('App\Status', 'status_id', 'id');
+        return $this->belongsTo('Iplayfootball\Status', 'status_id', 'id');
     }
 
     public function team()
     {
-        return $this->hasOne('App\Team', 'user_id', 'id');
+        return $this->hasOne('Iplayfootball\Team', 'user_id', 'id');
     }
 
     public static function getUserType(string $role)

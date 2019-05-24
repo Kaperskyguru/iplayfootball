@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Message::class, function (Faker $faker) {
+$factory->define(Iplayfootball\Message::class, function (Faker $faker) {
     $type = $faker->randomElement($array = array('scout', 'player', 'user', 'team', 'academie'));
     return [
         'message_subject' => $faker->title,

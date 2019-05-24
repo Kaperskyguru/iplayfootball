@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Verification::class, function (Faker $faker) {
+$factory->define(Iplayfootball\Verification::class, function (Faker $faker) {
     $type = $faker->randomElement($array = array('scout', 'player', 'user', 'team', 'academie'));
     return [
         "verification_user_id" => $faker->numberBetween(1,20),

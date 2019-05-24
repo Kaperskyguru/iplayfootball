@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Providers;
+namespace Iplayfootball\Providers;
 
-use App\Message;
-use App\User;
-use App\Scout;
-use App\Team;
-use App\Academic;
-use App\Player;
-use App\Http\Requests\StoreMessage;
+use Iplayfootball\Message;
+use Iplayfootball\User;
+use Iplayfootball\Scout;
+use Iplayfootball\Team;
+use Iplayfootball\Academic;
+use Iplayfootball\Player;
+use Iplayfootball\Http\Requests\StoreMessage;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\ServiceProvider;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
-use App\Notice;
+use Iplayfootball\Notice;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Http\Requests\StoreNotice;
-use App\Http\Controllers\Controller;
+use Iplayfootball\Http\Requests\StoreNotice;
+use Iplayfootball\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class NoticesController extends Controller

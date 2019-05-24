@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
-use App\Player;
+use Iplayfootball\Player;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller

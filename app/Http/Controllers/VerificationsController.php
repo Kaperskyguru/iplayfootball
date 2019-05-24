@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
-use App\Http\Requests\StoreVerification;
-use App\Verification;
+use Iplayfootball\Http\Requests\StoreVerification;
+use Iplayfootball\Verification;
 use Illuminate\Http\Request;
 use Validator;
 use \Illuminate\Support\Facades\Storage;

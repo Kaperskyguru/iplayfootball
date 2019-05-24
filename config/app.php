@@ -154,12 +154,12 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\NotificationServiceProvider::class,
+        Iplayfootball\Providers\AppServiceProvider::class,
+        Iplayfootball\Providers\AuthServiceProvider::class,
+        // Iplayfootball\Providers\BroadcastServiceProvider::class,
+        Iplayfootball\Providers\EventServiceProvider::class,
+        Iplayfootball\Providers\RouteServiceProvider::class,
+        Iplayfootball\Providers\NotificationServiceProvider::class,
 
     ],
 

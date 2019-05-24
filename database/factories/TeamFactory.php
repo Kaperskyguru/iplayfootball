@@ -1,8 +1,8 @@
 <?php
 use Faker\Generator as Faker;
-use App\User;
+use Iplayfootball\User;
 
-$factory->define(App\Team::class, function (Faker $faker) {
+$factory->define(Iplayfootball\Team::class, function (Faker $faker) {
     $gender = $faker->randomElement($array = array('male', 'female'));
     return [
         'name' => $faker->name($gender),

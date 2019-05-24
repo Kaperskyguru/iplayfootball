@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Iplayfootball;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,12 +10,12 @@ class Notice extends Model
 
     public function status()
     {
-        return $this->belongsTo('App\Status', "notice_status_id", 'id');
+        return $this->belongsTo('Iplayfootball\Status', "notice_status_id", 'id');
     }
 
     public function visibleTo()
     {
-        return $this->belongsTo('App\Status', "notice_visibility_id", 'id');
+        return $this->belongsTo('Iplayfootball\Status', "notice_visibility_id", 'id');
     }
 }
 
