@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\PlayersController as Players;
-use App\Http\Controllers\ScoutsController as Scouts;
-use App\Http\Controllers\NoticesController as Notices;
-use App\Http\Controllers\AcademicsController as Academics;
-use App\Http\Controllers\VerificationsController as Verifications;
-use App\Http\Controllers\TeamsController as Teams;
-use App\Http\Controllers\MessagesController as Messages;
+use Iplayfootball\Http\Controllers\PlayersController as Players;
+use Iplayfootball\Http\Controllers\ScoutsController as Scouts;
+use Iplayfootball\Http\Controllers\NoticesController as Notices;
+use Iplayfootball\Http\Controllers\AcademicsController as Academics;
+use Iplayfootball\Http\Controllers\VerificationsController as Verifications;
+use Iplayfootball\Http\Controllers\TeamsController as Teams;
+use Iplayfootball\Http\Controllers\MessagesController as Messages;
 
-use App\Notice;
-use App\Verification;
-use App\Scout;
-use App\Player;
-use App\User;
+use Iplayfootball\Notice;
+use Iplayfootball\Verification;
+use Iplayfootball\Scout;
+use Iplayfootball\Player;
+use Iplayfootball\User;
 
 use Auth;
 

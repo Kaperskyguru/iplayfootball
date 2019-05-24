@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Team;
-use App\Player;
+use Iplayfootball\Team;
+use Iplayfootball\Player;
 use Validator;
-use App\User;
-use App\Http\Controllers\MessagesController as Messages;
-use App\Http\Controllers\UsersController as users;
-use App\Http\Requests\StoreUser;
+use Iplayfootball\User;
+use Iplayfootball\Http\Controllers\MessagesController as Messages;
+use Iplayfootball\Http\Controllers\UsersController as users;
+use Iplayfootball\Http\Requests\StoreUser;
 use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller

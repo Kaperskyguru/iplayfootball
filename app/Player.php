@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Iplayfootball;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -56,26 +56,26 @@ class Player extends Model
 
     public function status()
     {
-        return $this->belongsTo('App\Status', 'player_status_id', 'id');
+        return $this->belongsTo('Iplayfootball\Status', 'player_status_id', 'id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('Iplayfootball\User', 'user_id', 'id');
     }
 
     public function package()
     {
-        return $this->belongsTo('App\Status', 'player_package_id', 'id');
+        return $this->belongsTo('Iplayfootball\Status', 'player_package_id', 'id');
     }
 
     public function verify()
     {
-        return $this->belongsTo('App\Verification', 'user_id', 'verification_user_id');
+        return $this->belongsTo('Iplayfootball\Verification', 'user_id', 'verification_user_id');
     }
 
     public function team()
     {
-        return $this->hasOne('App\Team', 'id', 'player_associate_team');
+        return $this->hasOne('Iplayfootball\Team', 'id', 'player_associate_team');
     }
 }

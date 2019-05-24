@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Package::class, function (Faker $faker) {
+$factory->define(Iplayfootball\Package::class, function (Faker $faker) {
         $package = $faker->randomKey($array = array('Silver', 'Gold', 'Premium'));
     return [
         'name' => $package,

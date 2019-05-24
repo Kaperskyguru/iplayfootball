@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Providers;
-use App\User;
-use App\Player;
-use App\Scout;
-use App\Team;
-use App\Academic;
+namespace Iplayfootball\Providers;
+
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Http\Request;
+use Iplayfootball\Academic;
+use Iplayfootball\Player;
+use Iplayfootball\Scout;
+use Iplayfootball\Team;
+use Iplayfootball\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,34 +34,33 @@ class AppServiceProvider extends ServiceProvider
 
     public function userDeleted()
     {
-        User::deleted(function($user)
-        {
-            switch($user->role){
+        User::deleted(function ($user) {
+            switch ($user->role) {
                 case 8:
                     $this->deletePlayer($user);
-                break;
+                    break;
 
                 case 5:
                     $this->deleteAcademy($user);
-                break;
+                    break;
 
                 case 6:
                     $this->deleteTeam($user);
-                break;
+                    break;
 
                 case 7:
                     $this->deleteScout($user);
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         });
     }
 
     public function deleteTeam($user)
     {
-        if(Team::where('user_id', $user->id)->delete()){
+        if (Team::where('user_id', $user->id)->delete()) {
             return true;
         }
         return false;
@@ -69,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function deletePlayer($user)
     {
-        if(Player::where('user_id', $user->id)->delete()){
+        if (Player::where('user_id', $user->id)->delete()) {
             return true;
         }
         return false;
@@ -77,7 +76,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function deleteScout($user)
     {
-        if(Scout::where('user_id', $user->id)->delete()){
+        if (Scout::where('user_id', $user->id)->delete()) {
             return true;
         }
         return false;
@@ -85,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function deleteAcademy($user)
     {
-        if(Academic::where('user_id', $user->id)->delete()){
+        if (Academic::where('user_id', $user->id)->delete()) {
             return true;
         }
         return false;
@@ -93,29 +92,28 @@ class AppServiceProvider extends ServiceProvider
 
     public function userCreated()
     {
-        User::created(function ($user)
-        {
-            switch($user->role){
+        User::created(function ($user) {
+            switch ($user->role) {
                 case 8:
                     $this->createPlayer($user);
-                break;
+                    break;
 
                 case 5:
                     $this->createAcademic($user);
-                break;
+                    break;
 
                 case 6:
                     $this->createTeam($user);
-                break;
+                    break;
 
                 case 7:
                     $this->createScout($user);
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
-            
+
         });
     }
 
@@ -129,7 +127,7 @@ class AppServiceProvider extends ServiceProvider
         $player->player_state = $user->state;
         $player->player_status_id = $user->status_id;
         $player->save();
-        
+
     }
 
     private function createScout($user)
@@ -142,7 +140,7 @@ class AppServiceProvider extends ServiceProvider
         $scout->scout_state = $user->state;
         $scout->scout_status_id = $user->status_id;
         $scout->save();
-        
+
     }
 
     private function createTeam($user)
@@ -155,7 +153,7 @@ class AppServiceProvider extends ServiceProvider
         $team->user_id = $user->id;
         $team->status_id = $user->status_id;
         $team->save();
-        
+
     }
 
     private function createAcademic($user)
@@ -168,6 +166,6 @@ class AppServiceProvider extends ServiceProvider
         $academic->user_id = $user->id;
         $academic->academic_status_id = $user->status_id;
         $academic->save();
-        
+
     }
 }

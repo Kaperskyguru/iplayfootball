@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
-use App\Http\Requests\StoreMessage;
-use App\Message;
-use App\User;
+use Iplayfootball\Http\Requests\StoreMessage;
+use Iplayfootball\Message;
+use Iplayfootball\User;
 use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller

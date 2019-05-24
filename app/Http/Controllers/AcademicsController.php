@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Iplayfootball\Http\Controllers;
 
-use App\Academic;
-use App\Http\Controllers\MessagesController as Messages;
-use App\Http\Controllers\UsersController as users;
-use App\Http\Requests\StoreUser;
-use App\Player;
-use App\User;
+use Iplayfootball\Academic;
+use Iplayfootball\Http\Controllers\MessagesController as Messages;
+use Iplayfootball\Http\Controllers\UsersController as users;
+use Iplayfootball\Http\Requests\StoreUser;
+use Iplayfootball\Player;
+use Iplayfootball\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;

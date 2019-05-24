@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Notice::class, function (Faker $faker) {
+$factory->define(Iplayfootball\Notice::class, function (Faker $faker) {
     return [
         'notice_title' => $faker->text(40),
         'notice_desc' => $faker->text,

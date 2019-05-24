@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Iplayfootball;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,11 +9,11 @@ class Verification extends Model
     //
     public function status()
     {
-        return $this->hasOne('App\Status', 'id', 'verification_status_id');
+        return $this->hasOne('Iplayfootball\Status', 'id', 'verification_status_id');
     }
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'verification_user_id');
+        return $this->hasOne('Iplayfootball\User', 'id', 'verification_user_id');
     }
 }
